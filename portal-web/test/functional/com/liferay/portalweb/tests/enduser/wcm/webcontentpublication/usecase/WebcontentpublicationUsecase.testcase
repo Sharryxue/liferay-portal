@@ -2360,6 +2360,8 @@
 	</command>
 
 	<command name="ViewRelatedAssetViaDMPortlet" priority="3">
+		<property name="portal.acceptance" value="raven" />
+		
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Build" />
 			<var name="panel" value="Site Administration" />
@@ -2423,6 +2425,8 @@
 		</execute>
 
 		<execute macro="DMDocument#viewPGDetails">
+			<var name="searchTerm" value="DM Document Title" />
+			<var name="portletName" value="Documents and Media" />
 			<var name="assetTitle" value="Blogs Entry Title" />
 			<var name="dmDocumentDescription" value="DM Document Description" />
 			<var name="dmDocumentRelatedAsset" value="true" />
@@ -2443,8 +2447,8 @@
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
 
-		<execute macro="Portlet#changeDisplayStyle">
-			<var name="displayStyle" value="descriptive" />
+		<execute macro="LexiconEntry#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
 		</execute>
 
 		<execute macro="DMDocument#editPG">
@@ -2459,6 +2463,8 @@
 		</execute>
 
 		<execute macro="DMDocument#viewPGDetails">
+			<var name="searchTerm" value="DM Document Title Edit" />
+			<var name="portletName" value="Documents and Media" />
 			<var name="assetTitle" value="Blogs Entry Title" />
 			<var name="dmDocumentDescription" value="DM Document Description Edit" />
 			<var name="dmDocumentRelatedAsset" value="true" />

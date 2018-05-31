@@ -97,7 +97,7 @@
 </tr>
 <tr>
 	<td>DOCUMENT_INFO_RELATED_ASSETS_TITLE</td>
-	<td>//li[@class='asset-links-list-item']//a</td>
+	<td>//li[@class='asset-links-list-item']//a[2]</td>
 	<td></td>
 </tr>
 <tr>
