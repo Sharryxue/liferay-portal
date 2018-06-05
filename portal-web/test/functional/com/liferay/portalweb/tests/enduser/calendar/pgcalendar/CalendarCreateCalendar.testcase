@@ -209,6 +209,7 @@
 
 	<command name="ViewUserCanAddSiteCalendarsWithCalendarPermissions" priority="3">
 		<description message="This is a use case for LPS-56229." />
+		<property name="portal.acceptance" value="sharry" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Users" />
