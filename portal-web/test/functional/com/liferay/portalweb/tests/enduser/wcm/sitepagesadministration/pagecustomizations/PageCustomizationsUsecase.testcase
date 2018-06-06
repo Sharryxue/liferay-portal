@@ -406,6 +406,7 @@
 	</command>
 
 	<command name="SiteMemberWithCustomizablePagePermissionsWillOnlySeePortletsInCustomizableView" priority="4">
+		<property name="portal.acceptance" value="sharry" />
 		<property name="test.name.skip.portal.instance" value="PageCustomizations#SiteMemberWithCustomizablePagePermissionsWillOnlySeePortletsInCustomizableView" />
 
 		<execute macro="TestCase#getSiteName">

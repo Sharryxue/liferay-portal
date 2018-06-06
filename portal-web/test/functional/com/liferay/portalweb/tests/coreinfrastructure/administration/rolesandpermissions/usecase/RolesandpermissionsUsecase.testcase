@@ -517,6 +517,8 @@
 	</command>
 
 	<command name="RolesOrganizationSearch" priority="4">
+		<property name="portal.acceptance" value="sharry" />
+
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Users" />
 			<var name="panel" value="Control Panel" />
@@ -1157,6 +1159,8 @@
 	</command>
 
 	<command name="RolesSiteSearch" priority="4">
+		<property name="portal.acceptance" value="sharry" />
+
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
@@ -2312,6 +2316,8 @@
 	</command>
 
 	<command name="ViewAutomaticAssignedRoles" priority="4">
+		<property name="portal.acceptance" value="sharry" />
+
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Users" />
 			<var name="panel" value="Control Panel" />
@@ -2358,6 +2364,8 @@
 	</command>
 
 	<command name="ViewDocumentsAndMediaAddRepositoryPermissionSiteMemberRole" priority="4">
+		<property name="portal.acceptance" value="sharry" />
+
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Users" />
 			<var name="panel" value="Control Panel" />

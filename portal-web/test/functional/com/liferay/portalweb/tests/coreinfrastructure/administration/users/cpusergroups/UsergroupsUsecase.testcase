@@ -212,6 +212,8 @@
 	</command>
 
 	<command name="UserGroupSiteOwnerPermissions" priority="4">
+		<property name="portal.acceptance" value="sharry" />
+
 		<property name="test.name.skip.portal.instance" value="UsergroupsUsecase#UserGroupSiteOwnerPermissions" />
 
 		<execute macro="ProductMenu#gotoPortlet">
