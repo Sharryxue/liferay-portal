@@ -1047,7 +1047,7 @@
 			</execute>
 		</for>
 
-		<execute function="Click" locator1="Icon#EXPIRE" />
+		<execute function="ClickNoError" locator1="Icon#EXPIRE" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>

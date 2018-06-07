@@ -2283,6 +2283,7 @@
 	</command>
 
 	<command name="ExpireMultipleWebContent" priority="4">
+		<property name="portal.acceptance" value="sharry" />
 		<property name="testray.component.names" value="Web Content Administration" />
 
 		<execute macro="ProductMenu#gotoPortlet">
