@@ -3,6 +3,7 @@
 		<execute function="Type" locator1="TextInput#FIRST_NAME" value1="${administratorFirstName}" />
 		<execute function="Type" locator1="TextInput#LAST_NAME" value1="${administratorLastName}" />
 		<execute function="Type" locator1="TextInput#EMAIL" value1="${administratorEmail}" />
+		<execute function="Type" locator1="TextInput#PORTAL_NAME" value1="${portalName}" />
 	</command>
 
 	<command name="configureDatabasePG">
@@ -89,6 +90,7 @@
 			<var name="administratorEmail" value="${administratorEmail}" />
 			<var name="administratorFirstName" value="${administratorFirstName}" />
 			<var name="administratorLastName" value="${administratorLastName}" />
+			<var name="portalName" value="${portalName}" />
 		</execute>
 
 		<execute macro="SetupWizard#configureDatabasePG">
