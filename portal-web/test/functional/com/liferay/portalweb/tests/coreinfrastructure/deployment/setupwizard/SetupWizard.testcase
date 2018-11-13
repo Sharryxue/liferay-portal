@@ -142,59 +142,15 @@
 		<var method="FileUtil#read('${liferayHome}/portal-setup-wizard.properties')" name="fileContent" />
 
 		<if>
-			<contains string="${fileContent}" substring="admin.email.from.address=user@liferay.com" />
+			<and>
+				<contains string="${fileContent}" substring="admin.email.from.address=user@liferay.com" />
+				<contains string="${fileContent}" substring="admin.email.from.name=User User" />
+				<contains string="${fileContent}" substring="default.admin.email.address.prefix=user" />
+				<contains string="${fileContent}" substring="default.admin.first.name=User" />
+				<contains string="${fileContent}" substring="default.admin.last.name=User" />
+			</and>
 			<then>
-				<echo message="admin.email.from.address=user@liferay.com" />
-			</then>
-			<else>
-				<fail message="Fail to save the email address configuration in portal file portal-setup-wizard.properties" />
-			</else>
-		</if>
-
-		<if>
-			<contains string="${fileContent}" substring="admin.email.from.name=User User" />
-			<then>
-				<echo message="admin.email.from.name=User User" />
-			</then>
-			<else>
-				<fail message="Fail to save the user name configuration in portal file portal-setup-wizard.properties" />
-			</else>
-		</if>
-
-		<if>
-			<contains string="${fileContent}" substring="default.admin.email.address.prefix=user" />
-			<then>
-				<echo message="default.admin.email.address.prefix=user" />
-			</then>
-			<else>
-				<fail message="Fail to save the email address prefix configuration in portal file portal-setup-wizard.properties" />
-			</else>
-		</if>
-
-		<if>
-			<contains string="${fileContent}" substring="default.admin.first.name=User" />
-			<then>
-				<echo message="default.admin.first.name=User" />
-			</then>
-			<else>
-				<fail message="Fail to save the user first name configuration in portal file portal-setup-wizard.properties" />
-			</else>
-		</if>
-
-		<if>
-			<contains string="${fileContent}" substring="default.admin.last.name=User" />
-			<then>
-				<echo message="default.admin.last.name=User" />
-			</then>
-			<else>
-				<fail message="Fail to save the user last name configuration in portal file portal-setup-wizard.properties" />
-			</else>
-		</if>
-
-		<if>
-			<contains string="${fileContent}" substring="admin.email.from.address=user@liferay.com,admin.email.from.name=User User,default.admin.email.address.prefix=user,default.admin.first.name=User,default.admin.last.name=User" />
-			<then>
-				<echo message="admin.email.from.address=user@liferay.com,admin.email.from.name=User User,default.admin.email.address.prefix=user,default.admin.first.name=User,default.admin.last.name=User" />
+				<echo message="Save the configuration in portal file portal-setup-wizard.properties successfully" />
 			</then>
 			<else>
 				<fail message="Fail to save the configuration in portal file portal-setup-wizard.properties" />
