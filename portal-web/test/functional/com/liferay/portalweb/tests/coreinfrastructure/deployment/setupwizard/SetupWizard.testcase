@@ -122,4 +122,73 @@
 		<execute function="AssertHTMLSourceTextNotPresent" value1="${actualScript}" />
 		<execute function="AssertHTMLSourceTextPresent" value1="${escapedScript}" />
 	</command>
+
+	<command name="ViewConfigedSetupWizardValue" priority="5">
+		<property name="database.types" value="mysql" />
+
+		<execute macro="SetupWizard#configurePG">
+			<var name="administratorEmail" value="user@liferay.com" />
+			<var name="administratorFirstName" value="User" />
+			<var name="administratorLastName" value="User" />
+			<var method="PropsUtil#get('database.mysql.password')" name="databasePassword" />
+			<var name="databaseType" value="MySQL" />
+			<var method="PropsUtil#get('database.mysql.username')" name="databaseUserName" />
+			<var method="PropsUtil#get('database.mysql.driver')" name="jdbcDriverClassName" />
+			<var method="PropsUtil#get('database.mysql.url')" name="jdbcURL" />
+		</execute>
+
+		<var method="PropsUtil#get('liferay.home.dir.name')" name="liferayHome" />
+
+		<var method="FileUtil#read('${liferayHome}/portal-setup-wizard.properties')" name="fileContent" />
+
+		<if>
+			<contains string="${fileContent}" substring="admin.email.from.address=user@liferay.com" />
+			<then>
+				<echo message="admin.email.from.address=user@liferay.com" />
+			</then>
+			<else>
+				<fail message="Fail to save the email address configuration in portal file portal-setup-wizard.properties" />
+			</else>
+		</if>
+
+		<if>
+			<contains string="${fileContent}" substring="admin.email.from.name=User User" />
+			<then>
+				<echo message="admin.email.from.name=User User" />
+			</then>
+			<else>
+				<fail message="Fail to save the user name configuration in portal file portal-setup-wizard.properties" />
+			</else>
+		</if>
+
+		<if>
+			<contains string="${fileContent}" substring="default.admin.email.address.prefix=user" />
+			<then>
+				<echo message="default.admin.email.address.prefix=user" />
+			</then>
+			<else>
+				<fail message="Fail to save the email address prefix configuration in portal file portal-setup-wizard.properties" />
+			</else>
+		</if>
+
+		<if>
+			<contains string="${fileContent}" substring="default.admin.first.name=User" />
+			<then>
+				<echo message="default.admin.first.name=User" />
+			</then>
+			<else>
+				<fail message="Fail to save the user first name configuration in portal file portal-setup-wizard.properties" />
+			</else>
+		</if>
+
+		<if>
+			<contains string="${fileContent}" substring="default.admin.last.name=User" />
+			<then>
+				<echo message="default.admin.last.name=User" />
+			</then>
+			<else>
+				<fail message="Fail to save the user last name configuration in portal file portal-setup-wizard.properties" />
+			</else>
+		</if>
+	</command>
 </definition>
