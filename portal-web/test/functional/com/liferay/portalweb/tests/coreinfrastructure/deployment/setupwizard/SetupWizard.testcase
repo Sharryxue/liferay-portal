@@ -190,5 +190,15 @@
 				<fail message="Fail to save the user last name configuration in portal file portal-setup-wizard.properties" />
 			</else>
 		</if>
+
+		<if>
+			<contains string="${fileContent}" substring="admin.email.from.address=user@liferay.com,admin.email.from.name=User User,default.admin.email.address.prefix=user,default.admin.first.name=User,default.admin.last.name=User" />
+			<then>
+				<echo message="admin.email.from.address=user@liferay.com,admin.email.from.name=User User,default.admin.email.address.prefix=user,default.admin.first.name=User,default.admin.last.name=User" />
+			</then>
+			<else>
+				<fail message="Fail to save the configuration in portal file portal-setup-wizard.properties" />
+			</else>
+		</if>
 	</command>
 </definition>
