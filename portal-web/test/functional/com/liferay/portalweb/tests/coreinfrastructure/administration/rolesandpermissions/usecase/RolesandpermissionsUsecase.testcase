@@ -178,12 +178,12 @@ definition {
 
 		AssertTextEquals(
 			locator1 = "Permissions#CONFIGURATION_PERMISSIONS_TEAM_ROLE_NAME",
-			value1 = "Site Team Name"
+			value1 = "Regular Role Site Team Name"
 		);
 
 		User.logoutPG();
 
-		User.loginUserPG(password = "test", userEmailAddress = "test@liferay.com");
+		User.loginUserPG(password = "test", userEmailAddress = "test@liferay.com");*/
 
 		Navigator.openSiteURL(siteName = "Site Name");
 
@@ -193,7 +193,7 @@ definition {
 
 		AssertTextEquals(
 			locator1 = "Permissions#CONFIGURATION_PERMISSIONS_TEAM_ROLE_NAME",
-			value1 = "Site Team Name"
+			value1 = "Regular Role Site Team Name"
 		);
 
 		Navigator.openURL();
