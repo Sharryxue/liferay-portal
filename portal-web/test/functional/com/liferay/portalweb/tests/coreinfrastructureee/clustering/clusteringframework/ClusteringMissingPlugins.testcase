@@ -274,6 +274,7 @@ definition {
 
 	@priority = "4"
 	test ScheduleJobOnAllClusterNode {
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "ClusteringMissingPlugins#ScheduleJobOnAllClusterNode";
 
 		Clustering.viewClusterStatusInConsole();
