@@ -47,13 +47,9 @@ definition {
 
 		Organization.addSiteCP(orgName = "Organization Name");
 
-		PortalSettings.gotoPortalSettings();
-
 		PortalSettings.editConfigurationUsersDefaultUserAssociationsOrganizationSitesCP(
 			orgName = "Organization Name"
 		);
-
-		PortalSettings.gotoPortalSettings();
 
 		PortalSettings.viewConfigurationUsersDefaultUserAssociationsOrganizationSitesCP(
 			orgName = "Organization Name"
@@ -96,13 +92,9 @@ definition {
 
 		Role.add(roleTitle = "Roles Regrole Name");
 
-		PortalSettings.gotoPortalSettings();
-
 		PortalSettings.editConfigurationUsersDefaultUserAssociationsRolesCP(
 			roleTitle = "Roles Regrole Name"
 		);
-
-		PortalSettings.gotoPortalSettings();
 
 		PortalSettings.viewConfigurationUsersDefaultUserAssociationsRolesCP(
 			roleTitle = "Roles Regrole Name"
@@ -142,13 +134,9 @@ definition {
 
 		Site.addBlankCP(siteName = "Site Name");
 
-		PortalSettings.gotoPortalSettings();
-
 		PortalSettings.editConfigurationUsersDefaultUserAssociationsSitesCP(
 			siteName = "Site Name"
 		);
-
-		PortalSettings.gotoPortalSettings();
 
 		PortalSettings.viewConfigurationUsersDefaultUserAssociationsSitesCP(
 			siteName = "Site Name"
@@ -188,13 +176,9 @@ definition {
 
 		UserGroup.addCP(userGroupName = "UG UserGroup Name");
 
-		PortalSettings.gotoPortalSettings();
-
 		PortalSettings.editConfigurationUsersDefaultUserAssociationsUserGroupsCP(
 			userGroupName = "UG UserGroup Name"
 		);
-
-		PortalSettings.gotoPortalSettings();
 
 		PortalSettings.viewConfigurationUsersDefaultUserAssociationsUserGroupsCP(
 			userGroupName = "UG UserGroup Name"
@@ -228,8 +212,6 @@ definition {
 	test EnterReservedEmailAddress {
 		property portal.acceptance = "true";
 
-		PortalSettings.gotoPortalSettings();
-
 		PortalSettings.enterReservedEmailAddressCP(
 			userEmailAddress = "userea@liferay.com"
 		);
@@ -251,8 +233,6 @@ definition {
 	@priority = "5"
 	test EnterReservedScreenName {
 		property portal.acceptance = "true";
-
-		PortalSettings.gotoPortalSettings();
 
 		PortalSettings.viewReservedCredentialsScreenNamesCP();
 
@@ -482,28 +462,28 @@ definition {
 
 	@priority = "3"
 	test ViewDefaultUserAssociations {
-		PortalSettings.gotoPortalSettings();
+		Navigator.openURL();
 
 		PortalSettings.viewDefaultUserAssociationsCP();
 	}
 
 	@priority = "3"
 	test ViewEmailNotificationsAccountCreatedNotification {
-		PortalSettings.gotoPortalSettings();
+		Navigator.openURL();
 
 		PortalSettings.viewEmailNotificationsAccountCreatedNotificationCP();
 	}
 
 	@priority = "3"
 	test ViewEmailNotificationsPasswordChangedNotification {
-		PortalSettings.gotoPortalSettings();
+		Navigator.openURL();
 
 		PortalSettings.viewEmailNotificationsPasswordChangedNotificationCP();
 	}
 
 	@priority = "3"
 	test ViewEmailNotificationsSender {
-		PortalSettings.gotoPortalSettings();
+		Navigator.openURL();
 
 		PortalSettings.viewEmailNotificationsSenderCP();
 	}
