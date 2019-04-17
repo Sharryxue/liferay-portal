@@ -305,16 +305,6 @@ definition {
 		PortletEntry.save();
 	}
 
-	macro confirmWorkflowAction {
-		IFrame.selectConfigurationFrame();
-
-		AssertElementPresent(locator1 = "Button#DONE");
-
-		Click(locator1 = "Button#DONE");
-
-		Alert.viewSuccessMessage();
-	}
-
 	macro deleteWorkflowDefinition {
 		var key_workflowDefinitionTitle = "${workflowDefinitionTitle}";
 
