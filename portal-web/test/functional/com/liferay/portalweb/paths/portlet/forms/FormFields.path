@@ -286,7 +286,7 @@
 <!--SWITCHER-->
 <tr>
 	<td>SWITCHER</td>
-	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//span[@class='toggle-switch-bar'] | //span[contains(text(),'${key_fieldName}')]/preceding-sibling::span[@class='toggle-switch-handle'] | //span[contains(text(),'${key_fieldName}')]</td>
+	<td>//*[contains(.,'${key_fieldName}')]//span[@class='toggle-switch-bar'] | //span[contains(text(),'${key_fieldName}')]/preceding-sibling::span[@class='toggle-switch-handle'] | //span[contains(text(),'${key_fieldName}')]</td>
 	<td></td>
 </tr>
 <tr>
