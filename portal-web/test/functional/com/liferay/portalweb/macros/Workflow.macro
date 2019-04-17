@@ -135,7 +135,7 @@ definition {
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Approve");
 
-		Workflow.confirmWorkflowAction();
+		Alert.viewSuccessMessage();
 
 		Workflow.viewCompletedTask(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -193,7 +193,7 @@ definition {
 			);
 		}
 
-		Workflow.confirmWorkflowAction();
+		Alert.viewSuccessMessage();
 
 		Workflow.viewTaskAssignedToMe(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -225,9 +225,7 @@ definition {
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Assign to Me");
 
-		Workflow.confirmWorkflowAction();
-
-		Click(locator1 = "Icon#ANGLE_LEFT_BACK");
+		Alert.viewSuccessMessage();
 
 		Workflow.viewTaskAssignedToMe(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -479,9 +477,7 @@ definition {
 			);
 		}
 
-		Workflow.confirmWorkflowAction();
-
-		SelectFrame(value1 = "relative=top");
+		Alert.viewSuccessMessage();
 
 		Workflow.viewCompletedTask(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -508,9 +504,7 @@ definition {
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Reject");
 
-		Workflow.confirmWorkflowAction();
-
-		SelectFrame(value1 = "relative=top");
+		Alert.viewSuccessMessage();
 
 		Workflow.viewCompletedTask(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -535,7 +529,7 @@ definition {
 
 		MenuItem.click(menuItem = "Resubmit");
 
-		Workflow.confirmWorkflowAction();
+		Alert.viewSuccessMessage();
 
 		Workflow.viewCompletedTask(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -562,7 +556,7 @@ definition {
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Resubmit");
 
-		Workflow.confirmWorkflowAction();
+		Alert.viewSuccessMessage();
 
 		Workflow.viewCompletedTask(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -704,7 +698,7 @@ definition {
 			);
 		}
 
-		Workflow.confirmWorkflowAction();
+		Alert.viewSuccessMessage();
 
 		Workflow.viewTaskAssignedToMe(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -759,7 +753,7 @@ definition {
 			);
 		}
 
-		Workflow.confirmWorkflowAction();
+		Alert.viewSuccessMessage();
 
 		Workflow.viewTaskAssignedToMyRoles(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
