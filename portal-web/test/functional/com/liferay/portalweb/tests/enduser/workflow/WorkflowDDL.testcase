@@ -152,6 +152,8 @@ definition {
 
 	@priority = "4"
 	test RejectDynamicdatalistCP {
+		property portal.acceptance = "sharry";
+
 		var ddlDataDefinitionName = "DDL Definition";
 		var ddlListName = "DDL List";
 		var ddlRecordFieldData = "Record Text";

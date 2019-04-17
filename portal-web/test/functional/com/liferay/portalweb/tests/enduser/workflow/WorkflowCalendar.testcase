@@ -280,6 +280,8 @@ definition {
 
 	@priority = "4"
 	test RejectEventWithInvitedUser {
+		property portal.acceptance = "sharry";
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		CalendarNavigator.gotoView(viewType = "Week");

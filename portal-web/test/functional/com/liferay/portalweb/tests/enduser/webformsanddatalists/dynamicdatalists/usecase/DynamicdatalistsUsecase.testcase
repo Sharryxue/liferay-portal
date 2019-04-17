@@ -1740,6 +1740,8 @@ definition {
 
 	@priority = "4"
 	test AssertUserUpdateRejectedRecord {
+		property portal.acceptance = "sharry";
+
 		ProductMenu.gotoPortlet(
 			category = "Site Builder",
 			panel = "Site Administration",

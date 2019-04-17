@@ -140,6 +140,8 @@ definition {
 
 	@priority = "4"
 	test RejectBlogsEntryCP {
+		property portal.acceptance = "sharry";
+
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
