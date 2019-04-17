@@ -1028,6 +1028,7 @@ definition {
 	@description = "This is a use case for LPS-75495."
 	@priority = "3"
 	test ViewShowRuleActivationAfterInputtingUnrelatedField {
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "FormRules#ViewShowRuleActivationAfterInputtingUnrelatedField";
 		Navigator.openURL();
 
