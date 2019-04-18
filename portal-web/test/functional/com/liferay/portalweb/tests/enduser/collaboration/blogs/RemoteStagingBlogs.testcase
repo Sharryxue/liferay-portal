@@ -147,7 +147,7 @@ definition {
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Assign to Me");
 
-		Alert.viewSuccessMessage();
+		Workflow.confirmWorkflowAction();
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Workflow Tasks");
 

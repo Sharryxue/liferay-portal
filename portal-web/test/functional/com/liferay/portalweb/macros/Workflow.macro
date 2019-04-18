@@ -193,7 +193,7 @@ definition {
 			);
 		}
 
-		Alert.viewSuccessMessage();
+		Workflow.confirmWorkflowAction();
 
 		Workflow.viewTaskAssignedToMe(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -225,7 +225,9 @@ definition {
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Assign to Me");
 
-		Alert.viewSuccessMessage();
+		Workflow.confirmWorkflowAction();
+
+		Click(locator1 = "Icon#ANGLE_LEFT_BACK");
 
 		Workflow.viewTaskAssignedToMe(
 			ddlDataDefinitionName = "${ddlDataDefinitionName}",
@@ -303,6 +305,16 @@ definition {
 		);
 
 		PortletEntry.save();
+	}
+
+	macro confirmWorkflowAction {
+		IFrame.selectConfigurationFrame();
+
+		AssertElementPresent(locator1 = "Button#DONE");
+
+		Click(locator1 = "Button#DONE");
+
+		Alert.viewSuccessMessage();
 	}
 
 	macro deleteWorkflowDefinition {
