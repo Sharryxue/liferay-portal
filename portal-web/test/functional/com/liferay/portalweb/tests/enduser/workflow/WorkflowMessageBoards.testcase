@@ -142,7 +142,8 @@ definition {
 
 	@priority = "4"
 	test RejectMessageBoardsThreadPG {
-		property test.name.skip.portal.instance = "WorkflowadminPGMessageboards#RejectMessageBoardsThreadPG";
+		property portal.acceptance = "sharry";
+		property test.name.skip.portal.instance = "WorkflowMessageBoards#RejectMessageBoardsThreadPG";
 
 		Navigator.gotoPage(pageName = "Message Boards Page");
 

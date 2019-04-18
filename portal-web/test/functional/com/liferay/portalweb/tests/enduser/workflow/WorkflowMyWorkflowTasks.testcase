@@ -179,6 +179,8 @@ definition {
 
 	@priority = "4"
 	test ApproveResubmitTaskByActions {
+		property portal.acceptance = "sharry";
+
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
@@ -255,6 +257,8 @@ definition {
 
 	@priority = "4"
 	test RejectTaskByDetails {
+		property portal.acceptance = "sharry";
+
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
@@ -309,6 +313,8 @@ definition {
 
 	@priority = "5"
 	test ResubmitTaskByDetails {
+		property portal.acceptance = "sharry";
+
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
@@ -365,6 +371,8 @@ definition {
 
 	@priority = "3"
 	test ReviewerApproveResubmitTaskByActionsUser {
+		property portal.acceptance = "sharry";
+
 		Permissions.setUpRegRoleLoginUserCP(
 			roleTitle = "Regrole Name",
 			userEmailAddress = "userea1@liferay.com",

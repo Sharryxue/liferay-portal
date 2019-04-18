@@ -207,6 +207,8 @@ definition {
 
 	@priority = "4"
 	test RejectPageCommentPG {
+		property portal.acceptance = "sharry";
+
 		Navigator.gotoPage(pageName = "Page Comments Page");
 
 		PageComment.addWithWorkflowPG(

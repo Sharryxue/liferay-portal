@@ -961,6 +961,8 @@ definition {
 
 	@priority = "3"
 	test ViewBlogsEntryWorkflowViaNotifications {
+		property portal.acceptance = "sharry";
+
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(

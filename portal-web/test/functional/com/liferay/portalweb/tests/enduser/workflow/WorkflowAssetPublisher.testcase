@@ -219,6 +219,8 @@ definition {
 
 	@priority = "4"
 	test RejectBlogsEntryPG {
+		property portal.acceptance = "sharry";
+
 		Navigator.gotoPage(pageName = "Asset Publisher Page");
 
 		Blogs.addWithWorkflowViaAP(
