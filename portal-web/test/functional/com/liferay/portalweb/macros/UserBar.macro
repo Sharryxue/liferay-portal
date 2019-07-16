@@ -26,18 +26,6 @@ definition {
 		}
 	}
 
-	macro signOut {
-		if (IsElementNotPresent(locator1 = "UserBar#USER_SIGN_IN")) {
-			Click(locator1 = "UserBar#USER_AVATAR_IMAGE");
-
-			AssertVisible(locator1 = "UserBar#USER_AVATAR_DROPDOWN_PORTAL_OPEN");
-
-			ScrollWebElementIntoView(locator1 = "UserBar#USER_AVATAR_DROPDOWN_SIGNOUT");
-
-			Click(locator1 = "UserBar#USER_AVATAR_DROPDOWN_SIGNOUT");
-		}
-	}
-
 	macro viewFullName {
 		AssertTextEquals(
 			locator1 = "UserBar#USER_FULL_NAME",

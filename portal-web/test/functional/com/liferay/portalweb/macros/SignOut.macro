@@ -4,13 +4,13 @@ definition {
 	macro signOut {
 		Navigator.openURL();
 
-		UserBar.signOut();
+		UserBar.gotoDropdownItem(dropdownItem = "Sign Out");
 	}
 
 	macro signOutOfSpecificURL {
 		Navigator.openSpecificURL(url = "${url}");
 
-		UserBar.signOut();
+		UserBar.gotoDropdownItem(dropdownItem = "Sign Out");
 	}
 
 }

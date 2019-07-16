@@ -1901,7 +1901,7 @@ definition {
 	macro logoutAndLoginPG {
 		Navigator.openURL();
 
-		UserBar.signOut();
+		UserBar.gotoDropdownItem(dropdownItem = "Sign Out");
 
 		User.loginPG(
 			authenticationMethod = "${authenticationMethod}",
@@ -1924,14 +1924,14 @@ definition {
 			}
 		}
 
-		UserBar.signOut();
+		UserBar.gotoDropdownItem(dropdownItem = "Sign Out");
 	}
 
 	@description = "Log out of Liferay Portal."
 	macro logoutUserPG {
 		Navigator.openURL();
 
-		UserBar.signOut();
+		UserBar.gotoDropdownItem(dropdownItem = "Sign Out");
 	}
 
 	macro makePrimary {
