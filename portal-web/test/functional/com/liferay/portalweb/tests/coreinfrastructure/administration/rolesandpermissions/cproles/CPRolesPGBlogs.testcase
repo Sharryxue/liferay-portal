@@ -329,6 +329,7 @@ definition {
 
 	@priority = "5"
 	test AddBlogsEntrySiteRole {
+		property portal.acceptance = "sharry";
 		Permissions.setUpSiteRoleLoginUserPG(
 			page = "Public Pages",
 			pageName = "Blogs Page",
@@ -387,6 +388,7 @@ definition {
 
 	@priority = "4"
 	test AddBlogsEntrySiteRoleInline {
+		property portal.acceptance = "sharry";
 		Permissions.setUpSiteRoleLoginUserPG(
 			page = "Public Pages",
 			pageName = "Blogs Page",
@@ -1086,6 +1088,7 @@ definition {
 
 	@priority = "4"
 	test DeleteBlogsEntrySiteRoleInline {
+		property portal.acceptance = "sharry";
 		Permissions.setUpSiteRoleLoginUserPG(
 			page = "Public Pages",
 			pageName = "Blogs Page",
@@ -1768,6 +1771,7 @@ definition {
 
 	@priority = "4"
 	test ViewBlogsPermissionsSiteRole {
+		property portal.acceptance = "sharry";
 		Permissions.setUpSiteRoleLoginUserPG(
 			page = "Public Pages",
 			pageName = "Blogs Page",
@@ -1850,6 +1854,7 @@ definition {
 
 	@priority = "4"
 	test ViewBlogsPermissionsSiteRoleInline {
+		property portal.acceptance = "sharry";
 		Permissions.setUpSiteRoleLoginUserPG(
 			page = "Public Pages",
 			pageName = "Blogs Page",
