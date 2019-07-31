@@ -45,6 +45,7 @@ definition {
 
 	@priority = "4"
 	test AnonymizeAllEntries {
+        property portal.acceptance = "sharry"; 
 		User.logoutAndLoginPG(
 			userLoginEmailAddress = "userea@liferay.com",
 			userLoginFullName = "userfn userln");
