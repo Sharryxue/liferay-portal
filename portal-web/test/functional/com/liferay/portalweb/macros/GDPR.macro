@@ -32,7 +32,7 @@ definition {
 			key_lastName = "${userLastName}",
 			locator1 = "ExportPersonalData#HEADER");
 
-		while (IsElementNotPresent(locator1 = "ExportPersonalData#EXPORT_PROCESS_IN_PROGRESS")) {
+		if (!(IsElementPresent(locator1 = "ExportPersonalData#EXPORT_PROCESS_IN_PROGRESS")||IsElementPresent(locator1 = "ExportPersonalData#EXPORT_PROCESS_APPLICATION_IN_PROGRESS"))) {
 			AssertElementPresent(locator1 = "ExportPersonalData#EXPORT_PROCESS_SUCCESSFUL");
 		}
 
@@ -40,7 +40,7 @@ definition {
 			for (var application : list "${applications}") {
 				AssertElementPresent(
 					key_application = "${application}",
-					locator1 = "ExportPersonalData#EXPORT_PROCESS_SUCCESSFUL");
+					locator1 = "ExportPersonalData#EXPORT_PROCESS_SPECIFIC_APPLICATION_SUCCESSFUL");
 			}
 		}
 	}

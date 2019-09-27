@@ -9,7 +9,7 @@ definition {
 		TestCase.setUpPortalInstance();
 
 		User.firstLoginPG();
-
+/*
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
 			userFirstName = "userfn",
@@ -27,7 +27,7 @@ definition {
 
 		User.editPasswordCP(
 			userEmailAddress = "userea@liferay.com",
-			userScreenName = "usersn");
+			userScreenName = "usersn");*/
 	}
 
 	tearDown {
@@ -489,7 +489,7 @@ definition {
 			userLoginEmailAddress = "userea@liferay.com",
 			userLoginFullName = "userfn userln");
 
-		ProductMenu.gotoPortlet(
+/*		ProductMenu.gotoPortlet(
 			category = "Site Builder",
 			panel = "Site Administration",
 			portlet = "Pages");
@@ -564,7 +564,7 @@ definition {
 		Bookmark.addCP(
 			bookmarkDescription = "This is a test bookmark!",
 			bookmarkName = "Test Bookmark",
-			bookmarkURL = "https://www.liferay.com");
+			bookmarkURL = "https://www.liferay.com");*/
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
 
@@ -610,6 +610,8 @@ definition {
 			userLastName = "userln");
 
 		GDPR.downloadExportedPersonalData(applications = "Wiki,Message Boards,Contacts Center,Bookmarks,Blogs,Announcements,Documents and Media");
+
+		AssertConsoleTextNotPresent(value1 = "java.lang.NullPointerException");
 	}
 
 }
