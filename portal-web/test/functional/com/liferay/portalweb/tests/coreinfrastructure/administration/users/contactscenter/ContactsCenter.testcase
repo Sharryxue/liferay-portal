@@ -48,7 +48,8 @@ definition {
 	@priority = "4"
 	test Smoke {
         property portal.acceptance = "sharry";
-		Navigator.gotoPage(pageName = "Contacts Center Page");
+
+        Navigator.gotoPage(pageName = "Contacts Center Page");
 
 		ContactsCenter.addPG(
 			contactName = "test1",
@@ -88,6 +89,136 @@ definition {
 			contactName = "userfn",
 			interactButton = "Block",
 			successMessage = "You have blocked this user.");
+	}
+
+	@priority = "4"
+	test Smoke1 {
+        property portal.acceptance = "sharry";
+
+        Navigator.gotoPage(pageName = "Contacts Center Page");
+
+		ContactsCenter.addPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		ContactsCenter.viewContactPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		ContactsCenter.viewContactPG(
+			contactName = "userfn",
+			emailAddress = "userea@liferay.com");
+
+		for (var button : list "Connect,Follow,Block,vCard") {
+			Button.viewPresent(button = "${button}");
+		}
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Connect",
+			successMessage = "This user has received a connection request from you.");
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Follow",
+			successMessage = "You are now following this user.");
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Block",
+			successMessage = "You have blocked this user.");
+	}
+
+	@priority = "4"
+	test Smoke2 {
+        property portal.acceptance = "sharry";
+
+        Navigator.gotoPage(pageName = "Contacts Center Page");
+
+		ContactsCenter.viewContactPG(
+			contactName = "userfn",
+			emailAddress = "userea@liferay.com");
+
+		for (var button : list "Connect,Follow,Block,vCard") {
+			Button.viewPresent(button = "${button}");
+		}
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Connect",
+			successMessage = "This user has received a connection request from you.");
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Follow",
+			successMessage = "You are now following this user.");
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Block",
+			successMessage = "You have blocked this user.");
+
+		ContactsCenter.addPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		ContactsCenter.viewContactPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		AssertElementPresent(locator1 = "Button#EDIT");
+
+		AssertElementPresent(locator1 = "Button#DELETE");
+
+		ContactsCenter.editPG(
+			contactName = "test1",
+			contactNameEdit = "Edittest1");
+	}
+
+	@priority = "4"
+	test Smoke3 {
+        property portal.acceptance = "sharry";
+
+        Navigator.gotoPage(pageName = "Contacts Center Page");
+
+		ContactsCenter.viewContactPG(
+			contactName = "userfn",
+			emailAddress = "userea@liferay.com");
+
+		for (var button : list "Connect,Follow,Block,vCard") {
+			Button.viewPresent(button = "${button}");
+		}
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Connect",
+			successMessage = "This user has received a connection request from you.");
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Follow",
+			successMessage = "You are now following this user.");
+
+		ContactsCenter.interactWithContactPG(
+			contactName = "userfn",
+			interactButton = "Block",
+			successMessage = "You have blocked this user.");
+
+		ContactsCenter.addPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		ContactsCenter.viewContactPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		AssertElementPresent(locator1 = "Button#EDIT");
+
+		AssertElementPresent(locator1 = "Button#DELETE");
+
+		ContactsCenter.editPG(
+			contactName = "test1",
+			contactNameEdit = "Edittest1");
 	}
 
 }
