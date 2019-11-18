@@ -47,6 +47,19 @@ definition {
 			value1 = "You have successfully updated the contact.");
 	}
 
+	macro interactWithContactPG {
+		AssertClick.assertPartialTextClickAt(
+			key_contact = "${contactName}",
+			locator1 = "ContactsCenter#CONTACT_LIST",
+			value1 = "${contactName}");
+
+		Button.click(button = "${interactButton}");
+
+		if (isSet(successMessage)) {
+			Alert.viewSuccessMessageText(successMessage = "${successMessage}");
+		}
+	}
+
 	macro viewContactPG {
 		AssertClick.assertPartialTextClickAt(
 			key_contact = "${contactName}",
