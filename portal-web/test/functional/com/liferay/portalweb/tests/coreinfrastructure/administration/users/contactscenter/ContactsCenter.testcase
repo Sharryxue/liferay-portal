@@ -10,7 +10,12 @@ definition {
 
 		User.firstLoginPG();
 
-		JSONUser.addUser(
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations");
+
+		User.addCP(
 			userEmailAddress = "userea@liferay.com",
 			userFirstName = "userfn",
 			userLastName = "userln",
@@ -47,7 +52,8 @@ definition {
 
 	@priority = "4"
 	test Smoke {
-        property portal.acceptance = "sharry";
+		property portal.acceptance = "sharry";
+
 		Navigator.gotoPage(pageName = "Contacts Center Page");
 
 		ContactsCenter.addPG(
