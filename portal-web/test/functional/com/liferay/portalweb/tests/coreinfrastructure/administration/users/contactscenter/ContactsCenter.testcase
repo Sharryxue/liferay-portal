@@ -56,22 +56,6 @@ definition {
 
 		Navigator.gotoPage(pageName = "Contacts Center Page");
 
-		ContactsCenter.addPG(
-			contactName = "test1",
-			emailAddress = "test1@liferay.com");
-
-		ContactsCenter.viewContactPG(
-			contactName = "test1",
-			emailAddress = "test1@liferay.com");
-
-		AssertElementPresent(locator1 = "Button#EDIT");
-
-		AssertElementPresent(locator1 = "Button#DELETE");
-
-		ContactsCenter.editPG(
-			contactName = "test1",
-			contactNameEdit = "Edittest1");
-
 		ContactsCenter.viewContactPG(
 			contactName = "userfn",
 			emailAddress = "userea@liferay.com");
@@ -94,6 +78,22 @@ definition {
 			contactName = "userfn",
 			interactButton = "Block",
 			successMessage = "You have blocked this user.");
+
+		ContactsCenter.addPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		ContactsCenter.viewContactPG(
+			contactName = "test1",
+			emailAddress = "test1@liferay.com");
+
+		AssertElementPresent(locator1 = "Button#EDIT");
+
+		AssertElementPresent(locator1 = "Button#DELETE");
+
+		ContactsCenter.editPG(
+			contactName = "test1",
+			contactNameEdit = "Edittest1");
 	}
 
 }
