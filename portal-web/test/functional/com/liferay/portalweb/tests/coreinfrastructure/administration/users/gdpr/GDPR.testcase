@@ -379,6 +379,8 @@ definition {
 
 	@priority = "4"
 	test DeleteEntryFromRegularSitesScope {
+		property test.portal.instance = "true";
+
 		JSONGroup.addGroup(groupName = "Site Name");
 
 		JSONLayout.addPublicLayout(
