@@ -110,7 +110,9 @@ definition {
 	@priority = "5"
 	test ViewWorkflowArchive621015 {
 		property data.archive.type = "data-archive-workflow";
+		property portal.acceptance = "sharry";
 		property portal.version = "6.2.10.15";
+
 
 		Upgrade.approveWorkflow();
 

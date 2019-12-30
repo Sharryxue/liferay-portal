@@ -110,6 +110,8 @@ definition {
 
 	@priority = "4"
 	test AddRegularRoleRegRole {
+		property portal.acceptance = "sharry";
+
 		Permissions.setUpRegRoleLoginUserCP(
 			roleTitle = "Regrole Name",
 			userEmailAddress = "userea@liferay.com",

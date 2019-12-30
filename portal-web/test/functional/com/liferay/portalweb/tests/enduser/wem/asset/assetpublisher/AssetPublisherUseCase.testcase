@@ -1084,6 +1084,7 @@ definition {
 	@priority = "3"
 	test ViewAuthorChangeViaAP {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
+		property portal.acceptance = "sharry";
 
 		Navigator.gotoSitePage(
 			pageName = "Asset Publisher Page",

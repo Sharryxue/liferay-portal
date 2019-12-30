@@ -513,6 +513,8 @@ definition {
 
 	@priority = "4"
 	test AssignRolePermissionsAddProcessCP {
+		property portal.acceptance = "sharry";
+
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
