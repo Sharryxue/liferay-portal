@@ -1,0 +1,44 @@
+definition {
+
+	macro login {
+		Open(locator1 = "http://localhost:8080/");
+
+		AssertClick(
+			locator1 = "LRLogin#SIGN_IN_LINK",
+			value1 = "Sign In");
+
+		var key_uerInfo ="${userInfo}";
+
+		Type(
+			locator1 = "LRLogin#EMAIL_ADDRESS_FILED",
+			value1 = "${userInfo}");
+
+		Type(
+			locator1 = "LRLogin#PASSWORD_FILED",
+			value1 = "${userInfo}");
+
+		Check(locator1 = "LRLogin#REMBERME_FILED");
+
+		AssertClick(
+			locator1 = "LRLogin#SIGN_IN_BUTTON",
+			value1 = "Sign In");
+
+		AssertClick(
+			locator1 = "LRTermsOfUse#I_AGREE_BUTTON",
+			value1 ="I Agree");
+
+		Type(
+			locator1 = "LRPasswordReminder#ANSWER_FIELD",
+			value1 = "aa");
+	
+		AssertClick(
+			locator1 = "LRPasswordReminder#SAVE_BUTTON",
+			value1 = "Save");
+	}
+
+	macro viewLogin {
+		AssertTextEquals(
+			locator1="LRWelcome#USER_AVATAR_IMAGE",
+			value1="You are signed in as Test Test.");
+	}
+}
