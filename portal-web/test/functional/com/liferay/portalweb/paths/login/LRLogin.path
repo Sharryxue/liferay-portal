@@ -15,12 +15,12 @@
 </tr>
 <tr>
 	<td>EMAIL_ADDRESS_FILED</td>
-	<td>//div[label[contains(.,'${key_uerInfo}')]]/input</td>
+	<td>//div[label[contains(.,'Email Address')]]/input</td>
 	<td></td>
 </tr>
 <tr>
 	<td>PASSWORD_FILED</td>
-	<td>//div[label[contains(.,'${key_uerInfo}')]]/input</td>
+	<td>//div[label[contains(.,'Password')]]/input</td>
 	<td></td>
 </tr>
 <tr>
@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>SIGN_IN_BUTTON</td>
-	<td>//button[contains(.,'Sign In')]</td>
+	<td>//button[contains(.,'${key_buttonName}')]</td>
 	<td></td>
 </tr>
 </tbody>
