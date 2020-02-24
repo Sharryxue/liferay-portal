@@ -8,9 +8,11 @@ definition {
 	test SuperAdminLogin{
 
 		MyFirstMacro.login(
-			userInfo = "test@liferay.com"
-			);
-
-		MyFirstMacro.viewLogin();
+			userEmailAddress = "test@liferay.com",
+			userPassword = "test");
+	
+		MyFirstMacro.viewLogin(userFullName = "Test Test");
+		User.logoutPG();
 	}
+
 }
