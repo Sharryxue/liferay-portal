@@ -24,12 +24,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>REMBERME_FILED</td>
+	<td>REMBERME_ME_FILED</td>
 	<td>//label[contains(.,'Remember Me')]/input[@type='checkbox']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>SIGN_IN_BUTTON</td>
+	<td>ANY_BUTTON</td>
 	<td>//button[contains(.,'${key_buttonName}')]</td>
 	<td></td>
 </tr>

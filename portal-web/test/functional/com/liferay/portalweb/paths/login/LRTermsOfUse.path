@@ -9,8 +9,8 @@
 </thead>
 <tbody>
 <tr>
-	<td>I_AGREE_BUTTON</td>
-	<td>//button[contains(.,'I Agree')]</td>
+	<td>ANY_BUTTON</td>
+	<td>//button[contains(.,'${key_buttonName}')]</td>
 	<td></td>
 </tr>
 </tbody>
