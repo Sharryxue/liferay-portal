@@ -40,4 +40,14 @@ definition {
 				value1 = "Save");
 		}
 	}
+
+	macro viewLogin {
+		Click(locator1 = "LRWelcome#USER_AVATAR_IMAGE");
+
+		var key_userFullName = "${userFullName}";
+		
+		AssertTextEquals.assertPartialText(
+			locator1="LRWelcome#USER_AVATAR_NAME",
+			value1 = "${userFullName}");
+	}
 }
