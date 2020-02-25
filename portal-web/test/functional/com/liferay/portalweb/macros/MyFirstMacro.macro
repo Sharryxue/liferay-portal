@@ -15,17 +15,17 @@ definition {
 			locator1 = "LRLogin#PASSWORD_FILED",
 			value1 = "${userPassword}");
 
-		Check(locator1 = "LRLogin#REMBERME_FILED");
+		Check(locator1 = "LRLogin#REMBERME_ME_FILED");
 
 		AssertClick(
 			key_buttonName = "Sign In";
-			locator1 = "LRLogin#SIGN_IN_BUTTON",
+			locator1 = "LRLogin#ANY_BUTTON",
 			value1 = "Sign In");
 
-		if (IsElementPresent(locator1 = "LRTermsOfUse#I_AGREE_BUTTON",key_buttonName = "I Agree")) {
+		if (IsElementPresent(locator1 = "LRTermsOfUse#ANY_BUTTON",key_buttonName = "I Agree")) {
 			AssertClick(
 				key_buttonName = "I Agree",
-				locator1 = "LRTermsOfUse#I_AGREE_BUTTON",
+				locator1 = "LRTermsOfUse#ANY_BUTTON",
 				value1 ="I Agree");
 		}
 
@@ -36,7 +36,7 @@ definition {
 
 			AssertClick(
 				key_buttonName = "Save",
-				locator1 = "LRPasswordReminder#SAVE_BUTTON",
+				locator1 = "LRPasswordReminder#ANY_BUTTON",
 				value1 = "Save");
 		}
 	}
@@ -45,7 +45,7 @@ definition {
 		Click(locator1 = "LRWelcome#USER_AVATAR_IMAGE");
 
 		var key_userFullName = "${userFullName}";
-		
+
 		AssertTextEquals.assertPartialText(
 			locator1="LRWelcome#USER_AVATAR_NAME",
 			value1 = "${userFullName}");
