@@ -22,4 +22,16 @@ definition {
 
 		User.logoutPG();
 	}
+
+	test SuperAdminLogin1 {
+		for (var userEmailAddress : list "user1,user2,user3") {
+			MyFirstMacro.login(
+				userEmailAddress = "${userEmailAddress}@liferay.com",
+				userPassword = "test");
+
+			MyFirstMacro.viewLogin(userFullName = "${userEmailAddress}");
+
+			User.logoutPG();
+		}
+	}
 }
