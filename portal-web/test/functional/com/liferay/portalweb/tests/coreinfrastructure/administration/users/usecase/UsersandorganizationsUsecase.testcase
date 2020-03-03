@@ -1945,7 +1945,10 @@ definition {
 			siteName = "${siteName}",
 			userScreenName = "usersn");
 
-		UserBar.gotoDropdownItem(dropdownItem = "My Profile");
+		AssertClick(
+			key_dropdownItem = "My Profile",
+			locator1 = "UserBar#USER_AVATAR_DROPDOWN_ITEM",
+			value1 = "My Profile");
 
 		SearchPortlets.viewUserResultDetails(
 			pageName = "My Profile",
