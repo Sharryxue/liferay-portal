@@ -669,9 +669,7 @@ definition {
 		}
 		else {
 			while (IsElementNotPresent(locator1 = "Roles#PERMISSION_TABLE_PERMISSIONS")) {
-				AssertClick(
-					locator1 = "Pagination#NEXT_LINK",
-					value1 = "Next");
+				Click(locator1 = "Pagination#NEXT_LINK");
 			}
 
 			AssertTextEquals.assertPartialText(
