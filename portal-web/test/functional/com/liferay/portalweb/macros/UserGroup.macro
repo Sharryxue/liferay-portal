@@ -292,7 +292,9 @@ definition {
 
 		AssertElementPresent(locator1 = "Checkbox#LEXICON_SELECT_ALL_INPUT");
 
-		AssertElementPresent(locator1 = "UserGroups#USER_GROUP_TABLE_CHECKBOX");
+		AssertElementPresent(
+			key_userGroupName = "${userGroupName}",
+			locator1 = "UserGroups#USER_GROUP_TABLE_CHECKBOX");
 
 		AssertElementPresent(locator1 = "Button#PLUS");
 
