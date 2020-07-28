@@ -60,7 +60,7 @@ definition {
 		ApplicationsMenu.gotoPortlet(
 			category = "Configuration",
 			panel = "Control Panel",
-			portlet = "System Settings");
+			portlet = "Instance Settings");
 
 		SystemSettings.gotoConfiguration(
 			configurationCategory = "Accounts",
@@ -123,7 +123,7 @@ definition {
 		ApplicationsMenu.gotoPortlet(
 			category = "Configuration",
 			panel = "Control Panel",
-			portlet = "System Settings");
+			portlet = "Instance Settings");
 
 		SystemSettings.gotoConfiguration(
 			configurationCategory = "Accounts",
@@ -538,7 +538,7 @@ definition {
 		ApplicationsMenu.gotoPortlet(
 			category = "Configuration",
 			panel = "Control Panel",
-			portlet = "System Settings");
+			portlet = "Instance Settings");
 
 		SystemSettings.gotoConfiguration(
 			configurationCategory = "Accounts",
