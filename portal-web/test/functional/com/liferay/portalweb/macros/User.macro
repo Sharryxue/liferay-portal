@@ -1636,16 +1636,6 @@ definition {
 		PortletEntry.save();
 	}
 
-	macro editUserJobTitleCP {
-		LexiconEntry.gotoEntry(rowEntry = "${userName}");
-
-		Type(
-			locator1 = "UsersAndOrganizationsEditUser#DETAILS_JOB_TITLE_FIELD",
-			value1 = "${userJobTitle}");
-
-		PortletEntry.save();
-	}
-
 	macro editUserInformation {
 		AssertElementPresent.assertElementPresent(locator1 = "TextInput#FIRST_NAME");
 
@@ -1688,6 +1678,16 @@ definition {
 
 			User.confirmPassword(password = "${password}");
 		}
+	}
+
+	macro editUserJobTitleCP {
+		LexiconEntry.gotoEntry(rowEntry = "${userName}");
+
+		Type(
+			locator1 = "UsersAndOrganizationsEditUser#DETAILS_JOB_TITLE_FIELD",
+			value1 = "${userJobTitle}");
+
+		PortletEntry.save();
 	}
 
 	macro editUserOrganizationCP {

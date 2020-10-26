@@ -1417,27 +1417,6 @@ definition {
 			teamName = "Site Team Name Edit");
 	}
 
-	@description = "This is a use case for LPS-120825."
-	@priority = "4"
-	test UpdateUserInformation {
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "Users and Organizations");
-
-		UserNavigator.gotoUser(userScreenName = "test");
-
-		User.editUserInformation(
-			userEmailAddressEdit = "testadmin@liferay.com",
-			userScreenNameEdit = "testscreen");
-
-		User.viewUserInfomation(
-			userEmailAddress = "testadmin@liferay.com",
-			userFirstName = "Test",
-			userLastName = "Test",
-			userScreenName = "testscreen");
-	}
-
 	@priority = "5"
 	test EditUserSite {
 		property app.server.types = "jboss,tcserver,tomcat,weblogic,websphere,wildfly";
@@ -1863,6 +1842,27 @@ definition {
 		User.searchCP(searchTerm = "test");
 
 		Organization.viewMembersNotFoundCP();
+	}
+
+	@description = "This is a use case for LPS-120825."
+	@priority = "4"
+	test UpdateUserInformation {
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations");
+
+		UserNavigator.gotoUser(userScreenName = "test");
+
+		User.editUserInformation(
+			userEmailAddressEdit = "testadmin@liferay.com",
+			userScreenNameEdit = "testscreen");
+
+		User.viewUserInfomation(
+			userEmailAddress = "testadmin@liferay.com",
+			userFirstName = "Test",
+			userLastName = "Test",
+			userScreenName = "testscreen");
 	}
 
 	@priority = "3"
