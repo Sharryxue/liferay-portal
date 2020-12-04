@@ -2574,17 +2574,21 @@ definition {
 			locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
 			value1 = "${city}");
 
-		AssertTextEquals.assertPartialText(
-			locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
-			value1 = "${country}");
+		if (isSet(country)) {
+			AssertTextEquals.assertPartialText(
+				locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
+				value1 = "${country}");
+		}
 
 		AssertTextEquals.assertPartialText(
 			locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
 			value1 = "${postalCode}");
 
-		AssertTextEquals.assertPartialText(
-			locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
-			value1 = "${region}");
+		if (isSet(region)) {
+			AssertTextEquals.assertPartialText(
+				locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
+				value1 = "${region}");
+		}
 
 		AssertTextEquals.assertPartialText(
 			locator1 = "UsersAndOrganizations#USER_ADDRESS_TABLE",
