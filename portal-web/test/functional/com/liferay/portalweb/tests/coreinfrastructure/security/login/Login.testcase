@@ -213,7 +213,7 @@ definition {
 			facebookPassword = "${facebookPassword}",
 			siteName = "${siteName}");
 
-		User.logoutUserPG();
+		User.logoutPG();
 
 		User.loginPG(
 			password = "test",
