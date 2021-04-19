@@ -13,4 +13,10 @@ definition {
 		UserBar.signOut();
 	}
 
+	macro signOutViaURL {
+		var portalURL = PropsUtil.get("portal.url");
+
+		Navigator.openSpecificURL(url = "${portalURL}/c/portal/logout");
+	}
+
 }

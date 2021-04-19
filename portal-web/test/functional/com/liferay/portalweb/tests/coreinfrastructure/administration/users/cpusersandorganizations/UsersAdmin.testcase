@@ -1598,26 +1598,17 @@ definition {
 	test LogoutUserViaURL {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 
-		var portalURL = PropsUtil.get("portal.url");
-
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
 			userFirstName = "userfn",
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		JSONUser.setFirstPassword(
-			agreeToTermsAndAnswerReminderQuery = "true",
-			requireReset = "false",
-			userEmailAddress = "userea@liferay.com");
+		SignOut.signOutViaURL(url = "${portalURL}/c/portal/logout");
 
-		User.logoutPG();
+		User.autoLogin(userEmailAddress = "userea@liferay.com");
 
-		User.loginPG(
-			password = "test",
-			userEmailAddress = "userea@liferay.com");
-
-		Navigator.openSpecificURL(url = "${portalURL}/c/portal/logout");
+		SignOut.signOutViaURL(url = "${portalURL}/c/portal/logout");
 
 		User.viewLoggedOutPG();
 	}
