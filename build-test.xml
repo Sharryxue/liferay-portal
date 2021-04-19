@@ -2623,6 +2623,12 @@ include-and-override=portal-liferay-online-limit.properties</echo>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="prepare-portal-auto-login-osgi-configuration">
+		<sequential>
+			<echo file="${liferay.home}/osgi/configs/com.liferay.portal.security.sso.token.configuration.TokenConfiguration.config">enabled="true"${line.separator}tokenLocation="REQUEST"</echo>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="prepare-portal-elasticsearch-osgi-configuration">
 		<sequential>
 			<echo file="${liferay.home}/osgi/configs/com.liferay.portal.search.elasticsearch7.configuration.ElasticsearchConfiguration.config">logExceptionsOnly=B"false"${line.separator}sidecarShutdownTimeout=L"20000"${line.separator}sidecarHttpPort="AUTO"${line.separator}sidecarJVMOptions=["-Xms256m","-Xmx512m"]</echo>
@@ -8620,6 +8626,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 				<prepare-captcha-configuration />
 			</then>
 		</if>
+
+		<prepare-portal-auto-login-osgi-configuration/>
 
 		<prepare-portal-elasticsearch-osgi-configuration />
 
