@@ -948,6 +948,17 @@ definition {
 		}
 	}
 
+	@summary = "Log into Liferay Portal as '${userEmailAddress}' automatically, password not required"
+	macro autoLogin {
+		var portalURL = PropsUtil.get("portal.url");
+
+		JSONUser.agreeToTermsAndAnswerReminderQuery(
+			portalInstanceName = "${portalInstanceName}",
+			userEmailAddress = "${userEmailAddress}");
+
+		Navigator.openSpecificURL(url = "${portalURL}/web/guest?SM_USER=${userEmailAddress}");
+	}
+
 	macro basicSearchCP {
 		if ("${userBasicSearch}" == "Basic") {
 			Search.searchCP(searchTerm = "${userScreenName}");
