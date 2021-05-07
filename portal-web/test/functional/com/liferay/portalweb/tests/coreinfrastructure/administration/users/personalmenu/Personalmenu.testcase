@@ -222,6 +222,14 @@ definition {
 			userFirstName = "Test",
 			userLastName = "Test",
 			userScreenName = "testscreen");
+
+		JSONUser.updateUser(
+			creatorEmailAddress = "testadmin@liferay.com",
+			creatorPassword = "test",
+			screenNameUpdate = "test",
+			userEmailAddressUpdate = "test@liferay.com",
+			userFirstName = "userfn",
+			userLastName = "userln");
 	}
 
 	@description = "This is a use case for LPS-105387."
