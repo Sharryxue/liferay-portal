@@ -249,4 +249,45 @@ definition {
 		}
 	}
 
+	macro updateUser {
+		Variables.assertDefined(parameterList = "${userEmailAddressUpdate},${userFirstName},${userLastName},${screenNameUpdate}");
+
+		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddressUpdate}");
+
+		var userFirstName = JSONUserSetter.setUserFirstName(userFirstName = "${userFirstName}");
+
+		var userLastName = JSONUserSetter.setUserLastName(userLastName = "${userLastName}");
+
+		if (!(isSet(birthdayDay))) {
+			var birthdayDay = "31";
+		}
+
+		if (!(isSet(birthdayMonth))) {
+			var birthdayMonth = "4";
+		}
+
+		if (!(isSet(birthdayYear))) {
+			var birthdayYear = "1986";
+		}
+
+		if (!(isSet(creatorEmailAddress))) {
+			var creatorEmailAddress = "test@liferay.com";
+		}
+
+		if (!(isSet(creatorPassword))) {
+			var creatorPassword = "test";
+		}
+
+		JSONUserAPI._updateUser(
+			birthdayDay = "${birthdayDay}",
+			birthdayMonth = "${birthdayMonth}",
+			birthdayYear = "${birthdayYear}",
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddressUpdate = "${userEmailAddressUpdate}",
+			userFirstName = "${userFirstName}",
+			userLastName = "${userLastName}",
+			screenNameUpdate = "${screenNameUpdate}");
+	}
+
 }
