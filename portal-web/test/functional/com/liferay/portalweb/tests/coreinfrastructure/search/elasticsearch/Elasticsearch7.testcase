@@ -56,7 +56,9 @@ definition {
 
 		Portlet.addPG(portletName = "Asset Publisher");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 		var port = Elasticsearch.getServerPort();
 
 		var curl = '''
@@ -151,7 +153,9 @@ definition {
 			locator1 = "Search#FIELD_MAPPINGS_EDITOR",
 			value1 = "liferay-0");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 		var liferayIndexName = "liferay-${companyId}";
 
 		Click(

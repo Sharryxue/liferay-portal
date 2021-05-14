@@ -110,7 +110,9 @@ definition {
 	macro _getDepotIdByName {
 		Variables.assertDefined(parameterList = "${depotName}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -134,7 +136,9 @@ definition {
 	macro _getGrandParentGroupIdByName {
 		Variables.assertDefined(parameterList = "${groupName}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -165,7 +169,9 @@ definition {
 	macro _getGroupIdByGroupKey {
 		Variables.assertDefined(parameterList = "${groupKey},${site}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var parentGroupId = JSONGroupSetter.setParentGroupId(parentGroupName = "${parentGroupName}", grandParentGroupName = "${grandParentGroupName}");
 
@@ -221,7 +227,9 @@ definition {
 	macro _getGroupName {
 		Variables.assertDefined(parameterList = "${groupId}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -239,7 +247,9 @@ definition {
 	macro _getParentGroupIdByName {
 		Variables.assertDefined(parameterList = "${groupName}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var grandParentGroupId = JSONGroupSetter.setGrandParentGroupId(grandParentGroupName = "${grandParentGroupName}");
 

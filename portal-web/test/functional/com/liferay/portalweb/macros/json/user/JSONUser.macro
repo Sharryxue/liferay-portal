@@ -50,7 +50,9 @@ definition {
 	}
 
 	macro addUserByJSONWSUI {
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		Type(
 			locator1 = "JSONWS#COMPANY_COMPANYID_FIELD",

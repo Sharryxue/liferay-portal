@@ -5,7 +5,9 @@ definition {
 
 		var portalURL = JSONCompany.getPortalURL();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var userId = JSONUserAPI._getUserIdByEmailAddress(userEmailAddress = "test@liferay.com");
 
@@ -24,7 +26,9 @@ definition {
 	macro _enablePublications {
 		var portalURL = JSONCompany.getPortalURL();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var curl = '''
 			${portalURL}/api/jsonws/ct.ctpreferences/checkout-ct-collection \
@@ -42,7 +46,9 @@ definition {
 
 		var portalURL = JSONCompany.getPortalURL();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var curl = '''
 			${portalURL}/api/jsonws/ct.ctcollection/get-ct-collections \
@@ -70,7 +76,9 @@ definition {
 
 		var portalURL = JSONCompany.getPortalURL();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var userId = JSONUserAPI._getUserIdByEmailAddress(userEmailAddress = "test@liferay.com");
 
@@ -89,7 +97,9 @@ definition {
 
 		var portalURL = JSONCompany.getPortalURL();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var userId = JSONUserAPI._getUserIdByEmailAddress(userEmailAddress = "test@liferay.com");
 

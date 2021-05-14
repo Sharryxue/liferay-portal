@@ -1,7 +1,9 @@
 definition {
 
 	macro cleanWorkflowIndex {
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var cleanCurl = '''
 			http://localhost:9200/liferay-${companyId}-${workflowIndexName}/_delete_by_query?pretty \

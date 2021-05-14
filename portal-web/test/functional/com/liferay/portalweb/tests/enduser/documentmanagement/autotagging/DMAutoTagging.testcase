@@ -56,7 +56,9 @@ definition {
 
 		GogoShell.openGogoShellAdmin();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		GogoShell.executeCommand(commandName = "assetAutoTagger:untagAll ${companyId}");
 

@@ -6,7 +6,9 @@ definition {
 
 		var portalURL = JSONCompany.getPortalURL();
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var curl = '''
 			${portalURL}/api/jsonws/portlet/has-portlet \

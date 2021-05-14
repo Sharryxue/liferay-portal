@@ -97,7 +97,9 @@ definition {
 	macro getOrganizationIdByName {
 		Variables.assertDefined(parameterList = "${organizationName}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 

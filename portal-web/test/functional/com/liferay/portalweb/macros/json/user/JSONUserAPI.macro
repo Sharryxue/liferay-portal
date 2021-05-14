@@ -3,7 +3,9 @@ definition {
 	macro _addUser {
 		Variables.assertDefined(parameterList = "${locale},${userEmailAddress},${userFirstName},${userLastName},${userScreenName}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -101,7 +103,9 @@ definition {
 	}
 
 	macro _disablePasswordChangeRequired {
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -182,7 +186,9 @@ definition {
 	}
 
 	macro _getUserIds {
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 

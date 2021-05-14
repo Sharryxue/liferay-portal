@@ -3,7 +3,9 @@ definition {
 	macro _getUserByIdCurl {
 		Variables.assertDefined(parameterList = "${userId}");
 
-		var companyId = JSONCompany.getCompanyId();
+		var companyId = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 
 		var portalURL = JSONCompany.getPortalURL();
 

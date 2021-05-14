@@ -18,7 +18,9 @@ definition {
 		JSONPermissionValidator.validateRoleType(roleType = "${roleType}");
 
 		if ("${roleType}" == "regular") {
-			var primKey = JSONCompany.getCompanyId();
+			var primKey = JSONCompany.getCompanyId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}");
 		}
 		else if (("${roleType}" == "site") || ("${roleType}" == "organization") || ("${roleType}" == "asset library")) {
 			var primKey = "0";
