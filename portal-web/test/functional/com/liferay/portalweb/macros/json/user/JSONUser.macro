@@ -128,7 +128,10 @@ definition {
 			groupName = "${depotName}",
 			site = "false");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserSetter.setUserId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._addUserToSite(
 			groupId = "${depotId}",
@@ -140,7 +143,10 @@ definition {
 
 		var groupId = JSONUserSetter.setGroupId(groupName = "${groupName}");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserSetter.setUserId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._addUserToSite(
 			groupId = "${groupId}",
@@ -152,7 +158,10 @@ definition {
 
 		var userGroupId = JSONUserGroupSetter.setUserGroupId(userGroupName = "${userGroupName}");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserSetter.setUserId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._addUserToUserGroup(
 			userGroupId = "${userGroupId}",
@@ -174,7 +183,10 @@ definition {
 	macro deleteUserByEmailAddress {
 		Variables.assertDefined(parameterList = "${userEmailAddress}");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserSetter.setUserId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._deleteUser(userId = "${userId}");
 	}
@@ -190,7 +202,10 @@ definition {
 
 		var userGroupId = JSONUserGroupSetter.setUserGroupId(userGroupName = "${userGroupName}");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserSetter.setUserId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._removeUserFromUserGroup(
 			userGroupId = "${userGroupId}",
@@ -207,7 +222,10 @@ definition {
 
 		var requireReset = JSONUserSetter.setRequireReset(requireReset = "${requireReset}");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserSetter.setUserId(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._updatePassword(
 			newPassword = "${newPassword}",

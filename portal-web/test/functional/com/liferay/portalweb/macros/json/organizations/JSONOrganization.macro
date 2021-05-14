@@ -60,7 +60,11 @@ definition {
 			parentOrganizationId = "${parentOrganizationId}"
 		);
 
-		var userId = JSONUserAPI._getUserIdByEmailAddress(userEmailAddress = "${userEmailAddress}");
+		var userId = JSONUserAPI._getUserIdByEmailAddress(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			portalInstanceName = "${portalInstanceName}",
+			userEmailAddress = "${userEmailAddress}");
 
 		JSONOrganizationAPI._assignUserToOrganization(
 			organizationId = "${organizationId}",

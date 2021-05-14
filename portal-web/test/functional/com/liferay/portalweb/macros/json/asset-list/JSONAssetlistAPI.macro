@@ -27,7 +27,11 @@ definition {
 
 		var portalURL = JSONCompany.getPortalURL();
 
-		var userId = JSONUserAPI._getUserIdByEmailAddress(userEmailAddress = "test@liferay.com");
+		var userId = JSONUserAPI._getUserIdByEmailAddress(
+			creatorEmailAddress = "${creatorEmailAddress}",
+			creatorPassword = "${creatorPassword}",
+			portalInstanceName = "${portalInstanceName}",
+			userEmailAddress = "${userEmailAddress}");
 
 		var typeSettings = JSONAssetlistSetter.setTypeSettings(
 			groupId = "${groupId}",
