@@ -32,25 +32,7 @@ export default function (url, listeners) {
 			});
 		}
 	}
-	else if (isValidURL(url)) {
+	else {
 		window.location.href = url;
 	}
-}
-
-function isValidURL(url) {
-	let urlObject;
-
-	try {
-		if (url.startsWith('/')) {
-			urlObject = new URL(url, window.location.origin);
-		}
-		else {
-			urlObject = new URL(url);
-		}
-	}
-	catch (error) {
-		return false;
-	}
-
-	return urlObject.protocol === 'http:' || urlObject.protocol === 'https:';
 }
