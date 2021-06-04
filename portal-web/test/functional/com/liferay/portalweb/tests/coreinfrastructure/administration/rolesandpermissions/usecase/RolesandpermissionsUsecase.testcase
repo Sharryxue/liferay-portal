@@ -493,7 +493,7 @@ definition {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
-
+/*
 		JSONRole.addSiteRole(
 			roleKey = "Data Recorder Name",
 			roleTitle = "Data Recorder Name");
@@ -592,7 +592,7 @@ definition {
 
 		User.assignSiteRoleCP(
 			siteRoleName = "Records Manager Name",
-			userScreenName = "usersn2");
+			userScreenName = "usersn2");*/
 
 		ProductMenu.gotoPortlet(
 			category = "Site Builder",
@@ -613,7 +613,7 @@ definition {
 			ddlDataDefinitionDescription = "Data Definition Description",
 			ddlDataDefinitionName = "Employee Profile Data Definition");
 
-		DynamicDataMapping.addField(
+/*		DynamicDataMapping.addField(
 			field = "Boolean",
 			fieldFieldLabel = "Employee",
 			fieldName = "Employee");
@@ -685,7 +685,7 @@ definition {
 
 		User.loginUserPG(
 			password = "test",
-			userEmailAddress = "userea1@liferay.com");
+			userEmailAddress = "userea1@liferay.com");*/
 	}
 
 	@priority = "4"
