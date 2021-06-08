@@ -2578,6 +2578,7 @@ definition {
 	@priority = "3"
 	test WelcomeEmailContainsVirtualHostSendToNewUser {
 		property custom.properties = "virtual.hosts.valid.hosts=localhost,127.0.0.1,www.able.com${line.separator}mail.send.blacklist=noreply@liferay.com,noreply@domain.invalid,test@domain.invalid";
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "UsersAdmin#ViewWelcomeEmailContainVirtualHostSendToNewUser";
 		property test.smtp.server.enabled = "true";
 
