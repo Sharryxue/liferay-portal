@@ -28,6 +28,27 @@ definition {
 		}
 	}
 
+	@priority = "3"
+	test AvatarFocus {
+		KeyPress(
+			locator1 = "UserBar#USER_AVATAR_BUTTON",
+			value1 = "\ENTER");
+
+		Pause(locator1 = "3000");
+
+		var boxShadow = Css.getSpecificCssValue(
+			cssClassSelector = ".btn:focus, .btn.focus",
+			cssProperty = "boxShadow");
+
+		echo("The boxShadow for is ${boxShadow}");
+
+/*		AssertCssValue(
+			key_element = ".btn:focus, .btn.focus",
+			locator1 = "UserBar#USER_AVATAR_BUTTON",
+			locator2 = "boxShadow",
+			value1 = "0 0 0 0.125rem #fff, 0 0 0 0.25rem #80acff");*/
+	}
+
 	@priority = "4"
 	test ConfigureLookAndFeelCurrentSiteAndMyDashboard {
 		PortalSettings.gotoConfiguration(
