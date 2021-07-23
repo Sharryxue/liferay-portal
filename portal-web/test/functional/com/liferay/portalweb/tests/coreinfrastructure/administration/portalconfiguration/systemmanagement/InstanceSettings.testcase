@@ -1267,6 +1267,8 @@ definition {
 	@description = "This test asserts that a user can update the password changed notification subject and body. The notification also send when set password via json."
 	@priority = "3"
 	test ViewPasswordChangedNotificationTemplateUpdated {
+		property portal.acceptance = "sharry";
+
 		property custom.properties = "mail.send.blacklist=noreply@liferay.com,noreply@domain.invalid,test@domain.invalid";
 		property test.name.skip.portal.instance = "InstanceSettings#ViewPasswordChangedNotificationTemplateUpdated";
 		property test.smtp.server.enabled = "true";
@@ -1328,6 +1330,8 @@ definition {
 	@description = "This test asserts that a user can update the password reset notification subject and body. The notification also send when set password via json."
 	@priority = "3"
 	test ViewPasswordResetNotificationTemplateUpdated {
+		property portal.acceptance = "sharry";
+
 		property custom.properties = "mail.send.blacklist=noreply@liferay.com,noreply@domain.invalid,test@domain.invalid";
 		property test.name.skip.portal.instance = "InstanceSettings#ViewPasswordResetNotificationTemplateUpdated";
 		property test.smtp.server.enabled = "true";
