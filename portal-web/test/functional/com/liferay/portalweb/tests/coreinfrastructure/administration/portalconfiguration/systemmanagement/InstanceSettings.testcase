@@ -1304,16 +1304,18 @@ definition {
 			''',
 			notificationsSubject = "[$PORTAL_URL$]: Dear user, your Password Has Been Changed");
 
-		JSONUser.addUser(
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations");
+
+		User.addCP(
 			userEmailAddress = "userea@liferay.com",
 			userFirstName = "userfn",
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		JSONUser.setFirstPassword(
-			agreeToTermsAndAnswerReminderQuery = "true",
-			requireReset = "false",
-			userEmailAddress = "userea@liferay.com");
+		User.editPassword(newPassword = "test");
 
 		MockMock.viewMail(
 			asset = "${portalURL}: Dear user, your Password Has Been Changed",
