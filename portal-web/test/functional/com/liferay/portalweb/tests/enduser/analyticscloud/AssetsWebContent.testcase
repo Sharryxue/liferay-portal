@@ -37,7 +37,6 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8446 | Test Summary: Assert 180 day time filter in Assets"
-	@ignore = "true"
 	@priority = "3"
 	test AssertAssetsPageTimeFilter180Days {
 		task ("Connect DXP to Analytics Cloud and get the property name") {
@@ -72,7 +71,6 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8444 | Test Summary: Custom Range time filter in Web Content assets page"
-	@ignore = "true"
 	@priority = "4"
 	test CanAssertWebContentTimeFIlterCustom {
 		task ("Connect DXP to Analytics Cloud and get the property name") {
@@ -179,7 +177,6 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8445 | Test Summary: Assert Web Content 180 Days Time Filter In Web Content Assets Page"
-	@ignore = "true"
 	@priority = "5"
 	test CanUse180DaysTimeFilterInWebContentOverview {
 		task ("Connect DXP to Analytics Cloud and get the property name") {
@@ -249,8 +246,7 @@ definition {
 		}
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8444 | Test Summary: Custom Range time filter in Web Content assets page"
-	@ignore = "true"
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8443 | Test Summary: Custom Range time filter in Web Content assets page"
 	@priority = "4"
 	test CanUseCustomRangeTimeFilterInWebContentOverview {
 		task ("Connect DXP to Analytics Cloud and get the property name") {
