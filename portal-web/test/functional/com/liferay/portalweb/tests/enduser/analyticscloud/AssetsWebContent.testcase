@@ -200,7 +200,7 @@ definition {
 			ACAssets.viewVisitorsBehaviorMetric(
 				metricTitle = "Views",
 				metricValue = "3");
-		}		
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8441 | Test Summary: Web content list is searchable"
@@ -408,7 +408,7 @@ definition {
 		task ("Wait for DXP data sync with AC") {
 			ACUtils.closeAllSessions();
 
-			Pause(locator1 = "30000");			
+			Pause(locator1 = "30000");
 		}
 
 		task ("Navigate to AC property") {
