@@ -4,6 +4,7 @@ definition {
 	property analytics.cloud.enabled = "true";
 	property minimum.slave.ram = "32";
 	property portal.release = "false";
+	property portal.acceptance = "sharry";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Analytics Cloud";
 
