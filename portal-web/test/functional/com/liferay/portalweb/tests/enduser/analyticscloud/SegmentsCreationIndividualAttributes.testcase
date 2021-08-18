@@ -391,9 +391,72 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanAddSegmentWithCustomFieldsForIndividuals {
+		property custom.properties = "jsonws.web.service.paths.excludes=";
 
-		// TODO LRAC-8569 CanAddSegmentWithCustomFieldsForIndividuals pending implementation
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
 
+		task ("Connect the DXP to AC") {
+			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+		}
+
+		task ("Add a new user with site") {
+			JSONUser.addUser(
+				userEmailAddress = "ac@liferay.com",
+				userFirstName = "ac",
+				userLastName = "ac",
+				userScreenName = "ac");
+
+			JSONUser.setFirstPassword(
+				agreeToTermsAndAnswerReminderQuery = "true",
+				requireReset = "false",
+				userEmailAddress = "ac@liferay.com");
+		}
+
+		task ("Sync the Contact Data") {
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("View the page as the new added user") {
+			User.logoutAndLoginPG(
+				userLoginEmailAddress = "ac@liferay.com",
+				userLoginFullName = "ac ac");
+
+			Navigator.gotoSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
+		}
+
+		task ("Switch to new property in AC") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Add a new dynamic segment using Individual Property Custom Fields") {
+			ACNavigation.goToSegments();
+
+			ACSegments.createDynamicSegment();
+
+			ACSegments.nameSegment(segmentName = "Dynamic Segment Using Individual Property Custom Fields");
+
+			ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
+
+			ACSegments.addSegmentField(segmentField = "Custom Field");
+
+			ACSegments.selectOperator(operator = "is not");
+
+			ACSegments.editTextCriterion(textInput = "defined");
+		}
+
+		task ("View the user showns on the Preview mode") {
+			Click(locator1 = "Icon#EYE_PREVIEW");
+
+			ACAssets.viewAssets(assetName = "ac ac");
+
+			Click.mouseDownMouseUp(locator1 = "Modal#CLOSE_BUTTON");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8570 | Test Summary: Add segment with custom fields for organizations"
