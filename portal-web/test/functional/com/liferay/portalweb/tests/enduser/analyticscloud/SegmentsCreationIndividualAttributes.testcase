@@ -206,9 +206,90 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyTeam {
+		property custom.properties = "jsonws.web.service.paths.excludes=";
 
-		// TODO LRAC-8566 CanAddSegmentUsingIndividualPropertyTeam pending implementation
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
 
+		task ("Connect the DXP to AC") {
+			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+		}
+
+		task ("Add a new user with site") {
+			JSONUser.addUser(
+				userEmailAddress = "ac@liferay.com",
+				userFirstName = "ac",
+				userLastName = "ac",
+				userScreenName = "ac");
+
+			JSONUser.setFirstPassword(
+				agreeToTermsAndAnswerReminderQuery = "true",
+				requireReset = "false",
+				userEmailAddress = "ac@liferay.com");
+
+			JSONGroup.assignUserToGroup(
+				groupName = "Site Name",
+				userEmailAddress = "ac@liferay.com");
+		}
+
+		task ("Assign the user to Team") {
+			Site.openSiteTeamsAdmin(siteURLKey = "site-name");
+
+			Team.addCP(
+				teamDescription = "Site Team Description",
+				teamName = "Site Team Name");
+
+			Team.assignMembersCP(
+				teamName = "Site Team Name",
+				userScreenName = "ac");
+		}
+
+		task ("Sync the Contact Data") {
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("View the page as the new added user") {
+			User.logoutAndLoginPG(
+				userLoginEmailAddress = "ac@liferay.com",
+				userLoginFullName = "ac ac");
+
+			Navigator.gotoSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
+		}
+
+		task ("Switch to new property in AC") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Add a new dynamic segment using Individual Property Team") {
+			ACNavigation.goToSegments();
+
+			ACSegments.createDynamicSegment();
+
+			ACSegments.nameSegment(segmentName = "Dynamic Segment Using Individual Property Team");
+
+			ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
+
+			ACSegments.addSegmentField(segmentField = "Team");
+
+			ACSegments.selectOperator(operator = "is");
+
+			ACSegments.selectDocument(
+				documentTitle = "Site Team Name",
+				indexField = "1");
+		}
+
+		task ("View the user showns on the Preview mode") {
+			Click(locator1 = "Icon#EYE_PREVIEW");
+
+			ACAssets.viewAssets(assetName = "ac ac");
+
+			Click.mouseDownMouseUp(locator1 = "Modal#CLOSE_BUTTON");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8568 | Test Summary: Add segment using an individual property 'user'"
