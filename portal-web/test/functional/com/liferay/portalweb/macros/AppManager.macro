@@ -69,6 +69,36 @@ definition {
 			value1 = "Grant Access");
 	}
 
+	macro purchaseApp {
+		var key_searchName = "${searchName}";
+
+		AssertElementPresent(
+			key_searchName = "${searchName}",
+			locator1 = "AppManager#APP_TITLE");
+
+		AssertClick(
+			key_searchName = "${searchName}",
+			locator1 = "AppManager#APP_TITLE",
+			value1 = "${searchName}");
+
+		AssertClick(
+			key_type = "${type}",
+			locator1 = "AppManager#APP_PURCHASE",
+			value1 = "${type}");
+
+		WaitForPageLoad();
+
+		Click(locator1 = "AppManager#APP_PURCHASE_USER");
+
+		Click(locator1 = "AppManager#APP_PURCHASE_AGREE_CHECKBOX");
+
+		Click(locator1 = "AppManager#APP_PURCHASE_SUBMIT");
+
+		WaitForPageLoad();
+
+		AssertElementPresent(locator1 = "AppManager#APP_PURCHASE_INFO");
+	}
+
 	macro searchApp {
 		Type(
 			locator1 = "AppManager#APP_RESULT_BOX",
