@@ -26,6 +26,92 @@
 	<td></td>
 	<td></td>
 </tr>
+<!--APP_STORE-->
+<tr>
+	<td>APP_FILTER_LABEL</td>
+	<td>//span[contains(@class,'aui-field-select')]/span[contains(@class,'aui-field-content')]/label[contains(.,'${key_filterName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_FILTER_SELECT</td>
+	<td>//span[contains(@class,'aui-field-content')]/label[contains(.,'${key_filterName}')]//following-sibling::span[contains(@class,'aui-field-element')]/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_FILTER_SELECT_OPTION</td>
+	<td>//span[contains(@class,'aui-field-content')]/label[contains(.,'${key_filterName}')]//following-sibling::span[contains(@class,'aui-field-element')]/select/option[contains(.,'${key_filterBy}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_PURCHASE</td>
+	<td>//div[contains(@class,'purchase')]/a[contains(.,'${key_type}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_PURCHASE_SUBMIT</td>
+	<td>//span[contains(@class,'aui-button-content')]/input[contains(@type,'submit')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_PURCHASE_AGREE_CHECKBOX</td>
+	<td>//span[contains(@class,'aui-field-element')]/input[contains(@type,'checkbox')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_PURCHASE_INFO</td>
+	<td>//div[contains(@class,'container')]/h3[contains(.,' Thank You! ')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_PURCHASE_USER</td>
+	<td>//div[contains(@class,'card user')]/div[contains(.,' For Personal Use Only ')]//following-sibling::div[contains(@class,'card-action')]/a[contains(.,'Select')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_RESULT_FILTER</td>
+	<td>//div[contains(@class,'marketplace-entry-tile')]/div//following-sibling::ul/li[contains(.,'${key_filterName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_RESULT_BOX</td>
+	<td>//span[contains(@class,'aui-field-element')]/input[contains(@class,'aui-field-input-text')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_TITLE</td>
+	<td>//div[contains(@class,'marketplace-entry-tile')]//a[contains(.,'${key_searchName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APP_TITLE_1</td>
+	<td>//tr[contains(@class,'portlet-section-body')]//div[contains(@class,'app-entry-display')]//a[contains(.,'${key_searchName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MARKETPLACE_TITLE</td>
+	<td>//div[contains(@class,'banner-content')]/a[contains(@title,'liferay-marketplace')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MARKETPLACE_DESCRIPTION</td>
+	<td>//div[contains(@class,'authorize')]/p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//*[@data-qa-id='searchButton'] | //button[contains(.,'Search')] | //input[contains(@value,'Search')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEE_PURCHASED_BUTTON</td>
+	<td>//div[contains(@class,'button-container')]//a[contains(.,'See Purchased')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--BREADCRUMB-->
 <tr>
 	<td>BREADCRUMB_2_LINK</td>

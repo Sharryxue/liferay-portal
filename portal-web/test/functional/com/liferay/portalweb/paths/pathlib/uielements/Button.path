@@ -727,7 +727,7 @@
 </tr>
 <tr>
 	<td>SEARCH</td>
-	<td>//*[@data-qa-id='searchButton'] | //button[contains(.,'Search')]</td>
+	<td>//*[@data-qa-id='searchButton'] | //button[contains(.,'Search')] | //input[contains(@value,'Search')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -817,7 +817,7 @@
 </tr>
 <tr>
 	<td>SIGN_IN</td>
-	<td>//button[contains(.,'Sign In')] | //button[contains(.,'Acceder')] | //button[contains(.,'Anmelden')] | //button[contains(.,'ログイン')] | //button[contains(.,'登录')]</td>
+	<td>//button[contains(.,'Sign In')] | //button[contains(.,'Acceder')] | //button[contains(.,'Anmelden')] | //button[contains(.,'ログイン')] | //button[contains(.,'登录')] | //div[contains(@class,'o-form-button-bar')]/input[contains(@class,'button-primary')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -868,6 +868,11 @@
 <tr>
 	<td>TRY_REDIRECTION_DISABLED</td>
 	<td>//button[@type='button' and @title='Check URL'][@disabled='']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUBMIT_FOR_GRANT_ACCESS</td>
+	<td>//input[contains(@class,'aui-button-input-submit')]</td>
 	<td></td>
 </tr>
 <tr>

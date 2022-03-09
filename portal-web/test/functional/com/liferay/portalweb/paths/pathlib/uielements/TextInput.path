@@ -37,7 +37,7 @@
 </tr>
 <tr>
 	<td>ANY</td>
-	<td>//div[label[contains(.,'${key_text}')]]//input[not(contains(@type,'checkbox'))]</td>
+	<td>//div[label[contains(.,'${key_text}')]]//input[not(contains(@type,'checkbox'))] | //div[contains(@data-se,'o-form-label') and contains(.,'${key_text}')]//following-sibling::div[contains(@class,'o-form-input')]//input[contains(@type,'text')] | //div[contains(@data-se,'o-form-label') and contains(.,'${key_text}')]//following-sibling::div[contains(@class,'o-form-input')]//input[contains(@type,'password')]</td>
 	<td></td>
 </tr>
 <tr>
