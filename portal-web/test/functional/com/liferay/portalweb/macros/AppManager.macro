@@ -69,6 +69,18 @@ definition {
 			value1 = "Grant Access");
 	}
 
+	macro searchApp {
+		Type(
+			locator1 = "AppManager#APP_RESULT_BOX",
+			value1 = "${searchName}");
+
+		Click(locator1 = "Button#SEARCH");
+
+		AssertElementPresent(
+			key_searchName = "${searchName}",
+			locator1 = "AppManager#APP_TITLE");
+	}
+
 	macro uninstallApp {
 		LexiconEntry.openEntryMenu(rowEntry = "${appName}");
 
