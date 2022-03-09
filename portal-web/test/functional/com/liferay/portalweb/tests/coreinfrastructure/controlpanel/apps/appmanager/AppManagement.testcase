@@ -552,6 +552,35 @@ definition {
 			appStatus = "Active");
 	}
 
+	@description = "This test assert that there are Categories, Liferay Version, Price filters in marketplace store."
+	@priority = "3"
+	test FilterMarketplaceStoreApps {
+		task ("When login marketplace store") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			AppManager.loginMarketplaceStore();
+
+			WaitForPageLoad();
+		}
+
+		task ("Then assert that there are Categories, Liferay Version, Price filters in marketplace store") {
+			AppManager.filtersApp(
+				filterBy = " Templates and Themes ",
+				filterName = "Category");
+
+			AppManager.filtersApp(
+				filterBy = "Liferay Portal 6.1 CE GA3",
+				filterName = "Liferay Version");
+
+			AppManager.filtersApp(
+				filterBy = " Free ",
+				filterName = "Price");
+		}
+	}
+
 	@priority = "5"
 	test InstallViaUploadIsSuccessful {
 		property test.name.skip.portal.instance = "AppManagement#InstallViaUploadIsSuccessful";
