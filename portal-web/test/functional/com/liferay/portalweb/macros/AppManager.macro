@@ -46,14 +46,14 @@ definition {
 			locator1 = "UserBar#USER_SIGN_IN",
 			value1 = "Sign In");
 
-		var marketplaceClientId = PropsUtil.get("marketplace.email.address.4");
+		var marketplaceClientId = PropsUtil.get("marketplace.email.address.6");
 
 		Type(
 			key_text = "Email Address",
 			locator1 = "TextInput#ANY",
 			value1 = "${marketplaceClientId}");
 
-		var marketplaceClientSecret = PropsUtil.get("marketplace.email.password.4");
+		var marketplaceClientSecret = PropsUtil.get("marketplace.email.password.6");
 
 		Type(
 			key_text = "Password",
