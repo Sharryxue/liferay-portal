@@ -555,6 +555,8 @@ definition {
 	@description = "This test assert that there are Categories, Liferay Version, Price filters in marketplace store."
 	@priority = "3"
 	test FilterMarketplaceStoreApps {
+		property portal.acceptance = "melody";
+
 		task ("When login marketplace store") {
 			ApplicationsMenu.gotoPortlet(
 				category = "Marketplace",
@@ -631,6 +633,8 @@ definition {
 	@description = "This test check search apps in marketplace store and check sign in and sign out."
 	@priority = "3"
 	test SearchMarketplaceStore {
+		property portal.acceptance = "melody";
+
 		task ("When login marketplace store and check user logged") {
 			ApplicationsMenu.gotoPortlet(
 				category = "Marketplace",
@@ -753,6 +757,8 @@ definition {
 	@description = "This test check purchase apps in marketplace store and view in purchased."
 	@priority = "3"
 	test ViewPurchasedApp {
+		property portal.acceptance = "melody";
+
 		task ("When login marketplace store and check user logged") {
 			ApplicationsMenu.gotoPortlet(
 				category = "Marketplace",
