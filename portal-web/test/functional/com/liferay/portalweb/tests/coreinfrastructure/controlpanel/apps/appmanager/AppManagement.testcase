@@ -552,6 +552,37 @@ definition {
 			appStatus = "Active");
 	}
 
+	@description = "This test assert that user can filter app by Categories, Liferay Version, Price filters in marketplace store."
+	@priority = "3"
+	test FilterMarketplaceStoreApps {
+		property test.name.skip.portal.instance = "AppManagement#FilterMarketplaceStoreApps";
+
+		task ("Give user login marketplace") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			AppManager.loginMarketplaceStore();
+		}
+
+		task ("When user filter by Price") {
+			AppManager.filtersApp(
+				filterBy = " Free ",
+				filterName = "Price");
+		}
+
+		task ("Then the result filter by price") {
+			AssertElementPresent(
+				key_appType = "Free",
+				locator1 = "AppManager#APP_TIPY");
+
+			AssertElementNotPresent(
+				key_appType = " EE Only ",
+				locator1 = "AppManager#APP_TIPY");
+		}
+	}
+
 	@priority = "5"
 	test InstallViaUploadIsSuccessful {
 		property test.name.skip.portal.instance = "AppManagement#InstallViaUploadIsSuccessful";
