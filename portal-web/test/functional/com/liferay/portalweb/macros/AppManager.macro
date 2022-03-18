@@ -14,6 +14,64 @@ definition {
 		AssertConfirm(value1 = "Are you sure you want to deactivate this?");
 	}
 
+	macro filtersApp {
+		var key_filterName = "${filterName}";
+
+		SelectFrame.selectFrame(locator1 = "IFrame#MARKETPLACE_PORTLET_IFRAME_1");
+
+		WaitForElementPresent(
+			key_filterName = "${filterName}",
+			locator1 = "AppManager#APP_FILTER_LABEL");
+
+		if (isSet(filterBy)) {
+			var key_filterBy = "${filterBy}";
+
+			Click.pauseClickAt(locator1 = "AppManager#APP_FILTER_SELECT");
+
+			WaitForLiferayEvent.initializeLiferayEventLog();
+
+			Click.waitForMenuToggleJSClick(
+				key_filterBy = "${filterBy}",
+				locator1 = "AppManager#APP_FILTER_SELECT_OPTION");
+		}
+
+		Click(locator1 = "AppManager#SEARCH_BUTTON");
+	}
+
+	macro loginMarketplaceStore {
+		AssertElementPresent(
+			locator1 = "AppManager#MARKETPLACE_DESCRIPTION",
+			value1 = "Liferay Marketplace is an integral part of the Liferay platform experience for all users. Enterprise subscribers also have exclusive access to Liferay Subscription Apps through the Liferay Marketplace. Log in with your Liferay account to browse hundreds of apps to help you build your business or technical solution.");
+
+		AssertClick(
+			locator1 = "AppManager#USER_SIGN_IN",
+			value1 = "Sign In");
+
+		var marketplaceClientId = PropsUtil.get("marketplace.email.address.6");
+
+		Type(
+			key_text = "Email Address",
+			locator1 = "AppManager#APP_ANY",
+			value1 = "${marketplaceClientId}");
+
+		var marketplaceClientSecret = PropsUtil.get("marketplace.email.password.6");
+
+		Type(
+			key_text = "Password",
+			locator1 = "AppManager#APP_ANY",
+			value1 = "${marketplaceClientSecret}");
+
+		AssertClick(
+			locator1 = "Button#SUBMIT",
+			value1 = "Sign In");
+
+		AssertClick(
+			locator1 = "Button#SUBMIT_FOR_GRANT_ACCESS",
+			value1 = "Grant Access");
+
+		WaitForPageLoad();
+	}
+
 	macro uninstallApp {
 		LexiconEntry.openEntryMenu(rowEntry = "${appName}");
 
