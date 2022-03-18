@@ -191,8 +191,8 @@ definition {
 			localization = "ES",
 			localizedAgree = "Acepto",
 			localizedAnswer = "Respuesta",
+			localizedPassword = "test1",
 			localizedSaveButton = "Guardar",
-			newPassword = "test1",
 			password = "test",
 			userEmailAddress = "user@liferay.com");
 
