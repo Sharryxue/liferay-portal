@@ -1297,17 +1297,13 @@ definition {
 			LexiconEntry.viewEntryName(rowEntry = "${accountRoleName}");
 		}
 
-		for (var accountRoleName : list "Account Role 4") {
-			LexiconEntry.viewNoEntry(rowEntry = "${accountRoleName}");
-		}
+		LexiconEntry.viewNoEntry(rowEntry = "Account Role 4");
 
 		Pagination.viewResults(results = "Showing 1 to 4 of 5 entries.");
 
 		Click(locator1 = "Pagination#NEXT_LINK");
 
-		for (var accountRoleName : list "Account Role 4") {
-			LexiconEntry.viewEntryName(rowEntry = "${accountRoleName}");
-		}
+		LexiconEntry.viewEntryName(rowEntry = "${accountRoleName}");
 
 		for (var accountRoleName : list "Account Administrator,Account Role 1,Account Role 2,Account Role 3") {
 			LexiconEntry.viewNoEntry(rowEntry = "${accountRoleName}");
