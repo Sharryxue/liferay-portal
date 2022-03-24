@@ -552,6 +552,37 @@ definition {
 			appStatus = "Active");
 	}
 
+	@description = "This test asserts that user can filter app by Price in marketplace store."
+	@priority = "3"
+	test CanFilterMarketplaceStoreAppsByPrice {
+		property test.name.skip.portal.instance = "AppManagement#CanFilterMarketplaceStoreAppsByPrice";
+
+		task ("Given user login marketplace") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			AppManager.loginMarketplaceStore();
+		}
+
+		task ("When user filter by Price with value Free") {
+			AppManager.filtersApp(
+				filterBy = " Free ",
+				filterName = "Price");
+		}
+
+		task ("Then the results filtered by Free display properly") {
+			AssertElementPresent(
+				key_appType = "Free",
+				locator1 = "AppManager#APP_TYPE");
+
+			AssertElementNotPresent(
+				key_appType = " EE Only ",
+				locator1 = "AppManager#APP_TYPE");
+		}
+	}
+
 	@priority = "5"
 	test InstallViaUploadIsSuccessful {
 		property test.name.skip.portal.instance = "AppManagement#InstallViaUploadIsSuccessful";
