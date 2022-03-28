@@ -309,7 +309,7 @@ definition {
 		User.deletePersonalDataCP(
 			userFirstName = "userfn",
 			userLastName = "userln");
-		
+
 		GDPR.filterByApplications(
 			applicationItemsCount = "6",
 			applications = "Documents and Media",
