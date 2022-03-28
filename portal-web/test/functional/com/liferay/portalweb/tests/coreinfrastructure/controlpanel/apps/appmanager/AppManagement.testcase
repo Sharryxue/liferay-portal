@@ -552,6 +552,64 @@ definition {
 			appStatus = "Active");
 	}
 
+	@description = "This test asserts that user can filter app by Category in marketplace store."
+	@priority = "3"
+	test CanFilterMarketplaceStoreAppsByCategory {
+		property test.name.skip.portal.instance = "AppManagement#CanFilterMarketplaceStoreAppsByCategory";
+
+		task ("Given user login marketplace") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			AppManager.loginMarketplaceStore();
+		}
+
+		task ("When user filter by Category with value Page Layouts") {
+			AppManager.filtersApp(
+				filterBy = "Page Layouts",
+				filterName = "Category");
+		}
+
+		task ("Then the results filtered by Page Layouts display properly") {
+			AssertElementPresent(
+				key_appCategory = "Page Layouts",
+				locator1 = "AppManager#APP_CATEGORY");
+
+			AssertElementNotPresent(
+				key_appCategory = "Themes / Site Templates",
+				locator1 = "AppManager#APP_CATEGORY");
+		}
+	}
+
+	@description = "This test asserts that user can filter app by Liferay Version in marketplace store."
+	@priority = "3"
+	test CanFilterMarketplaceStoreAppsByLiferayVersion {
+		property test.name.skip.portal.instance = "AppManagement#CanFilterMarketplaceStoreAppsByLiferayVersion";
+
+		task ("Given user login marketplace") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			AppManager.loginMarketplaceStore();
+		}
+
+		task ("When user filter by Liferay Version with value Liferay Portal 6.1 CE GA3") {
+			AppManager.filtersApp(
+				filterBy = "Liferay Portal 6.1 CE GA3",
+				filterName = "Liferay Version");
+		}
+
+		task ("Then the results filtered by Free display properly") {
+			AssertElementPresent(
+				key_appVersion = "Liferay Portal 6.1 CE GA3",
+				locator1 = "AppManager#APP_Filter_RESULT_Label");
+		}
+	}
+
 	@description = "This test asserts that user can filter app by Price in marketplace store."
 	@priority = "3"
 	test CanFilterMarketplaceStoreAppsByPrice {
