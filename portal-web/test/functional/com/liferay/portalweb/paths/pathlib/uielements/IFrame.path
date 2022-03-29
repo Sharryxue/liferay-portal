@@ -131,13 +131,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>MARKETPLACE_PURCHASED_PORTLET_IFRAME</td>
-	<td>//iframe[contains(@id,'MarketplacePurchasedPortlet_frame')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>MARKETPLACE_STORE_PORTLET_IFRAME</td>
-	<td>//iframe[contains(@id,'MarketplaceStorePortlet_frame')]</td>
+	<td>MARKETPLACE_PORTLET_IFRAME</td>
+	<td>//iframe[contains(@id,'MarketplacePurchasedPortlet_frame')] | //iframe[contains(@id,'MarketplaceStorePortlet_frame')]</td>
 	<td></td>
 </tr>
 <tr>
