@@ -555,6 +555,7 @@ definition {
 	@description = "This assert that the app be installed via URL successfully."
 	@priority = "3"
 	test InstallViaInstallFromURLIsSuccessful {
+		property portal.acceptance = "melody";
 		property test.name.skip.portal.instance = "AppManagement#InstallViaInstallFromURLIsSuccessful";
 
 		task ("When go to app manager") {
