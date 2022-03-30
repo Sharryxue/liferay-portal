@@ -25,9 +25,9 @@ definition {
 	}
 
 	macro filtersApp {
-		var key_filterName = "${filterName}";
-
 		SelectFrame.selectFrameNoLoading(locator1 = "IFrame#MARKETPLACE_PORTLET_IFRAME");
+
+		var key_filterName = "${filterName}";
 
 		WaitForElementPresent(
 			key_filterName = "${filterName}",
@@ -36,7 +36,7 @@ definition {
 		if (isSet(filterBy)) {
 			Select(
 				locator1 = "AppManager#APP_FILTER_SELECT_DROP_DOWN_LIST",
-				value1 = "Free");
+				value1 = "${filterBy}");
 		}
 
 		Click(locator1 = "AppManager#SEARCH_BUTTON");

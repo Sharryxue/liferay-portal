@@ -564,11 +564,20 @@ definition {
 				portlet = "Store");
 
 			AppManager.loginMarketplaceStore();
+
+			Navigator.openURL();
 		}
 
 		task ("When user filter by Category with value Page Layouts") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			WaitForPageLoad();
+
 			AppManager.filtersApp(
-				filterBy = "Page Layouts",
+				filterBy = "    Page Layouts ",
 				filterName = "Category");
 		}
 
@@ -595,9 +604,18 @@ definition {
 				portlet = "Store");
 
 			AppManager.loginMarketplaceStore();
+
+			Navigator.openURL();
 		}
 
 		task ("When user filter by Liferay Version with value Liferay Portal 6.1 CE GA3") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			WaitForPageLoad();
+
 			AppManager.filtersApp(
 				filterBy = "Liferay Portal 6.1 CE GA3",
 				filterName = "Liferay Version");
@@ -622,9 +640,18 @@ definition {
 				portlet = "Store");
 
 			AppManager.loginMarketplaceStore();
+
+			Navigator.openURL();
 		}
 
 		task ("When user filter by Price with value Free") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Marketplace",
+				panel = "Control Panel",
+				portlet = "Store");
+
+			WaitForPageLoad();
+
 			AppManager.filtersApp(
 				filterBy = " Free ",
 				filterName = "Price");
