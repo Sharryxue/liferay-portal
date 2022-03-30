@@ -648,9 +648,7 @@ definition {
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "site-name-staging");
 
-		AssertTextEquals(
-			locator1 = "Message#EMPTY_INFO",
-			value1 = "There are no documents or media files in this folder.");
+		DMDocument.viewDefault();
 
 		BlogsNavigator.openBlogsAdmin(siteURLKey = "site-name");
 
