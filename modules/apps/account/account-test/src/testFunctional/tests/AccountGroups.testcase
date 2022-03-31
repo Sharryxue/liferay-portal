@@ -648,7 +648,11 @@ definition {
 
 			LexiconEntry.gotoEntry(rowEntry = "AG Name with Accounts");
 
-			AccountGroups.viewAssignee(assigneeName = "Account for Account Group");
+			WaitForPageLoad();
+
+			AccountGroups.viewAssignee(
+				assigneeName = "Account for Account Group",
+				user = "true");
 		}
 	}
 
