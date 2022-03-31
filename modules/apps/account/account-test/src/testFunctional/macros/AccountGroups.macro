@@ -116,14 +116,21 @@ definition {
 	}
 
 	macro viewAssignee {
-		AssertElementPresent(
-			key_tab = "Accounts",
-			locator1 = "NavTab#ACTIVE_TAB_LINK");
+		if (isSet(user)) {
+			AssertTextEquals.assertPartialText(
+				key_tableEntry = "${assigneeName}",
+				locator1 = "LexiconTable#TABLE_ENTRY",
+				value1 = "${assigneeName}");
+		}else{
+			AssertElementPresent(
+				key_tab = "Accounts",
+				locator1 = "NavTab#ACTIVE_TAB_LINK");
 
-		AssertTextEquals.assertPartialText(
-			key_tableEntry = "${assigneeName}",
-			locator1 = "LexiconTable#TABLE_ENTRY",
-			value1 = "${assigneeName}");
+			AssertTextEquals.assertPartialText(
+				key_tableEntry = "${assigneeName}",
+				locator1 = "LexiconTable#TABLE_ENTRY",
+				value1 = "${assigneeName}");
+		}
 	}
 
 	macro viewDefault {
