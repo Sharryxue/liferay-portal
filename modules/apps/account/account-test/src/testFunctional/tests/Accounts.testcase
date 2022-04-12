@@ -3433,6 +3433,49 @@ definition {
 		LexiconEntry.viewNoEntry(rowEntry = "Account without Role");
 	}
 
+	@description = "Use case for LPS-139430. Asserts a user can be removed from an account through the Users Admin portlet"
+	@priority = "3"
+	test RemoveUserFromAccountViaUsersAdmin {
+		task ("Given two accounts are created") {
+			for (var accountName : list "Keep Account,Remove Account") {
+				JSONAccountEntry.addAccountEntry(
+					accountEntryName = "${accountName}",
+					accountEntryType = "Business");
+			}
+
+			task ("And given an account user is created and added to both of those accounts") {
+				JSONAccountEntryUser.addAccountEntryUser(
+					accountEntryName = "Keep Account",
+					userEmailAddress = "userea@liferay.com",
+					userFirstName = "userfn",
+					userLastName = "userln",
+					userScreenName = "usersn");
+
+				User.assignAccountCP(
+					accountName = "Remove Account",
+					userScreenName = "usersn");
+			}
+		}
+
+		task ("When removing the second account through the Users Admin") {
+			User.removeAccountCP(
+				accountName = "Remove Account",
+				userScreenName = "usersn");
+
+			Refresh();
+		}
+
+		task ("Then the user should only have the first account listed in Users Admin") {
+			AssertElementPresent(
+				key_accountName = "Keep Account",
+				locator1 = "UsersAndOrganizationsEditUser#ACCOUNTS_TABLE_ACCOUNT_NAMES");
+
+			AssertElementNotPresent(
+				key_accountName = "Remove Account",
+				locator1 = "UsersAndOrganizationsEditUser#ACCOUNTS_TABLE_ACCOUNT_NAMES");
+		}
+	}
+
 	@description = "This test replaces user in Person Account with another existing user. It asserts that first user was replaced by the second user and isn't assigned to the account anymore."
 	@priority = "5"
 	test SelectingUserWillReplaceExistingUserInPersonAccount {
