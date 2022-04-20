@@ -114,7 +114,7 @@ const CreationMenu = ({
 				symbolLeft={item.icon}
 				{...getDataAttributes(item.data)}
 			>
-				{Liferay.Util.unescapeHTML(item.label)}
+				{item.label}
 			</ClayDropDown.Item>
 		);
 	};
