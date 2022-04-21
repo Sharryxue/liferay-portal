@@ -39,6 +39,7 @@ import com.liferay.portal.vulcan.dto.converter.DefaultDTOConverterContext;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -149,19 +150,10 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 		return (Long)function.apply(baseModel);
 	}
 
-	private DTOConverter<T, ?> _getDTOConverter() {
-		return (DTOConverter<T, ?>)_dtoConverterRegistry.getDTOConverter(
-			_modelClass.getName());
-	}
-
-	private String _getDTOConverterType() {
-		DTOConverter<T, ?> dtoConverter = _getDTOConverter();
-
-		if (dtoConverter == null) {
-			return _modelClass.getSimpleName();
-		}
-
-		return dtoConverter.getContentType();
+	private Optional<DTOConverter<T, ?>> _getDTOConverter(T baseModel) {
+		return Optional.ofNullable(
+			(DTOConverter<T, ?>)_dtoConverterRegistry.getDTOConverter(
+				baseModel.getModelClassName()));
 	}
 
 	private JSONObject _getPayloadJSONObject(
@@ -169,7 +161,13 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 			long userId)
 		throws PortalException {
 
-		String dtoConverterType = _getDTOConverterType();
+		String dtoConverterType = _getDTOConverter(
+			baseModel
+		).map(
+			DTOConverter::getContentType
+		).orElse(
+			_modelClass.getSimpleName()
+		);
 
 		return JSONUtil.put(
 			"model" + _modelClass.getSimpleName(),
@@ -225,12 +223,14 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 			return baseModel.toString();
 		}
 
-		DTOConverter<T, ?> dtoConverter = _getDTOConverter();
+		Optional<DTOConverter<T, ?>> dtoConverterOptional = _getDTOConverter(
+			baseModel);
 
-		if (dtoConverter == null) {
+		if (!dtoConverterOptional.isPresent()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No DTO converter found for " + _modelClass.getName());
+					"No DTOConverter found for " +
+						baseModel.getModelClassName());
 			}
 
 			return baseModel.toString();
@@ -240,6 +240,8 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 			new DefaultDTOConverterContext(
 				false, Collections.emptyMap(), _dtoConverterRegistry, null,
 				user.getLocale(), null, user);
+
+		DTOConverter<T, ?> dtoConverter = dtoConverterOptional.get();
 
 		try {
 			return _jsonFactory.looseSerializeDeep(
