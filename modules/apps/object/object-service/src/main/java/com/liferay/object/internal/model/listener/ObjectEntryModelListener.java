@@ -32,6 +32,9 @@ import com.liferay.portal.kernel.model.ModelListener;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.vulcan.dto.converter.DTOConverter;
 import com.liferay.portal.vulcan.dto.converter.DTOConverterRegistry;
@@ -192,18 +195,37 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 			"objectActionTriggerKey", objectActionTriggerKey
 		).put(
 			"objectEntry",
-			_jsonFactory.createJSONObject(
-				objectEntry.toString()
-			).put(
-				"values", objectEntry.getValues()
-			)
+			() -> {
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(
+							PropsKeys.WEBHOOK_EXPOSE_INTERNAL_MODEL))) {
+
+					return _jsonFactory.createJSONObject(
+						objectEntry.toString()
+					).put(
+						"values", objectEntry.getValues()
+					);
+				}
+
+				return null;
+			}
 		).put(
 			"originalObjectEntry",
-			_jsonFactory.createJSONObject(
-				originalObjectEntry.toString()
-			).put(
-				"values", originalObjectEntry.getValues()
-			)
+			() -> {
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(
+							PropsKeys.WEBHOOK_EXPOSE_INTERNAL_MODEL)) &&
+					(originalObjectEntry != null)) {
+
+					return _jsonFactory.createJSONObject(
+						originalObjectEntry.toString()
+					).put(
+						"values", originalObjectEntry.getValues()
+					);
+				}
+
+				return null;
+			}
 		).put(
 			"originalObjectEntryDTO" +
 				StringUtil.upperCaseFirstLetter(objectDefinitionLabel),

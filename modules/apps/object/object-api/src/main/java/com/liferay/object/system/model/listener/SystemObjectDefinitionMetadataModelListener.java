@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.vulcan.dto.converter.DTOConverter;
 import com.liferay.portal.vulcan.dto.converter.DTOConverterRegistry;
@@ -230,11 +232,24 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 			}
 		).put(
 			"model" + _modelClass.getSimpleName(),
-			_jsonFactory.createJSONObject(baseModel.toString())
+			() -> {
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(
+							PropsKeys.WEBHOOK_EXPOSE_INTERNAL_MODEL))) {
+
+					return _jsonFactory.createJSONObject(baseModel.toString());
+				}
+
+				return null;
+			}
 		).put(
 			"original" + _modelClass.getSimpleName(),
 			() -> {
-				if (originalBaseModel != null) {
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(
+							PropsKeys.WEBHOOK_EXPOSE_INTERNAL_MODEL)) &&
+					(originalBaseModel != null)) {
+
 					return _jsonFactory.createJSONObject(
 						originalBaseModel.toString());
 				}
