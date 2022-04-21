@@ -25,9 +25,7 @@ import com.liferay.petra.sql.dsl.Table;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.ModelListener;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.vulcan.dto.converter.DTOConverterRegistry;
 
 import java.util.Locale;
 import java.util.Map;
@@ -70,9 +68,8 @@ public abstract class BaseSystemObjectDefinitionMetadata
 		_serviceRegistration = bundleContext.registerService(
 			ModelListener.class.getName(),
 			new SystemObjectDefinitionMetadataModelListener(
-				dtoConverterRegistry, jsonFactory, getModelClass(),
-				objectActionEngine, objectDefinitionLocalService,
-				objectEntryLocalService, userLocalService),
+				jsonFactory, getModelClass(), objectActionEngine,
+				objectDefinitionLocalService, objectEntryLocalService),
 			null);
 	}
 
@@ -103,9 +100,6 @@ public abstract class BaseSystemObjectDefinitionMetadata
 	}
 
 	@Reference
-	protected DTOConverterRegistry dtoConverterRegistry;
-
-	@Reference
 	protected JSONFactory jsonFactory;
 
 	@Reference
@@ -116,9 +110,6 @@ public abstract class BaseSystemObjectDefinitionMetadata
 
 	@Reference
 	protected ObjectEntryLocalService objectEntryLocalService;
-
-	@Reference
-	protected UserLocalService userLocalService;
 
 	private String _translate(String labelKey) {
 		return LanguageUtil.get(LocaleUtil.getDefault(), labelKey);
