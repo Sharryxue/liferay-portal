@@ -185,15 +185,17 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 	private String _toDTO(ObjectEntry objectEntry, User user)
 		throws PortalException {
 
-		DTOConverter<ObjectEntry, ?> dtoConverter =
+		DTOConverter<ObjectEntry, ?> objectEntryDTOConverter =
 			(DTOConverter<ObjectEntry, ?>)_dtoConverterRegistry.getDTOConverter(
 				ObjectEntry.class.getName());
 
-		if (dtoConverter == null) {
+		String objectDefinitionShortName = _getObjectDefinitionShortName(
+			objectEntry.getObjectDefinitionId());
+
+		if (objectEntryDTOConverter == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No DTO converter found for " +
-						ObjectEntry.class.getName());
+					"No DTOConverter found for " + objectDefinitionShortName);
 			}
 
 			return objectEntry.toString();
@@ -206,7 +208,8 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 
 		try {
 			return _jsonFactory.looseSerializeDeep(
-				dtoConverter.toDTO(defaultDTOConverterContext, objectEntry));
+				objectEntryDTOConverter.toDTO(
+					defaultDTOConverterContext, objectEntry));
 		}
 		catch (Exception exception) {
 			_log.error(exception);
