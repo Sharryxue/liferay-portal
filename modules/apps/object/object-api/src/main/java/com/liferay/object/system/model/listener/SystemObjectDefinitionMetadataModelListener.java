@@ -156,67 +156,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 				baseModel.getModelClassName()));
 	}
 
-	private JSONObject _getPayloadJSONObject(
-			String objectActionTriggerKey, T originalBaseModel, T baseModel,
-			long userId)
-		throws PortalException {
-
-		String dtoConverterType = _getDTOConverter(
-			baseModel
-		).map(
-			DTOConverter::getContentType
-		).orElse(
-			_modelClass.getSimpleName()
-		);
-
-		return JSONUtil.put(
-			"model" + _modelClass.getSimpleName(),
-			_jsonFactory.createJSONObject(baseModel.toString())
-		).put(
-			"modelDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
-			_jsonFactory.createJSONObject(
-				_jsonFactory.serialize(_toDTO(baseModel, userId)))
-		).put(
-			"objectActionTriggerKey", objectActionTriggerKey
-		).put(
-			"original" + _modelClass.getSimpleName(),
-			() -> {
-				if (originalBaseModel == null) {
-					return null;
-				}
-
-				return _jsonFactory.createJSONObject(
-					originalBaseModel.toString());
-			}
-		).put(
-			"originalDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
-			() -> {
-				if (originalBaseModel == null) {
-					return null;
-				}
-
-				return _jsonFactory.createJSONObject(
-					_jsonFactory.serialize(_toDTO(originalBaseModel, userId)));
-			}
-		);
-	}
-
-	private long _getUserId(T baseModel) {
-		Map<String, Function<Object, Object>> functions =
-			(Map<String, Function<Object, Object>>)
-				(Map<String, ?>)baseModel.getAttributeGetterFunctions();
-
-		Function<Object, Object> function = functions.get("userId");
-
-		if (function == null) {
-			throw new IllegalArgumentException(
-				"Base model does not have a user ID column");
-		}
-
-		return (Long)function.apply(baseModel);
-	}
-
-	private String _toDTO(T baseModel, long userId) {
+	private String _getExternalModel(T baseModel, long userId) {
 		User user = _userLocalService.fetchUser(userId);
 
 		if (user == null) {
@@ -244,8 +184,10 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 		DTOConverter<T, ?> dtoConverter = dtoConverterOptional.get();
 
 		try {
-			return _jsonFactory.looseSerializeDeep(
-				dtoConverter.toDTO(defaultDTOConverterContext, baseModel));
+			Object externalModel = dtoConverter.toDTO(
+				defaultDTOConverterContext, baseModel);
+
+			return _jsonFactory.looseSerializeDeep(externalModel);
 		}
 		catch (Exception exception) {
 			if (_log.isDebugEnabled()) {
@@ -254,6 +196,67 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 		}
 
 		return baseModel.toString();
+	}
+
+	private JSONObject _getPayloadJSONObject(
+			String objectActionTriggerKey, T originalBaseModel, T baseModel,
+			long userId)
+		throws PortalException {
+
+		String dtoConverterType = _getDTOConverter(
+			baseModel
+		).map(
+			DTOConverter::getContentType
+		).orElse(
+			_modelClass.getSimpleName()
+		);
+
+		return JSONUtil.put(
+			"model" + _modelClass.getSimpleName(),
+			_jsonFactory.createJSONObject(baseModel.toString())
+		).put(
+			"modelDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
+			_jsonFactory.createJSONObject(
+				_jsonFactory.serialize(_getExternalModel(baseModel, userId)))
+		).put(
+			"objectActionTriggerKey", objectActionTriggerKey
+		).put(
+			"original" + _modelClass.getSimpleName(),
+			() -> {
+				if (originalBaseModel == null) {
+					return null;
+				}
+
+				return _jsonFactory.createJSONObject(
+					originalBaseModel.toString());
+			}
+		).put(
+			"originalDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
+			() -> {
+				if (originalBaseModel == null) {
+					return null;
+				}
+
+				return _jsonFactory.createJSONObject(
+					_jsonFactory.serialize(
+						_getExternalModel(originalBaseModel, userId)));
+			}
+		);
+	}
+
+	private long _getUserId(T baseModel) {
+		Map<String, Function<Object, Object>> functions =
+			(Map<String, Function<Object, Object>>)
+				(Map<String, ?>)baseModel.getAttributeGetterFunctions();
+
+		Function<Object, Object> function = functions.get("userId");
+
+		if (function == null) {
+			throw new IllegalArgumentException(
+				"Base model does not have a user ID column");
+		}
+
+		return (Long)function.apply(baseModel);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

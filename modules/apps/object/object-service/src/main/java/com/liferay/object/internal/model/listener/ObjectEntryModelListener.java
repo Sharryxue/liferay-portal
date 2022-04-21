@@ -127,6 +127,42 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		}
 	}
 
+	private String _getExternalModel(ObjectEntry objectEntry, User user)
+		throws PortalException {
+
+		DTOConverter<ObjectEntry, ?> objectEntryDTOConverter =
+			(DTOConverter<ObjectEntry, ?>)_dtoConverterRegistry.getDTOConverter(
+				ObjectEntry.class.getName());
+
+		String objectDefinitionLabel = _getObjectDefinitionLabel(
+			objectEntry.getObjectDefinitionId(), user.getLocale());
+
+		if (objectEntryDTOConverter == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No DTOConverter found for " + objectDefinitionLabel);
+			}
+
+			return objectEntry.toString();
+		}
+
+		DefaultDTOConverterContext defaultDTOConverterContext =
+			new DefaultDTOConverterContext(
+				false, Collections.emptyMap(), _dtoConverterRegistry, null,
+				user.getLocale(), null, user);
+
+		try {
+			Object externalModel = objectEntryDTOConverter.toDTO(
+				defaultDTOConverterContext, objectEntry);
+
+			return _jsonFactory.looseSerializeDeep(externalModel);
+		}
+		catch (Exception exception) {
+			_log.error(exception);
+		}
+
+		return objectEntry.toString();
+	}
+
 	private String _getObjectDefinitionLabel(
 			long objectDefinitionId, Locale locale)
 		throws PortalException {
@@ -160,7 +196,7 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		).put(
 			"objectEntryDTO" +
 				StringUtil.upperCaseFirstLetter(objectDefinitionLabel),
-			_jsonFactory.createJSONObject(_toDTO(objectEntry, user))
+			_jsonFactory.createJSONObject(_getExternalModel(objectEntry, user))
 		).put(
 			"originalObjectEntry",
 			() -> {
@@ -183,44 +219,9 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 				}
 
 				return _jsonFactory.createJSONObject(
-					_toDTO(originalObjectEntry, user));
+					_getExternalModel(originalObjectEntry, user));
 			}
 		);
-	}
-
-	private String _toDTO(ObjectEntry objectEntry, User user)
-		throws PortalException {
-
-		DTOConverter<ObjectEntry, ?> objectEntryDTOConverter =
-			(DTOConverter<ObjectEntry, ?>)_dtoConverterRegistry.getDTOConverter(
-				ObjectEntry.class.getName());
-
-		String objectDefinitionLabel = _getObjectDefinitionLabel(
-			objectEntry.getObjectDefinitionId(), user.getLocale());
-
-		if (objectEntryDTOConverter == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No DTOConverter found for " + objectDefinitionLabel);
-			}
-
-			return objectEntry.toString();
-		}
-
-		DefaultDTOConverterContext defaultDTOConverterContext =
-			new DefaultDTOConverterContext(
-				false, Collections.emptyMap(), _dtoConverterRegistry, null,
-				user.getLocale(), null, user);
-
-		try {
-			return _jsonFactory.looseSerializeDeep(
-				objectEntryDTOConverter.toDTO(
-					defaultDTOConverterContext, objectEntry));
-		}
-		catch (Exception exception) {
-			_log.error(exception);
-		}
-
-		return objectEntry.toString();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
