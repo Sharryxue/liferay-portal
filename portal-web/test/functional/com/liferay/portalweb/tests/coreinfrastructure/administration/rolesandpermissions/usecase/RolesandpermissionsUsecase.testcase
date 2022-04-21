@@ -171,6 +171,77 @@ definition {
 		AssertConsoleTextNotPresent(value1 = "java.lang.NumberFormatException");
 	}
 
+	@description = "This is a test for LPS-148855. The test site role shouldn't be inherited by Guest."
+	@priority = "5"
+	test DefaultSiteRoleShouldNotBeInheritedByGuest {
+		task ("Add a page to a new site") {
+			JSONGroup.addGroup(groupName = "Site Name");
+
+			JSONLayout.addPublicLayout(
+				groupName = "Site Name",
+				layoutName = "test page");
+		}
+
+		task ("Add new Regular Role then assign default site to regular role") {
+			JSONRole.addRegularRole(roleTitle = "Document Viewer");
+
+			JSONRole.assignRoleToGroup(
+				groupName = "Site Name",
+				roleTitle = "Document Viewer");
+		}
+
+		task ("Add a Document and Media widget to page and add a new file") {
+			JSONDocument.addFileWithUploadedFile(
+				dmDocumentTitle = "For Document Viewers Eyes Only",
+				groupName = "Site Name",
+				mimeType = "image/jpeg",
+				sourceFileName = "Document_1.jpg");
+
+			JSONLayout.addWidgetToPublicLayout(
+				groupName = "Site Name",
+				layoutName = "test page",
+				widgetName = "Documents and Media");
+		}
+
+		task ("Remove View permission from Guest and Add View permission to new regular role") {
+			DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "site-name");
+
+			DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "For Document Viewers Eyes Only");
+
+			PermissionsInline.addOrRemoveAnyPermissionsFromSpecificRole(
+				addOrRemoveViewPermission = "Add",
+				permissionsKeyList = "CONFIGURATION_PERMISSIONS_VIEW_CHECKBOX",
+				roleTitle = "Document Viewer");
+
+			PermissionsInline.addOrRemoveAnyPermissionsFromSpecificRole(
+				addOrRemoveViewPermission = "Remove",
+				permissionsKeyList = "CONFIGURATION_PERMISSIONS_VIEW_CHECKBOX",
+				roleTitle = "Guest");
+		}
+
+		task ("View the file is visible to admin user") {
+			Navigator.gotoSitePage(
+				pageName = "test page",
+				siteName = "Site Name");
+
+			AssertElementPresent(
+				key_dmDocumentTitle = "For Document Viewers Eyes Only",
+				locator1 = "DocumentsAndMedia#ICON_DOCUMENT_CHECKBOX");
+		}
+
+		task ("View the file is invisible to guest") {
+			User.logoutPG();
+
+			Navigator.gotoSitePage(
+				pageName = "test page",
+				siteName = "Site Name");
+
+			AssertElementNotPresent(
+				key_dmDocumentTitle = "For Document Viewers Eyes Only",
+				locator1 = "DocumentsAndMedia#ICON_DOCUMENT_CHECKBOX");
+		}
+	}
+
 	@priority = "4"
 	test EditTeamPermissions {
 		Permissions.definePermissionViaJSONAPI(
