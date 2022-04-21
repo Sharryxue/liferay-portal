@@ -20,21 +20,13 @@ import com.liferay.object.model.ObjectEntry;
 import com.liferay.object.service.ObjectValidationRuleLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.vulcan.dto.converter.DTOConverter;
-import com.liferay.portal.vulcan.dto.converter.DTOConverterRegistry;
-import com.liferay.portal.vulcan.dto.converter.DefaultDTOConverterContext;
-
-import java.util.Collections;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -114,8 +106,7 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 				objectEntry.getModelClassName(), objectEntry.getCompanyId(),
 				objectActionTriggerKey,
 				_getPayloadJSONObject(
-					objectActionTriggerKey, originalObjectEntry, objectEntry,
-					userId),
+					objectActionTriggerKey, originalObjectEntry, objectEntry),
 				userId);
 		}
 		catch (PortalException portalException) {
@@ -123,66 +114,35 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		}
 	}
 
-	private String _getExternalModel(ObjectEntry objectEntry, long userId)
-		throws PortalException {
-
-		User user = _userLocalService.getUser(userId);
-
-		DefaultDTOConverterContext defaultDTOConverterContext =
-			new DefaultDTOConverterContext(
-				false, Collections.emptyMap(), _dtoConverterRegistry, null,
-				user.getLocale(), null, user);
-
-		DTOConverter<ObjectEntry, ?> dtoConverter =
-			(DTOConverter<ObjectEntry, ?>)_dtoConverterRegistry.getDTOConverter(
-				ObjectEntry.class.getName());
-
-		if (dtoConverter == null) {
-			return objectEntry.toString();
-		}
-
-		try {
-			Object externalModel = dtoConverter.toDTO(
-				defaultDTOConverterContext, objectEntry);
-
-			return _jsonFactory.looseSerializeDeep(externalModel);
-		}
-		catch (Exception exception) {
-			_log.error(exception, exception);
-		}
-
-		return objectEntry.toString();
-	}
-
 	private JSONObject _getPayloadJSONObject(
 			String objectActionTriggerKey, ObjectEntry originalObjectEntry,
-			ObjectEntry objectEntry, long userId)
-		throws PortalException {
+			ObjectEntry objectEntry)
+		throws JSONException {
 
 		return JSONUtil.put(
 			"objectActionTriggerKey", objectActionTriggerKey
 		).put(
 			"objectEntry",
 			_jsonFactory.createJSONObject(
-				_getExternalModel(objectEntry, userId))
+				objectEntry.toString()
+			).put(
+				"values", objectEntry.getValues()
+			)
 		).put(
 			"originalObjectEntry",
 			() -> {
 				if (originalObjectEntry != null) {
 					return _jsonFactory.createJSONObject(
-						_getExternalModel(originalObjectEntry, userId));
+						originalObjectEntry.toString()
+					).put(
+						"values", originalObjectEntry.getValues()
+					);
 				}
 
 				return null;
 			}
 		);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ObjectEntryModelListener.class);
-
-	@Reference
-	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private JSONFactory _jsonFactory;
@@ -192,8 +152,5 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 
 	@Reference
 	private ObjectValidationRuleLocalService _objectValidationRuleLocalService;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }
