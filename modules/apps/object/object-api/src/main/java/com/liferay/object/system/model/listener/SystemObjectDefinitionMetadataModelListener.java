@@ -220,13 +220,13 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 		).put(
 			"originalDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
 			() -> {
-				if (originalBaseModel == null) {
-					return null;
+				if (originalBaseModel != null) {
+					return _jsonFactory.createJSONObject(
+						_jsonFactory.serialize(
+							_getExternalModel(originalBaseModel, userId)));
 				}
 
-				return _jsonFactory.createJSONObject(
-					_jsonFactory.serialize(
-						_getExternalModel(originalBaseModel, userId)));
+				return null;
 			}
 		).put(
 			"model" + _modelClass.getSimpleName(),
@@ -234,12 +234,12 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 		).put(
 			"original" + _modelClass.getSimpleName(),
 			() -> {
-				if (originalBaseModel == null) {
-					return null;
+				if (originalBaseModel != null) {
+					return _jsonFactory.createJSONObject(
+						originalBaseModel.toString());
 				}
 
-				return _jsonFactory.createJSONObject(
-					originalBaseModel.toString());
+				return null;
 			}
 		);
 	}
