@@ -241,11 +241,11 @@ public class UserAccountResourceDTOConverter
 
 	private <T> T _getContactField(
 			Contact contact,
-			UnsafeFunction<Contact, T, Exception> unsafeFunction)
+			UnsafeFunction<Contact, T, Exception> fieldFunction)
 		throws Exception {
 
 		if (contact != null) {
-			return unsafeFunction.apply(contact);
+			return fieldFunction.apply(contact);
 		}
 
 		return null;
