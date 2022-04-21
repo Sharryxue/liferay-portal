@@ -219,6 +219,8 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 	}
 
 	private String _toDTO(T baseModel, long userId) {
+		User user = _userLocalService.getUser(userId);
+
 		DTOConverter<T, ?> dtoConverter = _getDTOConverter();
 
 		if (dtoConverter == null) {
@@ -229,8 +231,6 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 
 			return baseModel.toString();
 		}
-
-		User user = _userLocalService.getUser(userId);
 
 		DefaultDTOConverterContext defaultDTOConverterContext =
 			new DefaultDTOConverterContext(
