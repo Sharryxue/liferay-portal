@@ -191,7 +191,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 					originalBaseModel.toString());
 			}
 		).put(
-			"originalDTO" + dtoConverterTypes,
+			"originalDTO" + dtoConverterType,
 			() -> {
 				if (originalBaseModel == null) {
 					return null;
@@ -219,7 +219,11 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 	}
 
 	private String _toDTO(T baseModel, long userId) {
-		User user = _userLocalService.getUser(userId);
+		User user = _userLocalService.fetchUser(userId);
+
+		if (user == null) {
+			return baseModel.toString();
+		}
 
 		DTOConverter<T, ?> dtoConverter = _getDTOConverter();
 
