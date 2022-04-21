@@ -149,7 +149,6 @@ public class UserAccountResourceDTOConverter
 							webUrls = TransformUtil.transformToArray(
 								user.getWebsites(), WebUrlUtil::toWebUrl,
 								WebUrl.class);
-
 							setFacebook(
 								_getContactField(
 									contact, Contact::getFacebookSn));
@@ -165,7 +164,6 @@ public class UserAccountResourceDTOConverter
 									contact, Contact::getTwitterSn));
 						}
 					};
-
 				setBirthDate(_getContactField(contact, Contact::getBirthday));
 				setDashboardURL(
 					() -> {
