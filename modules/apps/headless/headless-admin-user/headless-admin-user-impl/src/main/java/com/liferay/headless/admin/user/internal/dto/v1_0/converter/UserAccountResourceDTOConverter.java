@@ -31,7 +31,6 @@ import com.liferay.headless.admin.user.internal.dto.v1_0.util.PhoneUtil;
 import com.liferay.headless.admin.user.internal.dto.v1_0.util.PostalAddressUtil;
 import com.liferay.headless.admin.user.internal.dto.v1_0.util.ServiceBuilderListTypeUtil;
 import com.liferay.headless.admin.user.internal.dto.v1_0.util.WebUrlUtil;
-import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Contact;
 import com.liferay.portal.kernel.model.Group;
@@ -40,7 +39,6 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
-import com.liferay.portal.kernel.service.ContactLocalService;
 import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.service.RoleService;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -92,8 +90,7 @@ public class UserAccountResourceDTOConverter
 			return null;
 		}
 
-		Contact contact = _contactLocalService.fetchContact(
-			user.getContactId());
+		Contact contact = user.getContact();
 		User contextUser = dtoConverterContext.getUser();
 
 		return new UserAccount() {
@@ -101,6 +98,7 @@ public class UserAccountResourceDTOConverter
 				actions = dtoConverterContext.getActions();
 				additionalName = user.getMiddleName();
 				alternateName = user.getScreenName();
+				birthDate = user.getBirthday();
 				customFields = CustomFieldsUtil.toCustomFields(
 					dtoConverterContext.isAcceptAllLanguages(),
 					User.class.getName(), user.getUserId(), user.getCompanyId(),
@@ -111,6 +109,12 @@ public class UserAccountResourceDTOConverter
 				externalReferenceCode = user.getExternalReferenceCode();
 				familyName = user.getLastName();
 				givenName = user.getFirstName();
+				honorificPrefix =
+					ServiceBuilderListTypeUtil.getServiceBuilderListTypeMessage(
+						contact.getPrefixId(), dtoConverterContext.getLocale());
+				honorificSuffix =
+					ServiceBuilderListTypeUtil.getServiceBuilderListTypeMessage(
+						contact.getSuffixId(), dtoConverterContext.getLocale());
 				id = user.getUserId();
 				jobTitle = user.getJobTitle();
 				keywords = ListUtil.toArray(
@@ -123,6 +127,10 @@ public class UserAccountResourceDTOConverter
 					user.getOrganizations(),
 					organization -> _toOrganizationBrief(organization),
 					OrganizationBrief.class);
+				roleBriefs = TransformUtil.transformToArray(
+					_roleService.getUserRoles(user.getUserId()),
+					role -> _toRoleBrief(dtoConverterContext, role),
+					RoleBrief.class);
 				siteBriefs = TransformUtil.transformToArray(
 					_groupService.getGroups(
 						contextUser.getCompanyId(),
@@ -136,6 +144,8 @@ public class UserAccountResourceDTOConverter
 								user.getEmailAddresses(),
 								EmailAddressUtil::toEmailAddress,
 								EmailAddress.class);
+							facebook = contact.getFacebookSn();
+							jabber = contact.getJabberSn();
 							postalAddresses = TransformUtil.transformToArray(
 								user.getAddresses(),
 								address -> PostalAddressUtil.toPostalAddress(
@@ -143,28 +153,18 @@ public class UserAccountResourceDTOConverter
 									address, user.getCompanyId(),
 									dtoConverterContext.getLocale()),
 								PostalAddress.class);
+							skype = contact.getSkypeSn();
+							sms = contact.getSmsSn();
 							telephones = TransformUtil.transformToArray(
 								user.getPhones(), PhoneUtil::toPhone,
 								Phone.class);
+							twitter = contact.getTwitterSn();
 							webUrls = TransformUtil.transformToArray(
 								user.getWebsites(), WebUrlUtil::toWebUrl,
 								WebUrl.class);
-							setFacebook(
-								_getContactField(
-									contact, Contact::getFacebookSn));
-							setJabber(
-								_getContactField(
-									contact, Contact::getJabberSn));
-							setSkype(
-								_getContactField(contact, Contact::getSkypeSn));
-							setSms(
-								_getContactField(contact, Contact::getSmsSn));
-							setTwitter(
-								_getContactField(
-									contact, Contact::getTwitterSn));
 						}
 					};
-				setBirthDate(_getContactField(contact, Contact::getBirthday));
+
 				setDashboardURL(
 					() -> {
 						Group group = user.getGroup();
@@ -175,28 +175,6 @@ public class UserAccountResourceDTOConverter
 
 						return group.getDisplayURL(
 							_getThemeDisplay(group), true);
-					});
-				setHonorificPrefix(
-					() -> {
-						if (contact == null) {
-							return null;
-						}
-
-						return ServiceBuilderListTypeUtil.
-							getServiceBuilderListTypeMessage(
-								contact.getPrefixId(),
-								dtoConverterContext.getLocale());
-					});
-				setHonorificSuffix(
-					() -> {
-						if (contact == null) {
-							return null;
-						}
-
-						return ServiceBuilderListTypeUtil.
-							getServiceBuilderListTypeMessage(
-								contact.getSuffixId(),
-								dtoConverterContext.getLocale());
 					});
 				setImage(
 					() -> {
@@ -222,31 +200,8 @@ public class UserAccountResourceDTOConverter
 
 						return group.getDisplayURL(_getThemeDisplay(group));
 					});
-				setRoleBriefs(
-					() -> {
-						if (contact == null) {
-							return new RoleBrief[0];
-						}
-
-						return TransformUtil.transformToArray(
-							_roleService.getUserRoles(user.getUserId()),
-							role -> _toRoleBrief(dtoConverterContext, role),
-							RoleBrief.class);
-					});
 			}
 		};
-	}
-
-	private <T> T _getContactField(
-			Contact contact,
-			UnsafeFunction<Contact, T, Exception> fieldFunction)
-		throws Exception {
-
-		if (contact != null) {
-			return fieldFunction.apply(contact);
-		}
-
-		return null;
 	}
 
 	private ThemeDisplay _getThemeDisplay(Group group) {
@@ -300,9 +255,6 @@ public class UserAccountResourceDTOConverter
 
 	@Reference
 	private AssetTagLocalService _assetTagLocalService;
-
-	@Reference
-	private ContactLocalService _contactLocalService;
 
 	@Reference
 	private GroupService _groupService;
