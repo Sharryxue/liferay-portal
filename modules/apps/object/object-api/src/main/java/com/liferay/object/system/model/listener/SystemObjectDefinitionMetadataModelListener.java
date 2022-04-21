@@ -175,7 +175,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 			"model" + _modelClass.getSimpleName(),
 			_jsonFactory.createJSONObject(baseModel.toString())
 		).put(
-			"modelDTO" + dtoConverterType,
+			"modelDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
 			_jsonFactory.createJSONObject(
 				_jsonFactory.serialize(_toDTO(baseModel, userId)))
 		).put(
@@ -191,7 +191,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 					originalBaseModel.toString());
 			}
 		).put(
-			"originalDTO" + dtoConverterType,
+			"originalDTO" + StringUtil.upperCaseFirstLetter(dtoConverterType),
 			() -> {
 				if (originalBaseModel == null) {
 					return null;
