@@ -26,6 +26,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>EXPORT_IN_PROGRESS_BAR</td>
+	<td>//div[contains(@class,'progress-info')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>EXPORT_PROCESS_APPLICATION_STATUS</td>
 	<td>//div[contains(.,'${key_application}')]/span[contains(.,'${key_status}')]</td>
 	<td></td>
