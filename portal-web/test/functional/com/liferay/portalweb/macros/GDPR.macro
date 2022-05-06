@@ -32,9 +32,17 @@ definition {
 			key_lastName = "${userLastName}",
 			locator1 = "ExportPersonalData#HEADER");
 
+		if (isSet(exportInProgressBar)) {
+			AssertElementPresent(locator1 = "ExportPersonalData#EXPORT_IN_PROGRESS_BAR");
+		}
+
 		WaitForElementNotPresent(
 			key_status = "In Progress",
 			locator1 = "ExportPersonalData#EXPORT_PROCESS_STATUS");
+
+		while (IsElementPresent(key_status = "In Progress", locator1 = "ExportPersonalData#EXPORT_PROCESS_STATUS")) {
+			Pause(locator1 = "3000");
+		}
 
 		if (isSet(applications)) {
 			for (var application : list "${applications}") {
