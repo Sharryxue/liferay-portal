@@ -34,7 +34,7 @@ definition {
 		}
 	}
 
-	@description = "This is a use case for LPS-119168."
+	@description = "This is a use case for LPS-119168. PR for build bundle."
 	@priority = "5"
 	test AddUser {
 		property testray.component.names = "Training";
