@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.remote.json.web.service.web.internal.servlet;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.jsonwebservice.JSONWebServiceServiceAction;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.Portal;
