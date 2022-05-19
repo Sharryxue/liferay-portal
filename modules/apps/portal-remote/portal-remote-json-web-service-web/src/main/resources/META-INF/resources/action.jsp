@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portal/api/jsonws/init.jsp" %>
 
 <%
 String signature = ParamUtil.getString(request, "signature");
