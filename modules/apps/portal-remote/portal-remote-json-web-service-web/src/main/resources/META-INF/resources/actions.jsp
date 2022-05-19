@@ -138,32 +138,34 @@ Set<String> contextNames = JSONWebServiceActionsManagerUtil.getContextNames();
 		var contextNameSelector = A.one('#<portlet:namespace />contextName');
 
 		if (contextNameSelector) {
-			contextNameSelector.on('change', (event) => {
-				var contextName = contextNameSelector.val();
+			contextNameSelector.on(
+				'change',
+				function(event) {
+					var contextName = contextNameSelector.val();
 
-				var location = Liferay.Util.addParams(
-					'contextName=' + contextName,
-					'<%= jsonWSPath %>'
-				);
+					var location = Liferay.Util.addParams('contextName=' + contextName, '<%= jsonWSPath %>');
 
-				window.location.href = location;
-			});
+					window.location.href = location;
+				}
+			);
 		}
 	</c:if>
 
-	var ServiceFilter = A.Component.create({
-		AUGMENTS: [A.AutoCompleteBase],
-		EXTENDS: A.Base,
-		NAME: 'servicefilter',
-		prototype: {
-			initializer: function () {
-				var instance = this;
+	var ServiceFilter = A.Component.create(
+		{
+			AUGMENTS: [A.AutoCompleteBase],
+			EXTENDS: A.Base,
+			NAME: 'servicefilter',
+			prototype: {
+				initializer: function() {
+					var instance = this;
 
-				instance._bindUIACBase();
-				instance._syncUIACBase();
-			},
-		},
-	});
+					instance._bindUIACBase();
+					instance._syncUIACBase();
+				}
+			}
+		}
+	);
 
 	var noMatchMessage = A.one('#noMatches');
 	var services = A.one('#services');
@@ -172,60 +174,70 @@ Set<String> contextNames = JSONWebServiceActionsManagerUtil.getContextNames();
 
 	var results = [];
 
-	servicesClone.all('.lfr-api-service-result').each((item, index) => {
-		results.push({
-			el: item._node,
-			node: item,
-			text: item.text().trim(),
-		});
-	});
+	servicesClone.all('.lfr-api-service-result').each(
+		function(item, index) {
+			results.push(
+				{
+					el: item._node,
+					node: item,
+					text: item.text().trim()
+				}
+			);
+		}
+	);
 
 	var replaceRE = new RegExp('[-_\\s\\W]', 'g');
 
 	var cache = {};
 
-	var filter = new ServiceFilter({
-		inputNode: A.one('#serviceSearch'),
-		minQueryLength: 0,
-		queryDelay: 0,
-		resultFilters: function (query, results) {
-			query = query.toLowerCase().replace(replaceRE, '');
+	var filter = new ServiceFilter(
+		{
+			inputNode: A.one('#serviceSearch'),
+			minQueryLength: 0,
+			queryDelay: 0,
+			resultFilters: function(query, results) {
+				query = query.toLowerCase().replace(replaceRE, '');
 
-			return results.filter((item, index) => {
-				var node = item.raw.node;
+				return results.filter(
+					function(item, index) {
+						var node = item.raw.node;
 
-				var guid = node.guid();
+						var guid = node.guid();
 
-				var text = cache[guid];
+						var text = cache[guid];
 
-				if (!text) {
-					text = node.attr('data-metaData') + '/' + item.text;
-					text = text.toLowerCase().replace(replaceRE, '');
+						if (!text) {
+							text = node.attr('data-metaData') + '/' + item.text;
+							text = text.toLowerCase().replace(replaceRE, '');
 
-					cache[guid] = text;
+							cache[guid] = text;
+						}
+
+						return text.indexOf(query) !== -1;
+					}
+				);
+			},
+			resultHighlighter: function(query, results) {
+				var cachedResults = cache[query];
+
+				if (!cachedResults) {
+					var queryChars = AArray.dedupe(query.toLowerCase().split(''));
+
+					cachedResults = results.map(
+						function(item, index) {
+							return A.Highlight.all(item.text, queryChars);
+						}
+					);
+
+					cache[query] = cachedResults;
 				}
 
-				return text.indexOf(query) !== -1;
-			});
-		},
-		resultHighlighter: function (query, results) {
-			var cachedResults = cache[query];
-
-			if (!cachedResults) {
-				var queryChars = AArray.dedupe(query.toLowerCase().split(''));
-
-				cachedResults = results.map((item, index) => {
-					return A.Highlight.all(item.text, queryChars);
-				});
-
-				cache[query] = cachedResults;
-			}
-
-			return cachedResults;
-		},
-		resultTextLocator: 'text',
-		source: results,
-	});
+				return cachedResults;
+			},
+			resultTextLocator: 'text',
+			source: results
+		}
+	);
 
 	var servicesParent = services.ancestor();
 
@@ -233,69 +245,72 @@ Set<String> contextNames = JSONWebServiceActionsManagerUtil.getContextNames();
 
 	filter.on(
 		'results',
-		A.debounce((event) => {
-			var query = event.query;
-			var results = event.results;
+		A.debounce(
+			function(event) {
+				var query = event.query;
+				var results = event.results;
 
-			var resultsLength = results.length;
+				var resultsLength = results.length;
 
-			servicesClone.remove();
-			services.remove();
+				servicesClone.remove();
+				services.remove();
 
-			if (!trackedNodes) {
-				trackedNodes = servicesClone.all('.lfr-panel, .lfr-api-signature');
-			}
+				if (!trackedNodes) {
+					trackedNodes = servicesClone.all('.lfr-panel, .lfr-api-signature');
+				}
 
-			trackedNodes.hide();
+				trackedNodes.hide();
 
-			var activeServiceNode = services;
+				var activeServiceNode = services;
 
-			if (query) {
-				results.forEach((item, index) => {
-					var raw = item.raw;
+				if (query) {
+					results.forEach(
+						function(item, index) {
+							var raw = item.raw;
 
-					var el = raw.el;
-					var node = raw.node;
-					var serviceNode = raw.serviceNode;
+							var el = raw.el;
+							var node = raw.node;
+							var serviceNode = raw.serviceNode;
 
-					if (!serviceNode) {
-						serviceNode = node.ancestorsByClassName('lfr-panel');
+							if (!serviceNode) {
+								serviceNode = node.ancestorsByClassName('lfr-panel');
 
-						raw.serviceNode = serviceNode;
-					}
+								raw.serviceNode = serviceNode;
+							}
 
-					if (node.hasClass('method-name')) {
-						var signatureNode = raw.signatureNode;
+							if (node.hasClass('method-name')) {
+								var signatureNode = raw.signatureNode;
 
-						if (!signatureNode) {
-							signatureNode = node.ancestorsByClassName(
-								'lfr-api-signature'
-							);
+								if (!signatureNode) {
+									signatureNode = node.ancestorsByClassName('lfr-api-signature');
 
-							raw.signatureNode = signatureNode;
+									raw.signatureNode = signatureNode;
+								}
+
+								signatureNode.show();
+
+								var parentEl = el.parentNode;
+
+								parentEl.removeChild(el);
+
+								el.innerHTML = item.highlighted;
+
+								parentEl.appendChild(el);
+							}
+
+							node.show();
+							serviceNode.show();
 						}
+					);
 
-						signatureNode.show();
+					noMatchMessage.toggle(!resultsLength);
 
-						var parentEl = el.parentNode;
+					activeServiceNode = servicesClone;
+				}
 
-						parentEl.removeChild(el);
-
-						el.innerHTML = item.highlighted;
-
-						parentEl.appendChild(el);
-					}
-
-					node.show();
-					serviceNode.show();
-				});
-
-				noMatchMessage.toggle(!resultsLength);
-
-				activeServiceNode = servicesClone;
-			}
-
-			servicesParent.append(activeServiceNode);
-		}, 50)
+				servicesParent.append(activeServiceNode);
+			},
+			50
+		)
 	);
 </aui:script>
