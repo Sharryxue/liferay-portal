@@ -35,7 +35,6 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
@@ -60,14 +59,6 @@ public class JSONWebServiceServlet extends JSONServlet {
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws IOException, ServletException {
-
-		if (httpServletRequest instanceof HttpServletRequestWrapper) {
-			HttpServletRequestWrapper httpServletRequestWrapper =
-				(HttpServletRequestWrapper)httpServletRequest;
-
-			httpServletRequest =
-				(HttpServletRequest)httpServletRequestWrapper.getRequest();
-		}
 
 		String path = _getPathInfo(httpServletRequest);
 
