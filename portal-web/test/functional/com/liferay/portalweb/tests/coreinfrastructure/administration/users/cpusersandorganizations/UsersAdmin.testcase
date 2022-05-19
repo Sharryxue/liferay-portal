@@ -101,6 +101,7 @@ definition {
 	@priority = "4"
 	test AddUserEmailAddressApostrophe {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
+		property portal.acceptance = "sharry";
 
 		JSONUser.addUser(
 			userEmailAddress = "user1@liferay.com",
