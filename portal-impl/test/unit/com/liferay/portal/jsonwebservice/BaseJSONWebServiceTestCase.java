@@ -117,9 +117,8 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest30();
 
-		mockHttpServletRequest.setAttribute(
-			WebKeys.ORIGINAL_PATH_INFO, pathInfo);
 		mockHttpServletRequest.setMethod(HttpMethods.GET);
+		mockHttpServletRequest.setPathInfo(pathInfo);
 
 		return mockHttpServletRequest;
 	}
@@ -130,9 +129,8 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest30();
 
-		mockHttpServletRequest.setAttribute(
-			WebKeys.ORIGINAL_PATH_INFO, pathInfo);
 		mockHttpServletRequest.setMethod(method);
+		mockHttpServletRequest.setPathInfo(pathInfo);
 
 		return mockHttpServletRequest;
 	}
