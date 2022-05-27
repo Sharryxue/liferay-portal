@@ -130,7 +130,7 @@ definition {
 	@description = "This is a use case for LPS-101717. Assert portal will not show any other MFA after IP Address Configuration is Enabled and assert portal will goes in other MFA verifier if IP verifier is failed."
 	@priority = "5"
 	test AssertLoginGoesInOtherMFAVerifierWhenIPVerifierFailed {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "MultiFactorAuthentication#AssertLoginGoesInOtherMFAVerifierWhenIPVerifierFailed";
 
 		task ("Add CP able.com") {
