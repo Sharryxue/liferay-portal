@@ -618,6 +618,7 @@ definition {
 	@description = "Verify that the time format in Details tab is following the system language"
 	@priority = "3"
 	test TimeFormatFollowsSystemLanguageInDetails {
+		property portal.acceptance = "sharry";
 		property portal.upstream = "quarantine";
 
 		ApplicationsMenu.gotoPortlet(
@@ -678,6 +679,7 @@ definition {
 	@description = "Verify that the time format in Revision History tab is following the system language"
 	@priority = "4"
 	test TimeFormatFollowsSystemLanguageInRevision {
+		property portal.acceptance = "sharry";
 		property portal.upstream = "quarantine";
 
 		ApplicationsMenu.gotoPortlet(

@@ -800,6 +800,8 @@ definition {
 	@description = "This test deletes export process"
 	@priority = "3"
 	test CanDeleteAnExportProcess {
+		property portal.acceptance = "sharry";
+
 		task ("Log in as new user and create data across several different applications") {
 			JSONBlog.addEntry(
 				entryContent = "Blogs Entry Content",
@@ -1093,6 +1095,8 @@ definition {
 	@description = "This test filters and orders data from the export data process"
 	@priority = "2"
 	test CanFilterAndOrderExportProcesses {
+		property portal.acceptance = "sharry";
+
 		task ("Sign in as New User and create data from various applications") {
 			JSONBlog.addEntry(
 				entryContent = "Blogs Entry Content",
@@ -1813,7 +1817,7 @@ definition {
 
 	@priority = "4"
 	test ExportAllEntries {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		JSONLayout.addPublicLayout(
 			groupName = "Guest",
@@ -1959,6 +1963,8 @@ definition {
 	@description = "This test changes pagination and assert export processes display properly."
 	@priority = "2"
 	test PaginationWorksInExportPersonalData {
+		property portal.acceptance = "sharry";
+
 		task ("Log in as new user and create data across several different applications") {
 			JSONBlog.addEntry(
 				entryContent = "Blogs Entry Content",

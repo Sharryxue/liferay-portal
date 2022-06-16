@@ -550,6 +550,7 @@ definition {
 	@description = "View page template in Spanish and English."
 	@priority = "4"
 	test LocalizeGlobalDefaultPageTemplates {
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "WidgetPageTemplates#LocalizeDefaultPageTemplates";
 
 		task ("Edit Department Landing Page and add several widgets") {

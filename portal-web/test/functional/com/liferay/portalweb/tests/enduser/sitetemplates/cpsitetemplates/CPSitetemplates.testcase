@@ -587,6 +587,7 @@ definition {
 
 	@priority = "4"
 	test LocalizeSiteTemplatesAdmin {
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "CPSitetemplates#LocalizeSiteTemplatesAdmin";
 
 		SiteTemplates.addCP(siteTemplateName = "Site Template Name");

@@ -160,6 +160,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanBeUnInstalledAndRedeployed {
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "Theme#CanBeUnInstalledAndRedeployed";
 
 		var appName = "test-theme";
@@ -197,7 +198,7 @@ definition {
 
 		AppManager.uninstallApp(appName = "${appName}");
 
-		AssertConsoleTextPresent(value1 = "Stopping blacklisted bundle test-theme_1.0.0");
+		WaitForConsoleTextPresent(value1 = "Stopping blacklisted bundle test-theme_1.0.0");
 
 		Navigator.openSitePage(
 			pageName = "Theme Test Page",
