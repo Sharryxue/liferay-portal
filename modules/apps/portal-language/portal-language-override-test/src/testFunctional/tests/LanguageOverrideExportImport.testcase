@@ -1,0 +1,39 @@
+@component-name = "portal-user-management-and-portal-configuration"
+definition {
+
+	property portal.release = "true";
+	property portal.upstream = "true";
+	property testray.main.component.name = "Language Override";
+
+	setUp {
+		TestCase.setUpPortalInstance();
+
+		User.firstLoginPG();
+
+		LanguageOverride.openLanguageOverridePortlet();
+	}
+
+	tearDown {
+		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+		if ("${testPortalInstance}" == "true") {
+			PortalInstances.tearDownCP();
+		}
+	}
+
+	@description = "Export option displays when we have language key with override."
+	@priority = "3"
+	test CanViewExportOptionWhenHasOverride {
+		task ("When a new language keys is created") {
+			LanguageOverride.addLanguageKey(
+				languageKey = "new-key",
+				translationOverrideList = "en-US",
+				translationOverrideValueList = "New key");
+		}
+
+		task ("Then Export Overridden Translations should appear in the options menu dropdown") {
+			Portlet.viewPortletOptions(optionsName = "Export Overridden Translations");
+		}
+	}
+
+}
