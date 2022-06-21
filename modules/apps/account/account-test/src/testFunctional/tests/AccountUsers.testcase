@@ -25,7 +25,7 @@ definition {
 	@description = "This test adds an account user via Account Users portlet"
 	@priority = "5"
 	test CanAddAccountUser {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account with User",
@@ -51,6 +51,8 @@ definition {
 	@description = "This test adds an account user to an account via Edit User page"
 	@priority = "4"
 	test CanAddUserToAccountViaEditUser {
+		property portal.acceptance = "sharry";
+
 		for (var accountNumber : list "1,2") {
 			JSONAccountEntry.addAccountEntry(
 				accountEntryName = "Accounts Name ${accountNumber}",
@@ -104,6 +106,8 @@ definition {
 	@description = "This test adds more than 4 account users and asserts correct pagination."
 	@priority = "3"
 	test CanChangePaginationInAccountUsersList {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
@@ -149,6 +153,8 @@ definition {
 	@description = "This test deactivates an active user"
 	@priority = "4"
 	test CanDeactivateUser {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account with User",
 			accountEntryType = "Business");
@@ -219,6 +225,8 @@ definition {
 	@description = "This is a use case for LPS-107598 and LPS-129713"
 	@priority = "3"
 	test CanFilterAccountUserInTheUsersAdminPortlet {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account with User",
 			accountEntryType = "Business");
@@ -293,6 +301,8 @@ definition {
 	@description = "This filters users that do not have any assigned account"
 	@priority = "3"
 	test CanFilterByNoAssignedAccount {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account with User",
 			accountEntryType = "Business");
@@ -332,6 +342,8 @@ definition {
 	@description = "This filters users by Selected Accounts, choosing a specific account to view"
 	@priority = "3"
 	test CanFilterBySelectedAccounts {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Business Account",
 			accountEntryType = "Business");
@@ -393,6 +405,8 @@ definition {
 	@description = "This filters users by status: active and inactive"
 	@priority = "3"
 	test CanFilterByStatus {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Filter Account User",
 			accountEntryType = "Business");
@@ -432,6 +446,8 @@ definition {
 	@description = "This test impersonates an account user via Account Users portlet"
 	@priority = "4"
 	test CanImpersonateUser {
+		property portal.acceptance = "sharry";
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONAccountEntry.addAccountEntry(
@@ -459,6 +475,8 @@ definition {
 	@description = "This test asserts that a person account cannot be selected in Edit User when a user is already assigned to a Person Account."
 	@priority = "4"
 	test CannotSelectPersonAccountWithUserAssigned {
+		property portal.acceptance = "sharry";
+
 		task ("Given there is a Person account with a user assigned") {
 			JSONAccountEntry.addAccountEntry(
 				accountEntryName = "Person Account",

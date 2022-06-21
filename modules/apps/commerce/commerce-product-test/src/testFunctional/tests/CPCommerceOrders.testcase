@@ -2485,7 +2485,7 @@ definition {
 	@description = "This is a test for COMMERCE-5845. As a product specialist I want to see if a SKU is on order"
 	@priority = "3"
 	test ViewOrderSKU {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		// TODO Review
 

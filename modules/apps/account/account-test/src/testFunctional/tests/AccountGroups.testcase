@@ -139,6 +139,8 @@ definition {
 	@description = "This test asserts the user with Assign Account permission can assign account to account group."
 	@priority = "3"
 	test CanAssignAccountFromAccountGroupWithPermissions {
+		property portal.acceptance = "sharry";
+
 		task ("Given A new User/Accounts/Account Groups exists") {
 			JSONUser.addUser(
 				userEmailAddress = "userea1@liferay.com",
@@ -265,6 +267,8 @@ definition {
 	@description = "This test assert user can filter the assigned accounts in Account Group by name."
 	@priority = "3"
 	test CanFilterAccountsBelongToAccountGroupByName {
+		property portal.acceptance = "sharry";
+
 		task ("Given Add a new Account Group and Accounts with different name not in alphabetical order") {
 			JSONAccountGroup.addAccountGroup(
 				accountGroupDescription = "Filter the assigned Accounts by .",
@@ -312,6 +316,8 @@ definition {
 	@description = "This test assert user can filter the assigned accounts in Account Group by status."
 	@priority = "3"
 	test CanFilterAccountsBelongToAccountGroupByStatus {
+		property portal.acceptance = "sharry";
+
 		task ("Given Add a new Account Group and Accounts with different status") {
 			JSONAccountGroup.addAccountGroup(
 				accountGroupDescription = "Filter the assigned Accounts by Status.",
@@ -375,6 +381,8 @@ definition {
 	@description = "This test assert user can filter the assigned accounts in Account Group by type."
 	@priority = "3"
 	test CanFilterAccountsBelongToAccountGroupByType {
+		property portal.acceptance = "sharry";
+
 		task ("Given Add a new Account Group and Accounts with different type") {
 			JSONAccountGroup.addAccountGroup(
 				accountGroupDescription = "Filter the assigned Accounts by Type.",
@@ -427,6 +435,8 @@ definition {
 	@description = "This test assigns an account to Account Group"
 	@priority = "4"
 	test CanManuallyAssignAccountToGroup {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account for Account Group",
 			accountEntryType = "Business");
@@ -458,6 +468,8 @@ definition {
 	@description = "This is a use case for LPS-122414. It asserts the number of accounts in Accounts Group view is accurate."
 	@priority = "4"
 	test CanManuallyAssignMultipleAccountsToGroup {
+		property portal.acceptance = "sharry";
+
 		for (var accountNumber : list "1,2,3,4,5") {
 			JSONAccountEntry.addAccountEntry(
 				accountEntryName = "Accounts ${accountNumber} for AG",
@@ -505,7 +517,7 @@ definition {
 	@description = "This test removes an account from Account Group."
 	@priority = "4"
 	test CanRemoveAccountFromGroup {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		for (var accountNumber : list "1,2,3") {
 			JSONAccountEntry.addAccountEntry(
@@ -581,6 +593,8 @@ definition {
 	@description = "This test asserts the user with Assign Account permission can unassign account from account group."
 	@priority = "3"
 	test CanUnassignAccountFromAccountGroupWithPermissions {
+		property portal.acceptance = "sharry";
+
 		task ("Given A new User/Accounts/Account Groups exists") {
 			JSONUser.addUser(
 				userEmailAddress = "userea1@liferay.com",
@@ -657,6 +671,8 @@ definition {
 	@description = "This test asserts the user with View Account permission can view account in account group."
 	@priority = "3"
 	test CanViewAccountsAssignedToAccountGroupWithPermissions {
+		property portal.acceptance = "sharry";
+
 		task ("Given A new User/Accounts/Account Groups exists") {
 			JSONUser.addUser(
 				userEmailAddress = "userea1@liferay.com",

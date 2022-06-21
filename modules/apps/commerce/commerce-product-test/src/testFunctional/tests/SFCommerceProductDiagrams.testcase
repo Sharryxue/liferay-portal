@@ -887,7 +887,7 @@ definition {
 	@description = "COMMERCE-8153. Verify the visibility rules"
 	@priority = "4"
 	test VerifyTheVisibilityRules {
-		property portal.acceptance = "false";
+		property portal.acceptance = "sharry";
 
 		task ("Given the Minium site with two buyer users, and an account group with the buyer A") {
 			CommerceEntry.addAccountEntryUser(

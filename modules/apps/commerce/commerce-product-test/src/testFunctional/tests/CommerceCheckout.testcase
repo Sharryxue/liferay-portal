@@ -414,7 +414,7 @@ definition {
 	@description = "COMMERCE-8168. This is a use case for COMMERCE-8127"
 	@priority = "5"
 	test DeleteOrderAndCheckoutNewOrder {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 

@@ -363,6 +363,8 @@ definition {
 	@description = "This test asserts that an Account Admin cannot add a user wtih an email domain that is blocked."
 	@priority = "4"
 	test AccountAdminCannotAddUserWithBlockedDomain {
+		property portal.acceptance = "sharry";
+
 		task ("Login as Super User and block the gmail.com email domain") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "test@liferay.com",
@@ -408,6 +410,8 @@ definition {
 	@description = "This test sets a valid domain for a business account. Account Admin can only add users with a valid domain"
 	@priority = "3"
 	test AccountAdminCanOnlyAddUserWithValidDomain {
+		property portal.acceptance = "sharry";
+
 		task ("Login as Super User and enable email domain") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "test@liferay.com",
@@ -494,6 +498,8 @@ definition {
 	@description = "This test asserts that an Account Admin can set a billing address to an Account."
 	@priority = "5"
 	test AccountAdminCanSetDefaultBillingAddress {
+		property portal.acceptance = "sharry";
+
 		Search.searchPG(
 			portletName = "Account Management",
 			searchTerm = "Account Name");
@@ -535,6 +541,8 @@ definition {
 	@description = "This test asserts that an Account Admin can set a shipping address to an Account."
 	@priority = "5"
 	test AccountAdminCanSetDefaultShippingAddress {
+		property portal.acceptance = "sharry";
+
 		Search.searchPG(
 			portletName = "Account Management",
 			searchTerm = "Account Name");
@@ -578,6 +586,8 @@ definition {
 	@description = "This test asserts that an Account Admin can add and unassign organization in bulk"
 	@priority = "5"
 	test AccountAdminCanUnassignOrganizationsInBulk {
+		property portal.acceptance = "sharry";
+
 		User.logoutAndLoginPG(
 			userLoginEmailAddress = "test@liferay.com",
 			userLoginFullName = "Test Test");
@@ -624,6 +634,8 @@ definition {
 	@description = "This test asserts that an Account Admin can add and unassign organization to an account"
 	@priority = "5"
 	test AccountAdminCanUnassignOrganizationToAccount {
+		property portal.acceptance = "sharry";
+
 		User.logoutAndLoginPG(
 			userLoginEmailAddress = "test@liferay.com",
 			userLoginFullName = "Test Test");
@@ -1021,6 +1033,8 @@ definition {
 	@description = "This is a test for LRQA-73702 and asserts that a user can see all accounts that they belong to"
 	@priority = "5"
 	test CanAccessAListOfAccountsTheUserBelongsTo {
+		property portal.acceptance = "sharry";
+
 		task ("Given two accounts are created") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "test@liferay.com",
@@ -1065,6 +1079,8 @@ definition {
 	@description = "This test checks that the size of the pagination list can be changed."
 	@priority = "4"
 	test CanChangePaginationInAccounts {
+		property portal.acceptance = "sharry";
+
 		AssertElementNotPresent(locator1 = "Pagination#PAGINATION_BAR");
 
 		LexiconEntry.viewEntryName(rowEntry = "Account Name");

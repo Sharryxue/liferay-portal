@@ -1310,7 +1310,7 @@ definition {
 	}
 
 	test AssertPriceListCanBeAssociatedWithAccountAndAccountGroup {
-		property portal.acceptance = "false";
+		property portal.acceptance = "sharry";
 		property portal.upstream = "true";
 
 		for (var entryNumber : list "1,2") {

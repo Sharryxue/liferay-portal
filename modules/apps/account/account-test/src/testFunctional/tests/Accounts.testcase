@@ -25,7 +25,7 @@ definition {
 	@description = "This test asserts that a user can view all the Account Groups an account is assigned to via Account details page"
 	@priority = "4"
 	test AccountGroupsAreDisplayedInAccountDetailsPage {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Accounts Name",
@@ -405,6 +405,7 @@ definition {
 	@description = "This test asserts that a domain blocked in one instance will not be blocked when creating a separate virtual instance."
 	@priority = "4"
 	test BlockedDomainsAreInstanceWide {
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "Accounts#BlockedDomainsAreInstanceWide";
 
 		task ("Block google.com domain and create a new account") {
@@ -493,6 +494,8 @@ definition {
 	@description = "This test adds a new user via the Users tab of an Account"
 	@priority = "4"
 	test CanAddAccountUserViaAssignUser {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Assign Account User",
 			accountEntryType = "Business");
@@ -576,6 +579,8 @@ definition {
 	@description = "This test adds and removes multiple organizations from an account via management toolbar."
 	@priority = "4"
 	test CanAddAndRemoveOrganizationsInBulk {
+		property portal.acceptance = "sharry";
+
 		for (var organizationNumber : list "1,2,3,4") {
 			JSONOrganization.addOrganization(
 				organizationName = "Organization ${organizationNumber}",
@@ -787,6 +792,8 @@ definition {
 	@description = "This test assigns an existing user to account through the Users tab"
 	@priority = "4"
 	test CanAssignExistingUserToAccount {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
@@ -892,6 +899,8 @@ definition {
 	@description = "This test adds an organization as an assignee of a business account"
 	@priority = "4"
 	test CanAssignOrganizationToBusinessAccount {
+		property portal.acceptance = "sharry";
+
 		JSONOrganization.addOrganization(
 			organizationName = "Organization for Account",
 			organizationSite = "true");
@@ -920,6 +929,8 @@ definition {
 	@description = "This test assigns a role to an Account User in the Account Details page via Users tab"
 	@priority = "4"
 	test CanAssignRolesViaUsersTab {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
@@ -2327,6 +2338,7 @@ definition {
 	@priority = "4"
 	test CannotAddUserWithBlockedEmailDomain {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
+		property portal.acceptance = "sharry";
 
 		task ("Given an account is created and is configured to have blocked domains") {
 			AccountConfiguration.enableAccountEmailDomain();
@@ -2385,6 +2397,7 @@ definition {
 	@priority = "3"
 	test CannotAddUserWithInvalidEmailDomain {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
+		property portal.acceptance = "sharry";
 
 		task ("Given an account is created and is configured to have valid email domains") {
 			AccountConfiguration.enableAccountEmailDomain();
@@ -2440,6 +2453,7 @@ definition {
 	@description = "This test adds an address, sets it as default, and removes it as default"
 	@priority = "3"
 	test CanRemoveAddressAsDefault {
+		property portal.acceptance = "sharry";
 		property testray.component.names = "Address";
 
 		JSONAccountEntry.addAccountEntry(
@@ -2569,7 +2583,7 @@ definition {
 	@description = "This test removes an organization as an assignee of a business account."
 	@priority = "5"
 	test CanRemoveOrganizationFromBusinessAccount {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		JSONOrganization.addOrganization(
 			organizationName = "Organization for Account",
@@ -2605,6 +2619,8 @@ definition {
 	@description = "This test removes a user from account via Users tab"
 	@priority = "5"
 	test CanRemoveUserFromAccount {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Remove Account User",
 			accountEntryType = "Business");
@@ -2677,6 +2693,8 @@ definition {
 	@description = "This test removes multiple users from an account in bulk via management toolbar"
 	@priority = "3"
 	test CanRemoveUsersFromAccountsInBulk {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Business Account",
 			accountEntryType = "Business");
@@ -2761,6 +2779,8 @@ definition {
 	@description = "This test searches for organizations assigned to an account"
 	@priority = "4"
 	test CanSearchForAssignedOrganizations {
+		property portal.acceptance = "sharry";
+
 		task ("Add an account and add two organizations") {
 			JSONAccountEntry.addAccountEntry(
 				accountEntryName = "Business Account",
@@ -2806,6 +2826,7 @@ definition {
 	@description = "This test sets default shipping and default billing addresses for an account."
 	@priority = "3"
 	test CanSetDefaultAddresses {
+		property portal.acceptance = "sharry";
 		property testray.component.names = "Address";
 
 		JSONAccountEntry.addAccountEntry(
@@ -2909,6 +2930,8 @@ definition {
 	@description = "This test unassigns a role to an Account User in the Account Details page via Users tab"
 	@priority = "3"
 	test CanUnassignRolesViaUsersTab {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
@@ -3075,6 +3098,8 @@ definition {
 	@description = "This test removes domain set to an account."
 	@priority = "4"
 	test DisablingDomainValidationRemovesWarningMessages {
+		property portal.acceptance = "sharry";
+
 		AccountConfiguration.enableAccountEmailDomain();
 
 		Accounts.openAccountsAdmin();
@@ -3242,6 +3267,8 @@ definition {
 	@description = "This is a use case for LPS-117171. It asserts that Filter By Navigation does not display when assigning a user to a Person Account since domains are not applicable for this type of account."
 	@priority = "3"
 	test NoFilterByNavigationForPersonAccount {
+		property portal.acceptance = "sharry";
+
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Business Account",
 			accountEntryType = "Business");
@@ -3278,7 +3305,7 @@ definition {
 	@priority = "3"
 	test NoWarningDisplaysWhenAddingAUserWithValidDomain {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		AccountConfiguration.enableAccountEmailDomain();
 
@@ -3463,7 +3490,7 @@ definition {
 	@description = "This test replaces user in Person Account with another existing user. It asserts that first user was replaced by the second user and isn't assigned to the account anymore."
 	@priority = "5"
 	test SelectingUserWillReplaceExistingUserInPersonAccount {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		JSONAccountEntry.addAccountEntry(
 			accountEntryName = "Business Account",
@@ -3592,6 +3619,8 @@ definition {
 	@description = "This test assigns a user to an account with valid domain set. Manager can filter valid domain users and all users when assigning."
 	@priority = "3"
 	test UsersWithValidAndInvalidDomainsAreFilteredWhenAssigningUsers {
+		property portal.acceptance = "sharry";
+
 		AccountConfiguration.enableAccountEmailDomain();
 
 		Accounts.openAccountsAdmin();

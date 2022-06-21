@@ -768,7 +768,7 @@ definition {
 
 	@description = "This is a workaround for an issue with Minium's sidebar on CI"
 	test MiniumSiteFullFlowCheckingOutViaOrderDetails {
-		property portal.acceptance = "true";
+		property portal.acceptance = "sharry";
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
