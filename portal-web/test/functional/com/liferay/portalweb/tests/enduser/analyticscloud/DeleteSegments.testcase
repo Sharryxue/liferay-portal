@@ -375,6 +375,7 @@ definition {
 	@priority = "4"
 	test DeleteCustomFieldUsedSegmentResetData {
 		property analytics.cloud.upstream = "false";
+		property portal.acceptance = "sharry";
 		property test.name.skip.portal.instance = "DeleteSegments#DeleteCustomFieldUsedSegmentResetData";
 
 		task ("Connect DXP to AC") {
