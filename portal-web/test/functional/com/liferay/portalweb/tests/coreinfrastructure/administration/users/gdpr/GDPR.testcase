@@ -679,6 +679,8 @@ definition {
 	@description = "This test deletes multiple staged data from an application, tests with Blogs and DM entries."
 	@priority = "3"
 	test CanDeleteAllStagedDataFromAnApplication {
+		property test.name.skip.portal.instance = "GDPR#CanDeleteAllStagedDataFromAnApplication";
+
 		JSONGroup.addGroup(groupName = "Site Name");
 
 		JSONLayout.addPublicLayout(
