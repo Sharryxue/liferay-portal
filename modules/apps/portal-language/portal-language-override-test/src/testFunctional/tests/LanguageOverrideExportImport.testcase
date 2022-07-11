@@ -21,6 +21,40 @@ definition {
 		}
 	}
 
+	@description = "This test asserts that Cancel button works as expected in Import Translations page."
+	@priority = "5"
+	test CancelButtonWorks {
+		task ("Given assert the Import Translations page display") {
+			Portlet.gotoPortletOptions(portletOption = "Import Translations");
+
+			ControlMenu.viewHeaderTitle(headerTitle = "Import Translations");
+
+			AssertTextEquals(
+				locator1 = "LanguageOverride#IMPORT_TRANSLATIONS_TITLE",
+				value1 = "Import File");
+
+			AssertTextEquals(
+				locator1 = "LanguageOverride#IMPORT_TRANSLATIONS_DESCRIPTION",
+				value1 = "Support file format .properties.");
+
+			AssertElementPresent(
+				defaultLanguage = "en-us",
+				locator1 = "Select#DEFAULT_LANGUAGE");
+
+			AssertElementPresent(locator1 = "TextInput#FILE");
+
+			AssertElementPresent(locator1 = "Button#SAVE");
+		}
+
+		task ("When click Cancel button") {
+			Button.clickCancel();
+		}
+
+		task ("Then user is redirected to language key page") {
+			ControlMenu.viewHeaderTitle(headerTitle = "Language Override");
+		}
+	}
+
 	@description = "This test asserts that the Export option only displays when we have language key with override."
 	@priority = "5"
 	test CanViewExportOptionWhenHasOverride {
