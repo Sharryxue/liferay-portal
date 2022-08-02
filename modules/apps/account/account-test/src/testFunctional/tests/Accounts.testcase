@@ -527,6 +527,10 @@ definition {
 			accountLogo = "marketplace_icon.png",
 			accountName = "Business Account Name");
 
+		AssertVisible(
+			key_imageName = "account_entry_logo",
+			locator1 = "UsersAndOrganizationsEditUser#DETAILS_PROFILE_IMAGE");
+
 		Accounts.openAccountsAdmin();
 
 		Accounts.gotoEdit(accountName = "Business Account Name");
