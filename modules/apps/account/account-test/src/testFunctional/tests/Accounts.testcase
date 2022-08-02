@@ -518,7 +518,7 @@ definition {
 		Accounts.viewAssignee(assigneeName = "userfn");
 	}
 
-	@description = "This test adds an account with an avatar."
+	@description = "This is a use case for LPS-157661. It asserts that can add an account with an avatar."
 	@priority = "3"
 	test CanAddAccountWithAvatar {
 		Accounts.openAccountsAdmin();
