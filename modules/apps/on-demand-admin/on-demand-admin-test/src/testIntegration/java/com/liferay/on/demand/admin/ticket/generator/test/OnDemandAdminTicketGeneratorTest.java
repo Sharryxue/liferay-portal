@@ -91,6 +91,7 @@ public class OnDemandAdminTicketGeneratorTest {
 				onDemandAdminUser.getUserId(), false));
 	}
 
+	@Ignore
 	@Test(expected = PrincipalException.MustHavePermission.class)
 	public void testGenerateWithoutPermission() throws Exception {
 		Company company = CompanyTestUtil.addCompany();
