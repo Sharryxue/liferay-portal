@@ -33,4 +33,16 @@ definition {
 		}
 	}
 
+	macro addAccountEntryOrganization {
+		Variables.assertDefined(parameterList = "${accountEntryName},${organizationName}");
+
+		var organizationId = JSONOrganization.getOrganizationIdByName(organizationName = "${organizationName}");
+
+		var accountEntryId = JSONAccountEntryAPI._getAccountEntryId(accountEntryName = "${accountEntryName}");
+
+		JSONAccountEntryAPI._addAccountEntryOrganization(
+			accountEntryId = "${accountEntryId}",
+			organizationId = "${organizationId}");
+	}
+
 }
