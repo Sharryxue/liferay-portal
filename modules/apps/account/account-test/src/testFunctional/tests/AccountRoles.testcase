@@ -20,6 +20,7 @@ definition {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@description = "This is a use case for LPS-142654. This asserts user with Add Account Role permissions for an account can add account roles."
 	@priority = "4"
 	test CanAddAccountRolesWithPermissions {
@@ -29,6 +30,59 @@ definition {
 			JSONUser.addUser(
 				userEmailAddress = "userea1@liferay.com",
 =======
+=======
+	@description = "This test assert the account manager can view account organizations."
+	@priority = "4"
+	test AccountManagersCanViewOrganizations {
+		property custom.properties = "jsonws.web.service.paths.excludes=";
+
+		task ("Given add 2 organizations to an account") {
+			JSONAccountEntry.addAccountEntry(
+				accountEntryName = "AM Account",
+				accountEntryType = "Business");
+
+			for (var orgNum : list "1,2") {
+				JSONOrganization.addOrganization(organizationName = "Account Org${orgNum}");
+
+				JSONAccountEntry.addAccountEntryOrganization(
+					accountEntryName = "AM Account",
+					organizationName = "Account Org${orgNum}");
+			}
+		}
+
+		task ("When an account manager is added to the account") {
+			AccountConfiguration.addAccountManager(
+				accountName = "AM Account",
+				orgName = "AM Organization",
+				orgRoleTitle = "Account Manager",
+				userEmailAddress = "useramea@liferay.com",
+				userFirstName = "useramfn",
+				userLastName = "useramln",
+				userScreenName = "useramsn");
+
+			User.logoutPG();
+
+			User.loginUserPG(
+				password = "test",
+				userEmailAddress = "useramea@liferay.com");
+		}
+
+		task ("Then the user should be able to see the organizations listed in that account") {
+			Accounts.openAccountsAdmin();
+
+			LexiconEntry.gotoEntry(rowEntry = "AM Account");
+
+			Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+
+			LexiconEntry.viewEntryName(rowEntry = "AM Organization");
+
+			LexiconEntry.viewEntryName(rowEntry = "Account Org1");
+
+			LexiconEntry.viewEntryName(rowEntry = "Account Org2");
+		}
+	}
+
+>>>>>>> 30faa0df3ad7 (LRQA-75839 Assert account manager can view the organizations)
 	@description = "This test assert the account manager can view account users."
 	@priority = "4"
 	test AccountManagersCanViewUsers {
