@@ -16,6 +16,7 @@ definition {
 		}
 
 		var accountEntryStatus = JSONAccountEntrySetter.setStatus(accountEntryStatus = "${accountEntryStatus}");
+
 		var accountEntryType = JSONAccountEntrySetter.setType(accountEntryType = "${accountEntryType}");
 
 		JSONAccountEntryAPI._addAccountEntry(
@@ -31,6 +32,18 @@ definition {
 				accountEntryName = "${accountEntryName}",
 				externalReferenceCode = "${externalReferenceCode}");
 		}
+	}
+
+	macro addAccountEntryOrganization {
+		Variables.assertDefined(parameterList = "${accountEntryName},${organizationName}");
+
+		var organizationId = JSONOrganization.getOrganizationIdByName(organizationName = "${organizationName}");
+
+		var accountEntryId = JSONAccountEntryAPI._getAccountEntryId(accountEntryName = "${accountEntryName}");
+
+		JSONAccountEntryAPI._addAccountEntryOrganization(
+			accountEntryId = "${accountEntryId}",
+			organizationId = "${organizationId}");
 	}
 
 }
