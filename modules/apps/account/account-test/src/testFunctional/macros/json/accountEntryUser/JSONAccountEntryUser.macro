@@ -27,9 +27,8 @@ definition {
 	macro addExistUsertoAccount {
 		Variables.assertDefined(parameterList = "${accountEntryName},${userEmailAddress}");
 
-		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
-
 		var accountEntryId = JSONAccountEntryAPI._getAccountEntryId(accountEntryName = "${accountEntryName}");
+		var userId = JSONUserSetter.setUserId(userEmailAddress = "${userEmailAddress}");
 
 		JSONAccountEntryUserAPI._addExistUsertoAccount(
 			accountEntryId = "${accountEntryId}",
