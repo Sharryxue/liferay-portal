@@ -689,10 +689,7 @@ definition {
 
 		Close.closeAndSelectWindow(locator1 = "Site Templates - ${siteName}");
 
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "Users and Organizations");
+		User.openUsersAdmin();
 
 		UsersAndOrganizationsNavigator.gotoOrganizations();
 
@@ -710,10 +707,7 @@ definition {
 			organizationName = "Organization Name 2",
 			userEmailAddress = "userea2@liferay.com");
 
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "Users and Organizations");
+		User.openUsersAdmin();
 
 		UsersAndOrganizationsNavigator.gotoOrganizations();
 
@@ -728,44 +722,15 @@ definition {
 			organizationName = "Organization Name 3",
 			userEmailAddress = "userea3@liferay.com");
 
-		JSONUserGroup.addUserGroup(
-			userGroupDescription = "UG UserGroup1 Description",
-			userGroupName = "UG UserGroup1 Name");
+		for (var itemNum : list "1,2,3") {
+			JSONUserGroup.addUserGroup(
+				userGroupDescription = "UG UserGroup${itemNum} Description",
+				userGroupName = "UG UserGroup${itemNum} Name");
 
-		JSONUserGroup.addUserGroup(
-			userGroupDescription = "UG UserGroup2 Description",
-			userGroupName = "UG UserGroup2 Name");
-
-		JSONUserGroup.addUserGroup(
-			userGroupDescription = "UG UserGroup3 Description",
-			userGroupName = "UG UserGroup3 Name");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "User Groups");
-
-		UserGroup.assignMemberCP(
-			userGroupName = "UG UserGroup1 Name",
-			userScreenName = "usersn1");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "User Groups");
-
-		UserGroup.assignMemberCP(
-			userGroupName = "UG UserGroup2 Name",
-			userScreenName = "usersn2");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "User Groups");
-
-		UserGroup.assignMemberCP(
-			userGroupName = "UG UserGroup3 Name",
-			userScreenName = "usersn3");
+			JSONUser.addUserToUserGroup(
+				userEmailAddress = "userea${itemNum}@liferay.com",
+				userGroupName = "UG UserGroup${itemNum} Name");
+		}
 
 		JSONGroup.addGroup(groupName = "Site Name");
 
@@ -859,72 +824,46 @@ definition {
 				roleType = "site");
 		}
 
-		Navigator.openSiteURL(siteName = "Site Name");
+		JSONGroup.assignUserToGroup(
+			groupName = "Site Name",
+			userEmailAddress = "userea1@liferay.com");
 
-		ProductMenu.gotoPortlet(
-			category = "People",
-			portlet = "Memberships");
+		JSONGroup.assignOrganizationToGroup(
+			groupName = "Site Name",
+			organizationName = "Organization Name 2");
 
-		Site.assignUserAsMemberCP(
-			userFirstName = "userfn1",
-			userLastName = "userln1",
-			userScreenName = "usersn1");
-
-		Navigator.openSiteURL(siteName = "Site Name");
-
-		ProductMenu.gotoPortlet(
-			category = "People",
-			portlet = "Memberships");
-
-		Site.assignOrganizationAsMemberCP(orgName = "Organization Name 2");
-
-		Navigator.openSiteURL(siteName = "Site Name");
-
-		ProductMenu.gotoPortlet(
-			category = "People",
-			portlet = "Memberships");
-
-		Site.assignUserGroupAsMemberCP(userGroupName = "UG UserGroup3 Name");
-
-		Navigator.openSiteURL(siteName = "Site Name");
-
-		ProductMenu.gotoPortlet(
-			category = "People",
-			portlet = "Memberships");
-
-		Site.assignSiteRoleCP(
-			resourceName = "userfn1 userln1",
-			roleTitle = "Music Fan Name");
-
-		Navigator.openSiteURL(siteName = "Site Name");
-
-		ProductMenu.gotoPortlet(
-			category = "People",
-			portlet = "Memberships");
-
-		Site.assignSiteRoleCP(
-			resourceName = "userfn2 userln2",
-			roleTitle = "Movie Blogger Name");
-
-		Navigator.openSiteURL(siteName = "Site Name");
-
-		ProductMenu.gotoPortlet(
-			category = "People",
-			portlet = "Memberships");
-
-		Navigator.gotoNavItem(navItem = "User Groups");
-
-		Site.assignSiteRoleToUserGroup(
-			roleName = "Sports Journalist Name",
+		JSONGroup.assignUserGroupToGroup(
+			groupName = "Site Name",
 			userGroupName = "UG UserGroup3 Name");
 
-		Navigator.openSiteURL(siteName = "Site Name");
+		JSONGroup.assignGroupRoleToUser(
+			groupName = "Site Name",
+			roleTitle = "Music Fan Name",
+			userEmailAddress = "userea1@liferay.com");
 
-		Portlet.addPG(portletName = "Asset Publisher");
+		JSONGroup.assignGroupRoleToUser(
+			groupName = "Site Name",
+			roleTitle = "Movie Blogger Name",
+			userEmailAddress = "userea2@liferay.com");
 
-		Navigator.openSiteURL(siteName = "Site Name");
+// see if this macro works
 
-		Portlet.addPG(portletName = "Message Boards");
+		JSONGroup.assignGroupRoleToUserGroup(
+			groupName = "Site Name",
+			roleTitle = "Sports Journalist Name",
+			userGroupName = "UG UserGroup3 Name");
+
+		JSONLayout.addWidgetToPublicLayout(
+			column = "1",
+			groupName = "Site Name",
+			layoutName = "Asset Publisher Page",
+			widgetName = "Asset Publisher");
+
+		JSONLayout.addWidgetToPublicLayout(
+			column = "1",
+			groupName = "Site Name",
+			layoutName = "Asset Publisher Page",
+			widgetName = "Message Boards");
 
 		User.logoutPG();
 
@@ -936,19 +875,16 @@ definition {
 			pageName = "Asset Publisher Page",
 			siteName = "Site Name");
 
-		AssertTextEquals(
-			key_portletTitleName = "Message Boards",
-			locator1 = "Portlet#SPECIFIC_TITLE",
-			value1 = "Message Boards");
+		Portlet.viewSpecificPG(portletName = "Message Boards");
 
-		AssertTextEquals(
-			key_portletTitleName = "Asset Publisher",
-			locator1 = "Portlet#SPECIFIC_TITLE",
-			value1 = "Asset Publisher");
+		Portlet.viewSpecificPG(portletName = "Asset Publisher");
 
-		MessageboardsThread.addPG(
+		JSONMBMessage.addMessage(
+			groupName = "Site Name",
 			threadBody = "This is a thread by usersn1",
-			threadSubject = "Music Thread 1");
+			threadSubject = "Music Thread 1",
+			userEmailAddress = "userea1@liferay.com",
+			userPassword = "test");
 
 		User.logoutPG();
 
@@ -960,15 +896,9 @@ definition {
 			pageName = "Asset Publisher Page",
 			siteName = "Site Name");
 
-		AssertTextEquals(
-			key_portletTitleName = "Message Boards",
-			locator1 = "Portlet#SPECIFIC_TITLE",
-			value1 = "Message Boards");
+		Portlet.viewSpecificPG(portletName = "Message Boards");
 
-		AssertTextEquals(
-			key_portletTitleName = "Asset Publisher",
-			locator1 = "Portlet#SPECIFIC_TITLE",
-			value1 = "Asset Publisher");
+		Portlet.viewSpecificPG(portletName = "Asset Publisher");
 
 		AssertElementNotPresent(locator1 = "MessageBoards#ADD_CATEGORY_BUTTON");
 
