@@ -1959,6 +1959,8 @@ definition {
 	@description = "This test changes pagination and assert export processes display properly."
 	@priority = "2"
 	test PaginationWorksInExportPersonalData {
+		property portal.acceptance = "melody";
+
 		task ("Log in as new user and create data across several different applications") {
 			JSONBlog.addEntry(
 				entryContent = "Blogs Entry Content",
@@ -2075,6 +2077,8 @@ definition {
 	@description = "This test changes pagination and assert entries display properly."
 	@priority = "2"
 	test PaginationWorksInNewDataExport {
+		property portal.acceptance = "melody";
+
 		task ("Bring up the New Data Export page") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "test@liferay.com",
