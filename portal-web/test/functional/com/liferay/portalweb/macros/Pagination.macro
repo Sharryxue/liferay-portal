@@ -1,9 +1,13 @@
 definition {
 
 	macro changePagination {
+		var key_itemsPerPage = "${itemsPerPage}";
+
 		Click(locator1 = "Pagination#ITEMS_PER_PAGE_SELECT");
 
-		var key_itemsPerPage = "${itemsPerPage}";
+		if (IsElementNotPresent(key_menuItem = "${menuItem}", locator1 = "MenuItem#ANY_MENU_ITEM")) {
+			Click(locator1 = "Pagination#ITEMS_PER_PAGE_SELECT");
+		}
 
 		MenuItem.click(menuItem = "${itemsPerPage}");
 
