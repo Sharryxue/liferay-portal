@@ -15,3 +15,22 @@
 --%>
 
 <%@ include file="/init.jsp" %>
+
+<%
+AnalyticsSettingsDisplayContext analyticsSettingsDisplayContext = new AnalyticsSettingsDisplayContext(request, response);
+%>
+
+<div id="analytics-sync-app">
+	<react:component
+		module="js/index"
+		props='<%=
+			HashMapBuilder.<String, Object>put(
+				"connected", analyticsSettingsDisplayContext.isConnected()
+			).put(
+				"liferayAnalyticsURL", analyticsSettingsDisplayContext.getLiferayAnalyticsURL()
+			).put(
+				"token", analyticsSettingsDisplayContext.getToken()
+			).build()
+		%>'
+	/>
+</div>
