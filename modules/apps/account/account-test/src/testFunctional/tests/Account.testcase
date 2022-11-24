@@ -18,7 +18,7 @@ definition {
 			PortalInstances.tearDownCP();
 		}
 		else {
-			Accounts.tearDownCP();
+			Account.tearDownCP();
 		}
 	}
 
@@ -48,11 +48,11 @@ definition {
 			Navigator.gotoBack();
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Accounts Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Account Groups");
+		Account.gotoAssigneeTab(assigneeTab = "Account Groups");
 
 		for (var accountGroupNum : list "1,2,3") {
 			AssertTextEquals(
@@ -73,7 +73,7 @@ definition {
 	@priority = "5"
 	test AccountNameCannotExceed100Characters {
 		task ("When a user types an account name with more than 100 characters") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoAdd();
 
@@ -91,7 +91,7 @@ definition {
 
 			Button.clickSave();
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.viewNoEntry(rowEntry = "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet");
 		}
@@ -111,11 +111,11 @@ definition {
 				accountEntryName = "Account Name",
 				accountEntryType = "Business");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-			Accounts.assignUsers(
+			Account.assignUsers(
 				accountName = "Account Name",
 				assigneeName = "userfn");
 		}
@@ -161,7 +161,7 @@ definition {
 				accountEntryType = "Business");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		Pagination.changePagination(itemsPerPage = "4");
 
@@ -183,13 +183,13 @@ definition {
 	@description = "Duplicate External Reference Codes should not be allowed for multiple accounts in the same company. If a duplicate ERC is submitted, the form will not be saved and an error message will inform the user that the ERC belongs to another account."
 	@priority = "4"
 	test AccountWithDuplicateExternalReferenceCodeIsNotSaved {
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addBusinessAccount(
+		Account.addBusinessAccount(
 			accountName = "Business Account Name",
 			externalReferenceCode = "AAA-0100");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoAdd();
 
@@ -205,7 +205,7 @@ definition {
 			locator1 = "Message#ERROR_1",
 			value1 = "The given external reference code belongs to another account.");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.viewEntryName(rowEntry = "Business Account Name");
 
@@ -221,7 +221,7 @@ definition {
 			accountEntryName = "Person Account",
 			accountEntryType = "Person");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Person Account");
 
@@ -232,7 +232,7 @@ definition {
 			userLastName = "userln1",
 			userScreenName = "usersn1");
 
-		Accounts.addNewUserToPersonAccount(
+		Account.addNewUserToPersonAccount(
 			accountName = "Person Account",
 			userEmailAddress = "userfn2@liferay.com",
 			userFirstName = "userfn2",
@@ -265,13 +265,13 @@ definition {
 				accountEntryType = "Business");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 1");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -281,11 +281,11 @@ definition {
 			addressStreet2 = "1005 High-Tech Zone",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 2");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		AssertTextEquals(
 			locator1 = "Message#EMPTY_INFO",
@@ -305,13 +305,13 @@ definition {
 		}
 
 		task ("Add a billing address and a shipping address to account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-			Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+			Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Diamond Bar",
 				addressCountry = "United States",
 				addressName = "Liferay, Inc.",
@@ -321,7 +321,7 @@ definition {
 				addressType = "Billing",
 				phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Dalian",
 				addressCountry = "China",
 				addressName = "Liferay Dalian Software Co., Ltd.",
@@ -334,7 +334,7 @@ definition {
 		}
 
 		task ("Assert shipping addresses and filter by address type are not availabile when setting default billing address") {
-			Accounts.gotoAssigneeTab(assigneeTab = "Details");
+			Account.gotoAssigneeTab(assigneeTab = "Details");
 
 			Click(locator1 = "Account#DEFAULT_ACCOUNT_ADDRESSES_SET_DEFAULT_BILLING");
 
@@ -406,7 +406,7 @@ definition {
 		}
 
 		task ("Assert all added account entries display") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			for (var accountNum : list "1,2,3") {
 				LexiconEntry.viewEntryName(rowEntry = "Account Name ${accountNum}");
@@ -469,11 +469,11 @@ definition {
 		}
 
 		task ("Attempt to add a user with a blocked domain and assert the warning and error") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Business Account");
 
-			Accounts.viewErrorWhenAddingUserWithBlockedDomain(
+			Account.viewErrorWhenAddingUserWithBlockedDomain(
 				accountName = "Business Account",
 				assigneeName = "userfn",
 				emailDomainName = "google.com",
@@ -495,11 +495,11 @@ definition {
 
 			Navigator.openSpecificURL(url = "http://www.able.com:8080/group/guest/~/control_panel/manage?p_p_id=com_liferay_account_admin_web_internal_portlet_AccountEntriesAdminPortlet");
 
-			Accounts.addBusinessAccount(accountName = "New Instance Account");
+			Account.addBusinessAccount(accountName = "New Instance Account");
 		}
 
 		task ("Add a user with the same domain and assert the error message for blocked domains does not display") {
-			Accounts.gotoAssigneeTab(assigneeTab = "Users");
+			Account.gotoAssigneeTab(assigneeTab = "Users");
 
 			LexiconEntry.gotoAdd();
 
@@ -556,7 +556,7 @@ definition {
 		}
 
 		task ("When a user activates it") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			ManagementBar.setFilterAndOrder(filterBy = "Inactive");
 
@@ -568,7 +568,7 @@ definition {
 		}
 
 		task ("Then the account is in Active status and can be viewed in the Active filter") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.viewEntryName(rowEntry = "Accounts Name for Test");
 
@@ -585,11 +585,11 @@ definition {
 			accountEntryName = "Assign Account User",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Assign Account User");
 
-		Accounts.addNewUserToBusinessAccount(
+		Account.addNewUserToBusinessAccount(
 			accountName = "Assign Account User",
 			assigneeName = "userfn",
 			userEmailAddress = "userea@liferay.com",
@@ -597,21 +597,21 @@ definition {
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
 			rowEntry = "Assign Account User");
 
-		Accounts.viewAssignee(assigneeName = "userfn");
+		Account.viewAssignee(assigneeName = "userfn");
 	}
 
 	@description = "This is a use case for LPS-157661. It asserts that account avatar can be added in creation."
 	@priority = "3"
 	test CanAddAccountWithAvatar {
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addBusinessAccount(
+		Account.addBusinessAccount(
 			accountLogo = "marketplace_icon.png",
 			accountName = "Business Account Name");
 
@@ -619,9 +619,9 @@ definition {
 			key_imageName = "account_entry_logo",
 			locator1 = "UsersAndOrganizationsEditUser#DETAILS_PROFILE_IMAGE");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.gotoEdit(accountName = "Business Account Name");
+		Account.gotoEdit(accountName = "Business Account Name");
 
 		AssertVisible(
 			key_imageName = "account_entry_logo",
@@ -644,23 +644,23 @@ definition {
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.addOwnedAccountRole(accountRoleTitle = "Account Role Title");
+		Account.addOwnedAccountRole(accountRoleTitle = "Account Role Title");
 
-		Accounts.addAssigneeToRole(
+		Account.addAssigneeToRole(
 			accountRoleTitle = "Account Role Title",
 			assigneeName = "userfn");
 
 		LexiconEntry.viewEntryName(rowEntry = "userfn userln");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		// Navigate to assignees via menu item and removes existing assignee from role
 
@@ -696,23 +696,23 @@ definition {
 			accountEntryName = "Account with Organization",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Organization");
 
-		Accounts.assignMultipleOrganizations(
+		Account.assignMultipleOrganizations(
 			accountName = "Account with Organization",
 			organizationNumber = "1,3,4");
 
 		for (var organizationNumber : list "1,3,4") {
-			Accounts.viewAssignee(assigneeName = "Organization ${organizationNumber}");
+			Account.viewAssignee(assigneeName = "Organization ${organizationNumber}");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Organization");
 
-		Accounts.unassignMultipleOrganizations(
+		Account.unassignMultipleOrganizations(
 			accountName = "Account Name",
 			organizationNumber = "1,3");
 
@@ -726,17 +726,17 @@ definition {
 	@description = "This test adds a Person Account by changing the type in the dropdown upon creation."
 	@priority = "4"
 	test CanAddAPersonAccount {
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addPersonAccount(
+		Account.addPersonAccount(
 			accountDescription = "This is a Person Account.",
 			accountName = "Person Account");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		Search.searchCP(searchTerm = "Person Account");
 
-		Accounts.viewAccountDetails(
+		Account.viewAccountDetails(
 			accountDescription = "This is a Person Account.",
 			accountName = "Person Account",
 			accountType = "Person");
@@ -754,14 +754,14 @@ definition {
 			title = "Category Name 1",
 			vocabularyName = "Vocabulary Name 1");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addBusinessAccountWithCategory(
+		Account.addBusinessAccountWithCategory(
 			accountName = "Account with Category",
 			categoryName = "Category Name 1",
 			vocabularyName = "Vocabulary Name 1");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Category");
 
@@ -778,14 +778,14 @@ definition {
 		}
 
 		task ("Add multiple accounts with the same domain") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			for (var accountNum : list "1,2,3") {
-				Accounts.addAccountWithDomain(
+				Account.addAccountWithDomain(
 					accountName = "Account Name ${accountNum}",
 					domainNames = "liferay.com");
 
-				Accounts.openAccountsAdmin();
+				Account.openAccountsAdmin();
 
 				LexiconEntry.viewEntryName(rowEntry = "Account Name ${accountNum}");
 			}
@@ -799,13 +799,13 @@ definition {
 
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addAccountWithDomain(
+		Account.addAccountWithDomain(
 			accountName = "Account with Multi Domains",
 			domainNames = "liferay.com,google.com,si-na.com,9teen.com");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Multi Domains");
 
@@ -825,7 +825,7 @@ definition {
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
@@ -837,7 +837,7 @@ definition {
 			key_title = "Set Default Shipping Address",
 			locator1 = "IFrame#MODAL_ANY");
 
-		Accounts.addAddressViaSetDefaultAddress(
+		Account.addAddressViaSetDefaultAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Liferay, Inc.",
@@ -854,7 +854,7 @@ definition {
 			key_title = "Set Default Billing Address",
 			locator1 = "IFrame#MODAL_ANY");
 
-		Accounts.addAddressViaSetDefaultAddress(
+		Account.addAddressViaSetDefaultAddress(
 			addressCity = "Shibuya-ku",
 			addressCountry = "Japan",
 			addressName = "Liferay Japan K. K.",
@@ -868,11 +868,11 @@ definition {
 
 		Alert.viewSuccessMessage();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.viewDefaultShippingAddress(
+		Account.viewDefaultShippingAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Liferay, Inc.",
@@ -882,7 +882,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.viewDefaultBillingAddress(
+		Account.viewDefaultBillingAddress(
 			addressCity = "Shibuya-ku",
 			addressCountry = "Japan",
 			addressName = "Liferay Japan K. K.",
@@ -910,23 +910,23 @@ definition {
 		}
 
 		task ("When a user selects a user to add to an account via Account Admin") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-			Accounts.assignUsers(
+			Account.assignUsers(
 				accountName = "Account Name",
 				assigneeName = "userfn");
 		}
 
 		task ("Then the regular user is displayed and can be assigned to the account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
 				rowEntry = "Account Name");
 
-			Accounts.viewAssignee(assigneeName = "userfn");
+			Account.viewAssignee(assigneeName = "userfn");
 		}
 
 		task ("and the account is displayed in the Memberships tab in Edit User page") {
@@ -958,24 +958,24 @@ definition {
 
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addAccountWithDomain(
+		Account.addAccountWithDomain(
 			accountDescription = "This is a test for adding user to account.",
 			accountName = "Account with Exist User",
 			domainNames = "liferay.com");
 
-		Accounts.assignUsers(
+		Account.assignUsers(
 			accountName = "Account with Exist User",
 			assigneeName = "userfn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItemNoError(
 			menuItem = "Manage Users",
 			rowEntry = "Account with Exist User");
 
-		Accounts.viewAssignee(assigneeName = "userfn");
+		Account.viewAssignee(assigneeName = "userfn");
 	}
 
 	@description = "This test asserts that multiple users can be assigned to an account via the Assign Users Modal"
@@ -997,7 +997,7 @@ definition {
 		}
 
 		task ("Remove all users from Account so they can later be assigned") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -1058,21 +1058,21 @@ definition {
 			accountEntryName = "Account with Organization",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Organization");
 
-		Accounts.assignOrganizations(
+		Account.assignOrganizations(
 			accountName = "Account with Organization",
 			assigneeName = "Organization for Account");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Organization");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+		Account.gotoAssigneeTab(assigneeTab = "Organizations");
 
-		Accounts.viewAssignee(assigneeName = "Organization for Account");
+		Account.viewAssignee(assigneeName = "Organization for Account");
 	}
 
 	@description = "This test assigns a role to an Account User in the Account Details page via Users tab"
@@ -1082,11 +1082,11 @@ definition {
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
+		Account.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
 
 		AccountUsers.openAccountUsersAdmin();
 
@@ -1097,11 +1097,11 @@ definition {
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.addAssigneeToRoleViaUsersTab(
+		Account.addAssigneeToRoleViaUsersTab(
 			accountRoleTitle = "Account Administrator",
 			accountUserName = "userfn userln");
 
@@ -1111,11 +1111,11 @@ definition {
 			locator1 = "ContentRow#ENTRY_CONTENT_ROW_NUMBER_TD",
 			value1 = "Account Administrator");
 
-		Accounts.addAssigneeToRoleViaUsersTab(
+		Account.addAssigneeToRoleViaUsersTab(
 			accountRoleTitle = "Account Specific Role",
 			accountUserName = "userfn userln");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
@@ -1138,13 +1138,13 @@ definition {
 			accountEntryName = "Change Account Address Type",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Change Account Address Type");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -1154,11 +1154,11 @@ definition {
 			addressStreet2 = "1005 High-Tech Zone",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Change Account Address Type");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		LexiconEntry.viewEntryName(rowEntry = "Liferay Dalian Software Co., Ltd.");
 
@@ -1168,15 +1168,15 @@ definition {
 				rowEntry = "Liferay Dalian Software Co., Ltd.");
 		}
 
-		Accounts.editAddress(
+		Account.editAddress(
 			addressName = "Liferay Dalian Software Co., Ltd.",
 			addressType = "Shipping");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Change Account Address Type");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		for (var rowAny : list "537 Huangpu Road Taide Building,Dalian,Liaoning Sheng,116023,Shipping") {
 			LexiconEntry.viewEntryContent(
@@ -1184,15 +1184,15 @@ definition {
 				rowEntry = "Liferay Dalian Software Co., Ltd.");
 		}
 
-		Accounts.editAddress(
+		Account.editAddress(
 			addressName = "Liferay Dalian Software Co., Ltd.",
 			addressType = "Billing");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Change Account Address Type");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		for (var rowAny : list "537 Huangpu Road Taide Building,Dalian,Liaoning Sheng,116023,Billing") {
 			LexiconEntry.viewEntryContent(
@@ -1210,13 +1210,13 @@ definition {
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Chicago",
 			addressCountry = "United States",
 			addressName = "Chicago",
@@ -1227,7 +1227,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Hamilton",
 			addressCountry = "United States",
 			addressName = "Hamilton",
@@ -1238,7 +1238,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Shibuya-ku",
 			addressCountry = "Japan",
 			addressName = "Japan K. K.",
@@ -1249,7 +1249,7 @@ definition {
 			addressType = "Shipping",
 			phoneNumber = "+81 3-5456-5796");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Recife",
 			addressCountry = "Brazil",
 			addressName = "Latin America Ltda",
@@ -1260,7 +1260,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+55 11 3377-7530");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Los Angeles",
@@ -1270,7 +1270,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Madrid",
 			addressCountry = "Spain",
 			addressName = "Spain and Portugal",
@@ -1281,11 +1281,11 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+34 91 733 63 43");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		Pagination.changePagination(itemsPerPage = "4");
 
@@ -1326,11 +1326,11 @@ definition {
 				accountEntryName = "Account with Organization",
 				accountEntryType = "Business");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account with Organization");
 
-			Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+			Account.gotoAssigneeTab(assigneeTab = "Organizations");
 		}
 
 		task ("Changing the numbers assigned to a page on the Assign Organizations to Account with Organization modal and checking them.") {
@@ -1385,7 +1385,7 @@ definition {
 		}
 
 		task ("Open and click into the Assign Users Modal") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -1447,21 +1447,21 @@ definition {
 			accountEntryName = "Account with Role",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Role");
 
 		for (var accountRoleNumber : list "1,2,3,4") {
-			Accounts.addOwnedAccountRole(accountRoleTitle = "Account Role ${accountRoleNumber}");
+			Account.addOwnedAccountRole(accountRoleTitle = "Account Role ${accountRoleNumber}");
 
 			Navigator.gotoBack();
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Role");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		Pagination.changePagination(itemsPerPage = "4");
 
@@ -1495,27 +1495,27 @@ definition {
 				accountEntryType = "Business");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.deactivateAccount(accountName = "Accounts Name 1 for Test");
+		Account.deactivateAccount(accountName = "Accounts Name 1 for Test");
 
-		Accounts.viewInactiveAccount(accountName = "Accounts Name 1 for Test");
+		Account.viewInactiveAccount(accountName = "Accounts Name 1 for Test");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.deactivateAccount(
+		Account.deactivateAccount(
 			accountName = "Accounts Name 2 for Test",
 			deactivateType = "Hide Icon");
 
-		Accounts.viewInactiveAccount(accountName = "Accounts Name 2 for Test");
+		Account.viewInactiveAccount(accountName = "Accounts Name 2 for Test");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.deactivateAccount(
+		Account.deactivateAccount(
 			accountName = "Accounts Name 3 for Test",
 			deactivateType = "Management Toolbar");
 
-		Accounts.viewInactiveAccount(accountName = "Accounts Name 3 for Test");
+		Account.viewInactiveAccount(accountName = "Accounts Name 3 for Test");
 	}
 
 	@description = "This test deactivates and activates multiple entries via management toolbar"
@@ -1527,7 +1527,7 @@ definition {
 				accountEntryType = "Business");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		for (var accountNumber : list "1,3,5") {
 			LexiconEntry.selectEntry(rowEntry = "Account ${accountNumber}");
@@ -1584,11 +1584,11 @@ definition {
 				accountEntryName = "Account Name",
 				accountEntryType = "Business");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-			Accounts.addOwnedAccountRole(accountRoleTitle = "New Account Role");
+			Account.addOwnedAccountRole(accountRoleTitle = "New Account Role");
 
 			Navigator.gotoBack();
 		}
@@ -1674,11 +1674,11 @@ definition {
 				accountEntryName = "Business Account with Role",
 				accountEntryType = "Business");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Business Account with Role");
 
-			Accounts.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
+			Account.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
 
 			Navigator.gotoBack();
 
@@ -1740,29 +1740,29 @@ definition {
 				accountEntryType = "Business");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.deleteAccount(accountName = "Delete Accounts Name 1 for Test");
+		Account.deleteAccount(accountName = "Delete Accounts Name 1 for Test");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Delete Accounts Name 1 for Test");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.deleteAccount(
+		Account.deleteAccount(
 			accountName = "Delete Accounts Name 2 for Test",
 			deleteType = "Delete Icon");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Delete Accounts Name 2 for Test");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.deleteAccount(
+		Account.deleteAccount(
 			accountName = "Delete Accounts Name 3 for Test",
 			deleteType = "Management Toolbar");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Delete Accounts Name 3 for Test");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		ManagementBar.setFilterAndOrder(filterBy = "Inactive");
 
@@ -1786,7 +1786,7 @@ definition {
 				accountEntryType = "Person");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		for (var accountNumber : list "1,2,4,6") {
 			LexiconEntry.selectEntry(rowEntry = "Account ${accountNumber}");
@@ -1824,13 +1824,13 @@ definition {
 			accountEntryName = "Account Delete Address",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Delete Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressDescription = "Address of DL office.",
@@ -1842,11 +1842,11 @@ definition {
 			addressStreet3 = "1005",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Delete Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		LexiconEntry.viewEntryName(rowEntry = "Liferay Dalian Software Co., Ltd.");
 
@@ -1856,11 +1856,11 @@ definition {
 
 		AssertConsoleTextNotPresent(value1 = "javax.servlet.ServletException");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Delete Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Liferay Dalian Software Co., Ltd.");
 	}
@@ -1874,13 +1874,13 @@ definition {
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Liferay, Inc.",
@@ -1890,7 +1890,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -1902,7 +1902,7 @@ definition {
 			addressType = "Shipping",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Shibuya-ku",
 			addressCountry = "Japan",
 			addressName = "Liferay Japan K. K.",
@@ -1913,11 +1913,11 @@ definition {
 			addressType = "Shipping",
 			phoneNumber = "+81 3-5456-5796");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		for (var addressName : list "Liferay Dalian Software Co., Ltd.,Liferay Japan K. K.") {
 			LexiconEntry.selectEntry(rowEntry = "${addressName}");
@@ -1931,11 +1931,11 @@ definition {
 
 		Alert.viewSuccessMessage();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		for (var addressName : list "Liferay Dalian Software Co., Ltd.,Liferay Japan K. K.") {
 			LexiconEntry.viewNoEntry(rowEntry = "${addressName}");
@@ -1955,11 +1955,11 @@ definition {
 		}
 
 		task ("When a user deletes it") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			ManagementBar.setFilterAndOrder(filterBy = "Inactive");
 
-			Accounts.deleteAccount(accountName = "Accounts Name for Test");
+			Account.deleteAccount(accountName = "Accounts Name for Test");
 		}
 
 		task ("Then the inactive account is successfully deleted") {
@@ -1985,16 +1985,16 @@ definition {
 			accountEntryName = "Accounts Name with Custom Field",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.editCP(
+		Account.editCP(
 			accountName = "Accounts Name with Custom Field",
 			accountNameEdit = "Edit with Custom Field",
 			customFieldText = "Custom Field for Account");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.viewAccountDetails(
+		Account.viewAccountDetails(
 			accountName = "Edit with Custom Field",
 			customFieldText = "Custom Field for Account");
 	}
@@ -2009,13 +2009,13 @@ definition {
 				accountEntryName = "CanEditAddressFields",
 				accountEntryType = "Business");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "CanEditAddressFields");
 
-			Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+			Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Dalian",
 				addressCountry = "Cuba",
 				addressName = "Address Entry Name",
@@ -2024,7 +2024,7 @@ definition {
 		}
 
 		task ("Edit the previously added account entry information.") {
-			Accounts.editAddress(
+			Account.editAddress(
 				addressCity = "Irvine",
 				addressCountry = "Chile",
 				addressName = "Address Entry Name",
@@ -2064,15 +2064,15 @@ definition {
 	@description = "This test asserts that External Reference Code is editable."
 	@priority = "3"
 	test CanEditExternalReferenceCode {
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addBusinessAccount(
+		Account.addBusinessAccount(
 			accountName = "Business Account Name",
 			externalReferenceCode = "AAA-0100");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.gotoEdit(accountName = "Business Account Name");
+		Account.gotoEdit(accountName = "Business Account Name");
 
 		PortletEntry.inputText(
 			fieldLabel = "External Reference Code",
@@ -2082,7 +2082,7 @@ definition {
 
 		Alert.viewSuccessMessage();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Business Account Name");
 
@@ -2100,7 +2100,7 @@ definition {
 			accountEntryStatus = "Inactive",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.viewNoEntry(rowEntry = "Accounts Name for Test");
 
@@ -2142,22 +2142,22 @@ definition {
 	test CanEditNameAndDescription {
 		property portal.acceptance = "true";
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addBusinessAccount(
+		Account.addBusinessAccount(
 			accountDescription = "Accounts Name Description for Test",
 			accountName = "Accounts Name for Test");
 
 		AssertElementPresent(locator1 = "Icon#BACK");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.editCP(
+		Account.editCP(
 			accountDescriptionEdit = "Update Accounts Name Description for Test",
 			accountName = "Accounts Name for Test",
 			accountNameEdit = "Update Accounts Name for Test");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.viewEntryName(rowEntry = "Update Accounts Name for Test");
 
@@ -2175,7 +2175,7 @@ definition {
 			locator1 = "Portlet#HEADER",
 			value1 = "Edit Update Accounts Name via Name Link");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.viewEntryName(rowEntry = "Update Accounts Name via Name Link");
 
@@ -2197,7 +2197,7 @@ definition {
 			accountEntryName = "Person Account",
 			accountEntryType = "Person");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.viewEntryName(rowEntry = "Business Account");
 
@@ -2259,7 +2259,7 @@ definition {
 		}
 
 		task ("Open and click into the Assign Users Modal") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -2359,15 +2359,15 @@ definition {
 		task ("Given an account with a domain set") {
 			AccountConfiguration.enableAccountEmailDomain();
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.addAccountWithDomain(
+			Account.addAccountWithDomain(
 				accountName = "Acme Inc.",
 				domainNames = "liferay.com");
 		}
 
 		task ("When admin invites a user with the same domain") {
-			Accounts.inviteUser(
+			Account.inviteUser(
 				accountName = "Acme Inc.",
 				userEmailAddress = "userea@liferay.com");
 
@@ -2391,7 +2391,7 @@ definition {
 		}
 
 		task ("When the user creates an account") {
-			Accounts.createAccount(
+			Account.createAccount(
 				newPassword = "test",
 				userEmailAddress = "userea@liferay.com",
 				userFirstName = "userfn",
@@ -2404,7 +2404,7 @@ definition {
 				userLoginEmailAddress = "test@liferay.com",
 				userLoginFullName = "Test Test");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -2423,13 +2423,13 @@ definition {
 			accountEntryName = "Account 1",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 1");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Liferay, Inc.",
@@ -2439,7 +2439,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 1");
 
@@ -2471,13 +2471,13 @@ definition {
 			accountEntryName = "Account 1",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 1");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -2489,7 +2489,7 @@ definition {
 			addressType = "Shipping",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 1");
 
@@ -2522,9 +2522,9 @@ definition {
 
 			AccountConfiguration.addBlockedEmailDomain(settingValues = "yahoo.com,blocked.com");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.addAccountWithDomain(
+			Account.addAccountWithDomain(
 				accountName = "AM Account",
 				domainNames = "liferay.com,google.com");
 		}
@@ -2545,11 +2545,11 @@ definition {
 				password = "test",
 				userEmailAddress = "useramea@liferay.com");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "AM Account");
 
-			Accounts.viewErrorWhenAddingUserWithBlockedDomain(
+			Account.viewErrorWhenAddingUserWithBlockedDomain(
 				accountName = "AM Account",
 				assigneeName = "userfn",
 				emailDomainName = "blocked.com",
@@ -2560,7 +2560,7 @@ definition {
 		}
 
 		task ("Then the user should not be added or listed in that account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -2578,9 +2578,9 @@ definition {
 		task ("Given an account is created and is configured to have valid email domains") {
 			AccountConfiguration.enableAccountEmailDomain();
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.addAccountWithDomain(
+			Account.addAccountWithDomain(
 				accountName = "AM Account",
 				domainNames = "liferay.com,google.com,9teen.com");
 		}
@@ -2601,11 +2601,11 @@ definition {
 				password = "test",
 				userEmailAddress = "useramea@liferay.com");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "AM Account");
 
-			Accounts.viewErrorWhenAddingUserWithInvalidDomain(
+			Account.viewErrorWhenAddingUserWithInvalidDomain(
 				accountName = "AM Account",
 				assigneeName = "userfn",
 				emailDomainName = "nodomain.com",
@@ -2616,7 +2616,7 @@ definition {
 		}
 
 		task ("Then the user should not be added or listed in that account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -2632,15 +2632,15 @@ definition {
 		task ("Given an account with a domain set") {
 			AccountConfiguration.enableAccountEmailDomain();
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.addAccountWithDomain(
+			Account.addAccountWithDomain(
 				accountName = "S Auto Service",
 				domainNames = "liferay.com");
 		}
 
 		task ("When admin invites a user with a different domain") {
-			Accounts._goToInviteUsers(accountName = "S Auto Service");
+			Account._goToInviteUsers(accountName = "S Auto Service");
 
 			Type(
 				locator1 = "TextInput#EMAIL_ADDRESS",
@@ -2663,13 +2663,13 @@ definition {
 			accountEntryName = "Account Remove Address",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Remove Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -2680,15 +2680,15 @@ definition {
 			addressStreet3 = "1005",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Remove Address");
 
-		Accounts.setDefaultShippingAddress(
+		Account.setDefaultShippingAddress(
 			addressDataType = "${addressDataType}",
 			addressName = "Liferay Dalian Software Co., Ltd.");
 
-		Accounts.viewDefaultShippingAddress(
+		Account.viewDefaultShippingAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -2699,11 +2699,11 @@ definition {
 			addressStreet3 = "1005",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.setDefaultBillingAddress(
+		Account.setDefaultBillingAddress(
 			addressDataType = "${addressDataType}",
 			addressName = "Liferay Dalian Software Co., Ltd.");
 
-		Accounts.viewDefaultBillingAddress(
+		Account.viewDefaultBillingAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -2714,19 +2714,19 @@ definition {
 			addressStreet3 = "1005",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.removeDefaultBillingAddress(accountName = "Account Remove Address");
+		Account.removeDefaultBillingAddress(accountName = "Account Remove Address");
 
-		Accounts.openAccountsAdmin();
-
-		LexiconEntry.gotoEntry(rowEntry = "Account Remove Address");
-
-		Accounts.removeDefaultShippingAddress(accountName = "Account Remove Address");
-
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Remove Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.removeDefaultShippingAddress(accountName = "Account Remove Address");
+
+		Account.openAccountsAdmin();
+
+		LexiconEntry.gotoEntry(rowEntry = "Account Remove Address");
+
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		LexiconEntry.viewEntryName(rowEntry = "Liferay Dalian Software Co., Ltd.");
 	}
@@ -2736,19 +2736,19 @@ definition {
 	test CanRemoveDomainFromAccount {
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addAccountWithDomain(
+		Account.addAccountWithDomain(
 			accountName = "Remove Account Domain",
 			domainNames = "liferay.com,google.com");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.removeDomain(
+		Account.removeDomain(
 			accountName = "Remove Account Domain",
 			domainName = "google.com");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Remove Account Domain");
 
@@ -2796,25 +2796,25 @@ definition {
 			accountEntryName = "Unassign Organization from Account",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Unassign Organization from Account");
 
-		Accounts.assignOrganizations(
+		Account.assignOrganizations(
 			accountName = "Unassign Organization from Account",
 			assigneeName = "Organization for Account");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Unassign Organization from Account");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+		Account.gotoAssigneeTab(assigneeTab = "Organizations");
 
-		Accounts.removeOrganizationAsAssignee(assigneeName = "Organization for Account");
+		Account.removeOrganizationAsAssignee(assigneeName = "Organization for Account");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.viewNoAssignee(
+		Account.viewNoAssignee(
 			accountName = "Unassign Organization from Account",
 			assigneeType = "Organizations");
 	}
@@ -2835,17 +2835,17 @@ definition {
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
 			rowEntry = "Remove Account User");
 
-		Accounts.removeUserAsAssignee(assigneeName = "userfn");
+		Account.removeUserAsAssignee(assigneeName = "userfn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.viewNoAssignee(
+		Account.viewNoAssignee(
 			accountName = "Remove Account User",
 			assigneeType = "Users");
 	}
@@ -2866,7 +2866,7 @@ definition {
 			userLastName = "userln1",
 			userScreenName = "usersn1");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Person Account");
 
@@ -2882,7 +2882,7 @@ definition {
 
 		Button.clickSave();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Person Account");
 
@@ -2909,7 +2909,7 @@ definition {
 				userScreenName = "usersn${accountUser}");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
@@ -2927,7 +2927,7 @@ definition {
 
 		Alert.viewSuccessMessage();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
@@ -2960,7 +2960,7 @@ definition {
 		}
 
 		task ("When a user searches for an account group in the Account Groups tab of an account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Acme Inc");
 
@@ -2989,7 +2989,7 @@ definition {
 		}
 
 		task ("When a user searches for the inactive account in the Inactive filter") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			ManagementBar.setFilterAndOrder(filterBy = "Inactive");
 
@@ -3021,15 +3021,15 @@ definition {
 				accountEntryName = "B Chocolate Factory",
 				accountEntryType = "Business");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "B Chocolate Factory");
 
-			Accounts.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
+			Account.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
 		}
 
 		task ("When a user searches for an account role in the Roles tab of an account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "B Chocolate Factory");
 
@@ -3052,13 +3052,13 @@ definition {
 			accountEntryName = "Search Address",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Search Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -3069,7 +3069,7 @@ definition {
 			addressStreet3 = "1005",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
 		for (var searchTerm : list "Dalian,China,Liaoning,Liferay,116023") {
 			Search.searchCP(searchTerm = "${searchTerm}");
@@ -3094,12 +3094,12 @@ definition {
 		}
 
 		task ("Assign both organizations to the account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Business Account");
 
 			for (var org : list "Organization Name,New Selection for Search Test") {
-				Accounts.assignOrganizations(
+				Account.assignOrganizations(
 					accountName = "Business Account",
 					assigneeName = "${org}");
 			}
@@ -3145,7 +3145,7 @@ definition {
 		}
 
 		task ("When a user searches for a user in the Users tab of an account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
@@ -3175,9 +3175,9 @@ definition {
 		}
 
 		task ("When a user assigns an organization to an account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.goToEntryMenuItem(
+			Account.goToEntryMenuItem(
 				menuItem = "Manage Organizations",
 				rowEntry = "Account Name");
 
@@ -3223,9 +3223,9 @@ definition {
 		}
 
 		task ("When a user assigns a user to an account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.goToEntryMenuItem(
+			Account.goToEntryMenuItem(
 				menuItem = "Manage Users",
 				rowEntry = "Account Name");
 
@@ -3283,7 +3283,7 @@ definition {
 		}
 
 		task ("When a user assigns a user to an account role") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
@@ -3341,9 +3341,9 @@ definition {
 		}
 
 		task ("When a user assigns a user to a person account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.goToEntryMenuItem(
+			Account.goToEntryMenuItem(
 				menuItem = "Edit",
 				rowEntry = "Person Account");
 
@@ -3380,13 +3380,13 @@ definition {
 			accountEntryName = "Account with Default Address",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Default Address");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+		Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -3399,7 +3399,7 @@ definition {
 
 		LexiconEntry.viewEntryName(rowEntry = "Liferay Dalian Software Co., Ltd.");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Liferay, Inc.",
@@ -3409,7 +3409,7 @@ definition {
 			addressType = "Billing",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.addAddress(
+		Account.addAddress(
 			addressCity = "Shibuya-ku",
 			addressCountry = "Japan",
 			addressName = "Liferay Japan K. K.",
@@ -3420,13 +3420,13 @@ definition {
 			addressType = "Shipping",
 			phoneNumber = "+81 3-5456-5796");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Default Address");
 
-		Accounts.setDefaultShippingAddress(addressName = "Liferay Japan K. K.");
+		Account.setDefaultShippingAddress(addressName = "Liferay Japan K. K.");
 
-		Accounts.viewDefaultShippingAddress(
+		Account.viewDefaultShippingAddress(
 			addressCity = "Shibuya-ku",
 			addressCountry = "Japan",
 			addressName = "Liferay Japan K. K.",
@@ -3436,9 +3436,9 @@ definition {
 			addressStreet2 = "1-26-7 Ebisu Nishi",
 			phoneNumber = "+81 3-5456-5796");
 
-		Accounts.setDefaultBillingAddress(addressName = "Liferay, Inc.");
+		Account.setDefaultBillingAddress(addressName = "Liferay, Inc.");
 
-		Accounts.viewDefaultBillingAddress(
+		Account.viewDefaultBillingAddress(
 			addressCity = "Diamond Bar",
 			addressCountry = "United States",
 			addressName = "Liferay, Inc.",
@@ -3447,11 +3447,11 @@ definition {
 			addressStreet1 = "1400 Montefino Ave",
 			phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-		Accounts.changeDefaultShippingAddress(addressName = "Liferay Dalian Software Co., Ltd.");
+		Account.changeDefaultShippingAddress(addressName = "Liferay Dalian Software Co., Ltd.");
 
-		Accounts.changeDefaultBillingAddress(addressName = "Liferay Dalian Software Co., Ltd.");
+		Account.changeDefaultBillingAddress(addressName = "Liferay Dalian Software Co., Ltd.");
 
-		Accounts.viewDefaultBillingAddress(
+		Account.viewDefaultBillingAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -3462,7 +3462,7 @@ definition {
 			addressStreet3 = "1005",
 			phoneNumber = "+86 (0)411 88120855");
 
-		Accounts.viewDefaultShippingAddress(
+		Account.viewDefaultShippingAddress(
 			addressCity = "Dalian",
 			addressCountry = "China",
 			addressName = "Liferay Dalian Software Co., Ltd.",
@@ -3481,11 +3481,11 @@ definition {
 			accountEntryName = "Account Name",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
+		Account.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
 
 		AccountUsers.openAccountUsersAdmin();
 
@@ -3496,11 +3496,11 @@ definition {
 			userLastName = "userln",
 			userScreenName = "usersn");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
-		Accounts.addAssigneeToRoleViaUsersTab(
+		Account.addAssigneeToRoleViaUsersTab(
 			accountRoleTitle = "Account Administrator",
 			accountUserName = "userfn userln");
 
@@ -3510,11 +3510,11 @@ definition {
 			locator1 = "ContentRow#ENTRY_CONTENT_ROW_NUMBER_TD",
 			value1 = "Account Administrator");
 
-		Accounts.unassignUserRole(
+		Account.unassignUserRole(
 			accountRoleTitle = "Account Administrator",
 			accountUserName = "userfn userln");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account Name");
 
@@ -3544,7 +3544,7 @@ definition {
 		}
 
 		task ("When Navigate to the account menu item Manage Users") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntryMenuItem(
 				menuItem = "Manage Users",
@@ -3554,14 +3554,14 @@ definition {
 		task ("Then the assigned account user displays") {
 			Navigator.viewActivatedNavTab(navTab = "Users");
 
-			Accounts.viewAssignee(assigneeName = "userfn");
+			Account.viewAssignee(assigneeName = "userfn");
 		}
 	}
 
 	@description = "This tests canceling account creation will not save it."
 	@priority = "3"
 	test ClickingCancelOrBackWillNotSaveAccount {
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoAdd();
 
@@ -3577,13 +3577,13 @@ definition {
 			locator1 = "Portlet#HEADER",
 			value1 = "Accounts");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		Search.searchCP(searchTerm = "Cancel Accounts Name");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Cancel Accounts Name");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoAdd();
 
@@ -3599,7 +3599,7 @@ definition {
 			locator1 = "Portlet#HEADER",
 			value1 = "Accounts");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		Search.searchCP(searchTerm = "Back Icon Account");
 
@@ -3645,13 +3645,13 @@ definition {
 	test DisablingDomainValidationRemovesWarningMessages {
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addAccountWithDomain(
+		Account.addAccountWithDomain(
 			accountName = "Business Account",
 			domainNames = "liferay.com");
 
-		Accounts.addNewUserWithSameDomain(
+		Account.addNewUserWithSameDomain(
 			accountName = "Business Account",
 			assigneeName = "userfn",
 			emailDomainName = "liferay.com",
@@ -3663,13 +3663,13 @@ definition {
 
 		AccountConfiguration.disableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Business Account");
 
 		AssertElementNotPresent(locator1 = "Account#VALID_DOMAINS_HEADING");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Users");
+		Account.gotoAssigneeTab(assigneeTab = "Users");
 
 		LexiconEntry.gotoAdd();
 
@@ -3721,13 +3721,13 @@ definition {
 		}
 
 		task ("Add a billing address and a shipping address to account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Accounts Name");
 
-			Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+			Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Chicago",
 				addressCountry = "United States",
 				addressName = "Chicago",
@@ -3738,7 +3738,7 @@ definition {
 				addressType = "Billing",
 				phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Dalian",
 				addressCountry = "China",
 				addressName = "Liferay Dalian Software Co., Ltd.",
@@ -3771,13 +3771,13 @@ definition {
 		}
 
 		task ("Add a billing address and a shipping address to account") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoEntry(rowEntry = "Accounts Name");
 
-			Accounts.gotoAssigneeTab(assigneeTab = "Addresses");
+			Account.gotoAssigneeTab(assigneeTab = "Addresses");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Chicago",
 				addressCountry = "United States",
 				addressName = "Chicago",
@@ -3788,7 +3788,7 @@ definition {
 				addressType = "Billing",
 				phoneNumber = "+1-877-LIFERAY (1-877-543-3729)");
 
-			Accounts.addAddress(
+			Account.addAddress(
 				addressCity = "Dalian",
 				addressCountry = "China",
 				addressName = "Liferay Dalian Software Co., Ltd.",
@@ -3831,9 +3831,9 @@ definition {
 				userScreenName = "usersn${accountUser}");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.gotoEdit(accountName = "Person Account");
+		Account.gotoEdit(accountName = "Person Account");
 
 		AssertClick(
 			locator1 = "Account#USER_SELECT_BUTTON",
@@ -3852,9 +3852,9 @@ definition {
 
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addAccountWithDomain(
+		Account.addAccountWithDomain(
 			accountName = "AM Account",
 			domainNames = "liferay.com,google.com,9teen.com");
 
@@ -3873,11 +3873,11 @@ definition {
 			password = "test",
 			userEmailAddress = "useramea@liferay.com");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "AM Account");
 
-		Accounts.addNewUserWithSameDomain(
+		Account.addNewUserWithSameDomain(
 			accountName = "AM Account",
 			assigneeName = "userfn",
 			emailDomainName = "9teen.com",
@@ -3887,7 +3887,7 @@ definition {
 			userScreenName = "usersn",
 			validDomainNames = "liferay.com,google.com,9teen.com");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
@@ -3900,11 +3900,11 @@ definition {
 	@priority = "4"
 	test OnlyAccountNameIsRequired {
 		task ("Add account with account name only.") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
-			Accounts.addBusinessAccount(accountName = "Account Name Only");
+			Account.addBusinessAccount(accountName = "Account Name Only");
 
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.viewEntryName(rowEntry = "Account Name Only");
 		}
@@ -3935,14 +3935,14 @@ definition {
 			groupName = "Global",
 			tagName = "Global Tag Name 2");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addBusinessAccountWithTag(
+		Account.addBusinessAccountWithTag(
 			accountName = "Account with Tags",
 			addTagMethod = "Select",
 			tagNameList = "Global Tag Name 1,Global Tag Name 2");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Tags");
 
@@ -3974,11 +3974,11 @@ definition {
 			accountEntryName = "Account without Role",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account with Role");
 
-		Accounts.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
+		Account.addOwnedAccountRole(accountRoleTitle = "Account Specific Role");
 
 		Navigator.gotoBack();
 
@@ -3990,11 +3990,11 @@ definition {
 			locator1 = "LexiconTable#TABLE_ENTRY_COLUMN_LINK",
 			value1 = "Owned");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account without Role");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		LexiconEntry.viewEntryName(rowEntry = "Account Administrator");
 
@@ -4052,23 +4052,23 @@ definition {
 				userScreenName = "usersn${accountUser}");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.gotoEdit(accountName = "Person Account");
+		Account.gotoEdit(accountName = "Person Account");
 
 		for (var navTab : list "Details,Organizations,Roles") {
-			Accounts.viewAssigneeTab(navTab = "${navTab}");
+			Account.viewAssigneeTab(navTab = "${navTab}");
 		}
 
-		Accounts.viewNoAssigneeTab(navTab = "Users");
+		Account.viewNoAssigneeTab(navTab = "Users");
 
-		Accounts.assignExistingUserToPersonAccount(accountUserName = "userfn1");
+		Account.assignExistingUserToPersonAccount(accountUserName = "userfn1");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.gotoEdit(accountName = "Person Account");
+		Account.gotoEdit(accountName = "Person Account");
 
-		Accounts.assignExistingUserToPersonAccount(accountUserName = "userfn2");
+		Account.assignExistingUserToPersonAccount(accountUserName = "userfn2");
 
 		AssertElementNotPresent(
 			key_userName = "userfn1",
@@ -4100,11 +4100,11 @@ definition {
 			accountEntryName = "Account 2",
 			accountEntryType = "Business");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 1");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		LexiconEntry.viewEntryName(rowEntry = "Shared Account Role");
 
@@ -4114,11 +4114,11 @@ definition {
 			locator1 = "LexiconTable#TABLE_ENTRY_COLUMN_LINK",
 			value1 = "Shared");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntry(rowEntry = "Account 2");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		LexiconEntry.viewEntryName(rowEntry = "Shared Account Role");
 
@@ -4138,11 +4138,11 @@ definition {
 			panel = "Control Panel",
 			portlet = "Accounts");
 
-		Accounts.addBusinessAccount(
+		Account.addBusinessAccount(
 			accountName = "Accounts Name for Test",
 			accountTaxId = "Z9870654786390342199899Y");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		Search.searchCP(searchTerm = "Accounts Name for Test");
 
@@ -4152,7 +4152,7 @@ definition {
 			rowEntry = "Accounts Name for Test",
 			rowStatus = "Active");
 
-		Accounts.viewAccountDetails(
+		Account.viewAccountDetails(
 			accountName = "Accounts Name for Test",
 			accountTaxId = "Z9870654786390342199899Y");
 	}
@@ -4194,9 +4194,9 @@ definition {
 	test UsersWithValidAndInvalidDomainsAreFilteredWhenAssigningUsers {
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addAccountWithDomain(
+		Account.addAccountWithDomain(
 			accountName = "Account with Domain",
 			domainNames = "liferay.com");
 
@@ -4222,17 +4222,17 @@ definition {
 			userLastName = "userln2",
 			userScreenName = "usersn2");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
 			rowEntry = "Account no Domain");
 
 		for (var assigneeName : list "userfn1,userfn2") {
-			Accounts.viewAssignee(assigneeName = "${assigneeName}");
+			Account.viewAssignee(assigneeName = "${assigneeName}");
 		}
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
@@ -4264,7 +4264,7 @@ definition {
 
 		Alert.viewSuccessMessage();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		LexiconEntry.gotoEntryMenuItem(
 			menuItem = "Manage Users",
@@ -4280,13 +4280,13 @@ definition {
 	test ValidDomainSectionDoesNotDisplayInPersonAccounts {
 		AccountConfiguration.enableAccountEmailDomain();
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.addPersonAccount(accountName = "Person Account");
+		Account.addPersonAccount(accountName = "Person Account");
 
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
-		Accounts.gotoEdit(accountName = "Person Account");
+		Account.gotoEdit(accountName = "Person Account");
 
 		AssertElementNotPresent(locator1 = "Account#VALID_DOMAINS_HEADING");
 	}

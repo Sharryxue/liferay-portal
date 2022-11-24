@@ -1,7 +1,7 @@
 definition {
 
 	macro _goToAssignUsers {
-		Accounts.gotoAssigneeTab(assigneeTab = "Users");
+		Account.gotoAssigneeTab(assigneeTab = "Users");
 
 		LexiconEntry.gotoAdd();
 
@@ -13,7 +13,7 @@ definition {
 	}
 
 	macro _goToInviteUsers {
-		Accounts.gotoAssigneeTab(assigneeTab = "Users");
+		Account.gotoAssigneeTab(assigneeTab = "Users");
 
 		LexiconEntry.gotoAdd();
 
@@ -129,7 +129,7 @@ definition {
 			locator1 = "Portlet#HEADER",
 			value1 = "Add Address");
 
-		Accounts._inputAddressDetails(
+		Account._inputAddressDetails(
 			addressCity = "${addressCity}",
 			addressCountry = "${addressCountry}",
 			addressDescription = "${addressDescription}",
@@ -158,7 +158,7 @@ definition {
 			locator1 = "Portlet#HEADER",
 			value1 = "Add Address"); */
 
-		Accounts._inputAddressDetails(
+		Account._inputAddressDetails(
 			addressCity = "${addressCity}",
 			addressCountry = "${addressCountry}",
 			addressDescription = "${addressDescription}",
@@ -235,7 +235,7 @@ definition {
 	macro addAssigneeToRoleViaUsersTab {
 		Navigator.gotoNavTab(navTab = "Users");
 
-		Accounts.goToEntryMenuItem(
+		Account.goToEntryMenuItem(
 			menuItem = "Assign Roles",
 			rowEntry = "${accountUserName}");
 
@@ -375,7 +375,7 @@ definition {
 	}
 
 	macro addNewUserToBusinessAccount {
-		Accounts._goToAssignUsers(accountName = "${accountName}");
+		Account._goToAssignUsers(accountName = "${accountName}");
 
 		LexiconEntry.gotoAdd();
 
@@ -455,7 +455,7 @@ definition {
 	}
 
 	macro addNewUserWithSameDomain {
-		Accounts._goToAssignUsers(accountName = "${accountName}");
+		Account._goToAssignUsers(accountName = "${accountName}");
 
 		LexiconEntry.gotoAdd();
 
@@ -489,7 +489,7 @@ definition {
 	}
 
 	macro addOwnedAccountRole {
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		LexiconEntry.gotoAdd();
 
@@ -579,7 +579,7 @@ definition {
 	}
 
 	macro assignMultipleOrganizations {
-		Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+		Account.gotoAssigneeTab(assigneeTab = "Organizations");
 
 		LexiconEntry.gotoAdd();
 
@@ -599,7 +599,7 @@ definition {
 	}
 
 	macro assignOrganizations {
-		Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+		Account.gotoAssigneeTab(assigneeTab = "Organizations");
 
 		LexiconEntry.gotoAdd();
 
@@ -620,7 +620,7 @@ definition {
 	}
 
 	macro assignUsers {
-		Accounts._goToAssignUsers(accountName = "${accountName}");
+		Account._goToAssignUsers(accountName = "${accountName}");
 
 		Check(
 			key_tableEntry = "${assigneeName}",
@@ -828,7 +828,7 @@ definition {
 	}
 
 	macro deleteOwnedAccountRole {
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		LexiconEntry.delete(
 			menuItem = "Delete",
@@ -944,7 +944,7 @@ definition {
 	}
 
 	macro editCP {
-		Accounts.gotoEdit(accountName = "${accountName}");
+		Account.gotoEdit(accountName = "${accountName}");
 
 		PortletEntry.inputName(name = "${accountNameEdit}");
 
@@ -972,7 +972,7 @@ definition {
 	}
 
 	macro editPG {
-		Accounts.goToEntryMenuItem(
+		Account.goToEntryMenuItem(
 			menuItem = "Edit",
 			rowEntry = "${accountName}");
 
@@ -1052,7 +1052,7 @@ definition {
 	}
 
 	macro viewErrorWhenAddingUserWithBlockedDomain {
-		Accounts._goToAssignUsers(accountName = "${accountName}");
+		Account._goToAssignUsers(accountName = "${accountName}");
 
 		LexiconEntry.gotoAdd();
 
@@ -1097,7 +1097,7 @@ definition {
 	}
 
 	macro inviteUser {
-		Accounts._goToInviteUsers(accountName = "${accountName}");
+		Account._goToInviteUsers(accountName = "${accountName}");
 
 		Type(
 			locator1 = "TextInput#EMAIL_ADDRESS",
@@ -1322,7 +1322,7 @@ definition {
 
 		SelectFrameTop();
 
-		Accounts.gotoAssigneeTab(assigneeTab = "Details");
+		Account.gotoAssigneeTab(assigneeTab = "Details");
 
 		AssertClick(
 			locator1 = "Button#SAVE",
@@ -1421,7 +1421,7 @@ definition {
 	}
 
 	macro tearDownCP {
-		Accounts.openAccountsAdmin();
+		Account.openAccountsAdmin();
 
 		PortletEntry.selectAll();
 
@@ -1433,7 +1433,7 @@ definition {
 	}
 
 	macro unassignMultipleOrganizations {
-		Accounts.gotoAssigneeTab(assigneeTab = "Organizations");
+		Account.gotoAssigneeTab(assigneeTab = "Organizations");
 
 		for (var organizationNumber : list "${organizationNumber}") {
 			LexiconEntry.selectEntry(rowEntry = "Organization ${organizationNumber}");
@@ -1451,7 +1451,7 @@ definition {
 	macro unassignUserRole {
 		Navigator.gotoNavTab(navTab = "Users");
 
-		Accounts.goToEntryMenuItem(
+		Account.goToEntryMenuItem(
 			menuItem = "Assign Roles",
 			rowEntry = "${accountUserName}");
 
@@ -1471,7 +1471,7 @@ definition {
 	}
 
 	macro updateOwnedAccountRole {
-		Accounts.gotoAssigneeTab(assigneeTab = "Roles");
+		Account.gotoAssigneeTab(assigneeTab = "Roles");
 
 		LexiconEntry.openEntryMenu(rowEntry = "${accountRoleTitle}");
 
@@ -1698,7 +1698,7 @@ definition {
 	}
 
 	macro viewErrorWhenAddingUserWithInvalidDomain {
-		Accounts._goToAssignUsers(accountName = "${accountName}");
+		Account._goToAssignUsers(accountName = "${accountName}");
 
 		LexiconEntry.gotoAdd();
 
@@ -1743,7 +1743,7 @@ definition {
 	macro viewNoAssignee {
 		LexiconEntry.gotoEntry(rowEntry = "${accountName}");
 
-		Accounts.gotoAssigneeTab(assigneeTab = "${assigneeType}");
+		Account.gotoAssigneeTab(assigneeTab = "${assigneeType}");
 
 		var assigneeType = StringUtil.lowerCase("${assigneeType}");
 
