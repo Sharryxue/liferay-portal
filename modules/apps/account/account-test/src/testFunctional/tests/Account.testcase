@@ -4163,7 +4163,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("When a user is in the account creation page") {
-			Accounts.openAccountsAdmin();
+			Account.openAccountsAdmin();
 
 			LexiconEntry.gotoAdd();
 		}
