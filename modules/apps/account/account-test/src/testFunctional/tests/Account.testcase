@@ -1649,6 +1649,10 @@ definition {
 
 			Click.clickAt(locator1 = "RolesPermissionsNavigation#PERMISSIONS_NAVITEM_SUBITEM_COLLAPSED");
 
+			if (IsElementNotPresent(key_subItem = "Account Management",locator1 = "RolesPermissionsNavigation#PERMISSIONS_NAVITEM_SUBITEM")) {
+                Click.clickAt(locator1 = "RolesPermissionsNavigation#PERMISSIONS_NAVITEM_SUBITEM_COLLAPSED");
+            }
+
 			var key_subItem = "Account Management";
 
 			Click.clickAt(locator1 = "RolesPermissionsNavigation#PERMISSIONS_NAVITEM_SUBITEM");
