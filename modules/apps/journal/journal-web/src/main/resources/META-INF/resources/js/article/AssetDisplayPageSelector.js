@@ -32,40 +32,22 @@ export default function AssetDisplayPageSelector({
 	const openAssetDisplayPageSelector = () => {
 		const url = new URL(selectAssetDisplayPageURL);
 
-		if (selectedSite) {
-			url.searchParams.set(
-				`${getPortletNamespace(
-					Liferay.PortletKeys.ITEM_SELECTOR
-				)}groupId`,
-				selectedSite.groupId
-			);
-		}
+		url.searchParams.set(
+			`${getPortletNamespace(Liferay.PortletKeys.ITEM_SELECTOR)}groupId`,
+			selectedSite.groupId
+		);
 
 		openSelectionModal({
 			containerProps: {
 				className: 'cadmin',
 			},
 			onSelect(selectedItem) {
-				let itemValue = selectedItem;
+				const itemValue = JSON.parse(selectedItem.value);
 
-				if (
-					selectedItem.returnType ===
-					'com.liferay.item.selector.criteria.AssetEntryItemSelectorReturnType'
-				) {
-					itemValue = JSON.parse(selectedItem.value);
-
-					setAssetDisplayPageSelected({
-						assetDisplayPageId: itemValue.id,
-						name: itemValue.name,
-						plid: itemValue.plid,
-					});
-				}
-				else {
-					setAssetDisplayPageSelected({
-						layoutUuid: itemValue.id,
-						name: itemValue.name,
-					});
-				}
+				setAssetDisplayPageSelected({
+					name: itemValue.name,
+					plid: itemValue.plid,
+				});
 			},
 			selectEventName: selectAssetDisplayPageEventName,
 			title: sub(
