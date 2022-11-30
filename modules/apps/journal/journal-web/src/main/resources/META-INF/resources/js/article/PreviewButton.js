@@ -25,9 +25,6 @@ export default function PreviewButton({
 }) {
 	return (
 		<ClayButton
-			aria-label={Liferay.Language.get(
-				'a-draft-will-be-saved-before-displaying-the-preview'
-			)}
 			disabled={disabled}
 			displayType="secondary"
 			onClick={() => {
