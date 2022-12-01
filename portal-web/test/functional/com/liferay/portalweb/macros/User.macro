@@ -1319,7 +1319,11 @@ definition {
 	macro editAddressCP {
 		UserNavigator.gotoContact();
 
-		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Edit");
+		Click.waitForMenuToggleJSClick(locator1 = "Icon#VERTICAL_ELLIPSIS_BUTTON");
+
+		WaitForLiferayEvent.initializeLiferayEventLog();
+
+		MenuItem.click(menuItem = "Edit");
 
 		if (isSet(addressType)) {
 			Select(
