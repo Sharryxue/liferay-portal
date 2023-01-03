@@ -1821,8 +1821,8 @@ definition {
 		Role.openRolesAdmin();
 
 		RoleNavigator.gotoDefineRolePermissions(
-			permissionNavigationKey = "SITE_ADMIN_CONTENT_BLOGS",
-			portlet = "Blogs",
+			permissionNavHeader = "Content & Data",
+			permissionNavItem = "Blogs",
 			roleTitle = "Depot Regrole Name");
 
 		AssertClick(
